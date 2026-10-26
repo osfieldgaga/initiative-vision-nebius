@@ -9,10 +9,10 @@ The AWS pipeline is untouched; it stays the OpenCV competition entry (`upstream`
 
 | # | Step | Output | Done when | When |
 |---|---|---|---|---|
-| 0 | Setup: repo, license, Token Factory key, model spike | | done | Sun |
-| 1 | Vision batch `src/scripts/vision_batch.py`: `lld.process_frame` over the drive at 3 fps | `runs/<session>/vision.jsonl` | lane_valid on the 95 labelled frames matches `lane_eval/results.json` | Sun |
-| 2 | Fusion: vision + CAN (speed, steering, yaw, blinker, standstill, brake) on timestamp | `timeline.jsonl` | tests: stopped at the known stop signs, blinker at known lane changes | Mon |
-| 3 | Ground truth (2 h max): events in the drive | `events_gt.csv` | labelled | Mon |
+| ✅ 0 | Setup: repo, license, Token Factory key, model spike | | done | Sun |
+| ✅ 1 | Vision batch `src/scripts/vision_batch.py`: `lld.process_frame` over the drive at 3 fps | `runs/<session>/vision.jsonl` | lane_valid on the 95 labelled frames matches `lane_eval/results.json` | Sun |
+| ✅ 2 | Fusion `src/scripts/fuse.py`: vision + CAN (speed, steering, yaw, blinker, standstill, brake) on timestamp | `timeline.jsonl` | tests: stopped at the known stop signs, blinker at known lane changes | Mon |
+| 3 | Ground truth (2 h max): review `data/eval/events_gt_<session>.csv`, how-to in `data/eval/LABELLING.md` | labelled CSV | `label_events.py check` says OK | Mon |
 | 4 | Rule candidates | `candidates.json` + baseline score vs ground truth | high recall | Tue |
 | 5 | Agent v1 (Nemotron 3 Super + tools + validator, `--replay` from recorded responses) | `events.json` | every event passes the validator; replay is identical | Tue |
 | 6 | Agent v2: VL frame checks (Nemotron 3.5 Super VL), re-run vision at 1280 px | rules vs rules + agent table | table exists | Tue-Wed |
