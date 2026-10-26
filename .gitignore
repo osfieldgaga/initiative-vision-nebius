@@ -10,3 +10,4 @@ __pycache__/
 /data/videos
 docs/video/*.html
 /runs/
+.~lock.*#

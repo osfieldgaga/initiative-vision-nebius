@@ -13,7 +13,7 @@ The AWS pipeline is untouched; it stays the OpenCV competition entry (`upstream`
 | ✅ 1 | Vision batch `src/scripts/vision_batch.py`: `lld.process_frame` over the drive at 3 fps | `runs/<session>/vision.jsonl` | lane_valid on the 95 labelled frames matches `lane_eval/results.json` | Sun |
 | ✅ 2 | Fusion `src/scripts/fuse.py`: vision + CAN (speed, steering, yaw, blinker, standstill, brake) on timestamp | `timeline.jsonl` | tests: stopped at the known stop signs, blinker at known lane changes | Mon |
 | 3 | Ground truth (2 h max): review `data/eval/events_gt_<session>.csv`, how-to in `data/eval/LABELLING.md` | labelled CSV | `label_events.py check` says OK | Mon |
-| 4 | Rule candidates | `candidates.json` + baseline score vs ground truth | high recall | Tue |
+| ✅ 4 | Rule candidates `src/scripts/candidates.py` (with evidence: seqs, CAN rows, stats); scorer `src/scripts/score.py` | `candidates.json` + baseline score vs ground truth | code done; score once labels are in | Sun |
 | 5 | Agent v1 (Nemotron 3 Super + tools + validator, `--replay` from recorded responses) | `events.json` | every event passes the validator; replay is identical | Tue |
 | 6 | Agent v2: VL frame checks (Nemotron 3.5 Super VL), re-run vision at 1280 px | rules vs rules + agent table | table exists | Tue-Wed |
 | 7 | MATLAB export, simplest `drivingScenario` per event | `scenarios/*.m` | one runs in MATLAB | Wed |
@@ -26,3 +26,11 @@ The AWS pipeline is untouched; it stays the OpenCV competition entry (`upstream`
 Models (checked live 2026-10-25): `nvidia/nemotron-3-super-120b-a12b` (tool calling works),
 `nvidia/Nemotron-3.5-Super-VL` (images work; send `chat_template_kwargs: {"enable_thinking": false}`
 or it spends the whole budget reasoning).
+
+Evaluation caveat: the ground-truth list was pre-filled by the same rules, so the rules' recall is
+inflated by construction. The honest numbers are precision (after the `no` rows), detail accuracy,
+and recall on `source = added` rows, which the pre-fill missed.
+
+CAN finding (2026-10-25): the car's `Standstill` flag is not "speed = 0". At the 171 s stop sign it
+was on from 4.3 mph down to 1.1 mph and the car never stopped; every other standstill reads 0.0.
+Stop details use wheel speed.
