@@ -14,8 +14,8 @@ The AWS pipeline is untouched; it stays the OpenCV competition entry (`upstream`
 | ✅ 2 | Fusion `src/scripts/fuse.py`: vision + CAN (speed, steering, yaw, blinker, standstill, brake) on timestamp | `timeline.jsonl` | tests: stopped at the known stop signs, blinker at known lane changes | Mon |
 | 3 | Ground truth (2 h max): review `data/eval/events_gt_<session>.csv`, how-to in `data/eval/LABELLING.md` | labelled CSV | `label_events.py check` says OK | Mon |
 | ✅ 4 | Rule candidates `src/scripts/candidates.py` (with evidence: seqs, CAN rows, stats); scorer `src/scripts/score.py` | `candidates.json` + baseline score vs ground truth | code done; score once labels are in | Sun |
-| 5 | Agent v1 (Nemotron 3 Super + tools + validator, `--replay` from recorded responses) | `events.json` | every event passes the validator; replay is identical | Tue |
-| 6 | Agent v2: VL frame checks (Nemotron 3.5 Super VL), re-run vision at 1280 px | rules vs rules + agent table | table exists | Tue-Wed |
+| ✅ 5 | Agent `src/scripts/agent.py` (Nemotron 3 Super + tools + validator), client `tokenfactory.py` (record / `--replay`, spend cap) | `runs/<s>/agent/events.json` | every event passes the validator or is marked unverified; replay is identical (checked) | Sun |
+| ✅ 6 | VL frame checks (`look_at_frames`), `rerun_vision` at 15 fps (1280 px originals aren't shareable); VL vs 95 lane labels `eval_vl_lanes.py` | rules vs rules + agent table | VL eval done; table once labels are in | Sun |
 | 7 | MATLAB export, simplest `drivingScenario` per event | `scenarios/*.m` | one runs in MATLAB | Wed |
 | 8 | Results page + Token Factory proxy with spend cap | demo URL | a judge can open it and re-run an event | Wed |
 | | **Cut line: steps 1-8 = minimum submittable** | | | **end of Wed** |
@@ -34,3 +34,13 @@ and recall on `source = added` rows, which the pre-fill missed.
 CAN finding (2026-10-25): the car's `Standstill` flag is not "speed = 0". At the 171 s stop sign it
 was on from 4.3 mph down to 1.1 mph and the car never stopped; every other standstill reads 0.0.
 Stop details use wheel speed.
+
+First full agent run (2026-10-26, ~$0.18, 133 calls): 37 candidates -> 16 confirmed, 4 corrected,
+14 rejected, 3 unverified (validator refused every attempt; kept as the rules found them).
+VL vs 95 hand-labelled lane frames (upright, undistorted): "both lines visible" precision 1.00,
+recall 0.25; the OpenCV pipeline 0.98 / 0.73. VL is a reliable confirmer, a weak denier.
+
+For the final run, after the labels are in (each change invalidates the recordings, so batch them):
+- look_at_frames: ask the VL for one answer per frame (a single "Yes" for 4 frames is ambiguous).
+- Validator error for too many claims: say how many were given; MAX_EMITS 3 -> 4.
+- Lane departures were rejected on VL "no lines visible" despite the prompt warning: check against labels.

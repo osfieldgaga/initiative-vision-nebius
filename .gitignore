@@ -9,5 +9,7 @@ __pycache__/
 /docs/cloudwatch-full.png
 /data/videos
 docs/video/*.html
-/runs/
+/runs/*
+!/runs/20261022T164127Z-084b/
+/runs/*/*.log
 .~lock.*#

@@ -1,0 +1,702 @@
+{
+ "session": "20261022T164127Z-084b",
+ "frames": 95,
+ "model": "nvidia/Nemotron-3.5-Super-VL",
+ "vl_unparsed": 0,
+ "both_visible": {
+  "vl": {
+   "tp": 15,
+   "fp": 0,
+   "fn": 44,
+   "tn": 36,
+   "precision": 1.0,
+   "recall": 0.254,
+   "accuracy": 0.537
+  },
+  "pipeline": {
+   "tp": 43,
+   "fp": 1,
+   "fn": 16,
+   "tn": 35,
+   "precision": 0.977,
+   "recall": 0.729,
+   "accuracy": 0.821
+  }
+ },
+ "vl_3class_accuracy": 0.326,
+ "vl_confusion": {
+  "both -> both": 15,
+  "both -> none": 8,
+  "both -> one": 36,
+  "none -> none": 16,
+  "one -> none": 20
+ },
+ "cost": "95 calls, 46075 in / 760 out tokens, ~$0.0484",
+ "rows": [
+  {
+   "frame": "00001047_4617163839000.jpg",
+   "truth": "none",
+   "vl": "none",
+   "vl_raw": "{\"lane_lines\": \"none\"}",
+   "pipeline_lane_valid": false
+  },
+  {
+   "frame": "00001080_4619495924000.jpg",
+   "truth": "none",
+   "vl": "none",
+   "vl_raw": "{\"lane_lines\": \"none\"}",
+   "pipeline_lane_valid": false
+  },
+  {
+   "frame": "00001112_4621394909000.jpg",
+   "truth": "none",
+   "vl": "none",
+   "vl_raw": "{\"lane_lines\": \"none\"}",
+   "pipeline_lane_valid": false
+  },
+  {
+   "frame": "00001145_4623360522000.jpg",
+   "truth": "none",
+   "vl": "none",
+   "vl_raw": "{\"lane_lines\": \"none\"}",
+   "pipeline_lane_valid": false
+  },
+  {
+   "frame": "00001549_4649080160000.jpg",
+   "truth": "none",
+   "vl": "none",
+   "vl_raw": "{\"lane_lines\": \"none\"}",
+   "pipeline_lane_valid": false
+  },
+  {
+   "frame": "00001581_4651045809000.jpg",
+   "truth": "one",
+   "vl": "none",
+   "vl_raw": "{\"lane_lines\": \"none\"}",
+   "pipeline_lane_valid": false
+  },
+  {
+   "frame": "00001615_4653244613000.jpg",
+   "truth": "one",
+   "vl": "none",
+   "vl_raw": "{\"lane_lines\": \"none\"}",
+   "pipeline_lane_valid": false
+  },
+  {
+   "frame": "00001647_4655343498000.jpg",
+   "truth": "one",
+   "vl": "none",
+   "vl_raw": "{\"lane_lines\": \"none\"}",
+   "pipeline_lane_valid": false
+  },
+  {
+   "frame": "00001680_4657542347000.jpg",
+   "truth": "one",
+   "vl": "none",
+   "vl_raw": "{\"lane_lines\": \"none\"}",
+   "pipeline_lane_valid": false
+  },
+  {
+   "frame": "00001713_4659641214000.jpg",
+   "truth": "one",
+   "vl": "none",
+   "vl_raw": "{\"lane_lines\": \"none\"}",
+   "pipeline_lane_valid": false
+  },
+  {
+   "frame": "00001745_4661706795000.jpg",
+   "truth": "one",
+   "vl": "none",
+   "vl_raw": "{\"lane_lines\": \"none\"}",
+   "pipeline_lane_valid": false
+  },
+  {
+   "frame": "00001780_4663772374000.jpg",
+   "truth": "one",
+   "vl": "none",
+   "vl_raw": "{\"lane_lines\": \"none\"}",
+   "pipeline_lane_valid": false
+  },
+  {
+   "frame": "00001812_4665671352000.jpg",
+   "truth": "one",
+   "vl": "none",
+   "vl_raw": "{\"lane_lines\": \"none\"}",
+   "pipeline_lane_valid": false
+  },
+  {
+   "frame": "00001845_4667470403000.jpg",
+   "truth": "one",
+   "vl": "none",
+   "vl_raw": "{\"lane_lines\": \"none\"}",
+   "pipeline_lane_valid": false
+  },
+  {
+   "frame": "00001877_4669735873000.jpg",
+   "truth": "one",
+   "vl": "none",
+   "vl_raw": "{\"lane_lines\": \"none\"}",
+   "pipeline_lane_valid": false
+  },
+  {
+   "frame": "00001910_4671934712000.jpg",
+   "truth": "one",
+   "vl": "none",
+   "vl_raw": "{\"lane_lines\": \"none\"}",
+   "pipeline_lane_valid": false
+  },
+  {
+   "frame": "00001942_4673966960000.jpg",
+   "truth": "one",
+   "vl": "none",
+   "vl_raw": "{\"lane_lines\": \"none\"}",
+   "pipeline_lane_valid": false
+  },
+  {
+   "frame": "00001975_4675999220000.jpg",
+   "truth": "one",
+   "vl": "none",
+   "vl_raw": "{\"lane_lines\": \"none\"}",
+   "pipeline_lane_valid": false
+  },
+  {
+   "frame": "00002658_4721308663000.jpg",
+   "truth": "one",
+   "vl": "none",
+   "vl_raw": "{\"lane_lines\": \"none\"}",
+   "pipeline_lane_valid": true
+  },
+  {
+   "frame": "00002835_4732569421000.jpg",
+   "truth": "both",
+   "vl": "one",
+   "vl_raw": "{\"lane_lines\": \"one\"}",
+   "pipeline_lane_valid": true
+  },
+  {
+   "frame": "00002868_4734701639000.jpg",
+   "truth": "both",
+   "vl": "one",
+   "vl_raw": "{\"lane_lines\": \"one\"}",
+   "pipeline_lane_valid": true
+  },
+  {
+   "frame": "00002900_4736767226000.jpg",
+   "truth": "both",
+   "vl": "one",
+   "vl_raw": "{\"lane_lines\": \"one\"}",
+   "pipeline_lane_valid": true
+  },
+  {
+   "frame": "00002933_4739232596000.jpg",
+   "truth": "both",
+   "vl": "one",
+   "vl_raw": "{\"lane_lines\": \"one\"}",
+   "pipeline_lane_valid": true
+  },
+  {
+   "frame": "00002965_4741264866000.jpg",
+   "truth": "both",
+   "vl": "one",
+   "vl_raw": "{\"lane_lines\": \"one\"}",
+   "pipeline_lane_valid": false
+  },
+  {
+   "frame": "00002998_4743430391000.jpg",
+   "truth": "both",
+   "vl": "one",
+   "vl_raw": "{\"lane_lines\": \"one\"}",
+   "pipeline_lane_valid": true
+  },
+  {
+   "frame": "00003030_4745462668000.jpg",
+   "truth": "both",
+   "vl": "one",
+   "vl_raw": "{\"lane_lines\": \"one\"}",
+   "pipeline_lane_valid": true
+  },
+  {
+   "frame": "00003065_4747761466000.jpg",
+   "truth": "both",
+   "vl": "one",
+   "vl_raw": "{\"lane_lines\": \"one\"}",
+   "pipeline_lane_valid": false
+  },
+  {
+   "frame": "00003097_4750026939000.jpg",
+   "truth": "both",
+   "vl": "one",
+   "vl_raw": "{\"lane_lines\": \"one\"}",
+   "pipeline_lane_valid": true
+  },
+  {
+   "frame": "00003130_4752159162000.jpg",
+   "truth": "both",
+   "vl": "one",
+   "vl_raw": "{\"lane_lines\": \"one\"}",
+   "pipeline_lane_valid": true
+  },
+  {
+   "frame": "00003162_4754324695000.jpg",
+   "truth": "both",
+   "vl": "one",
+   "vl_raw": "{\"lane_lines\": \"one\"}",
+   "pipeline_lane_valid": true
+  },
+  {
+   "frame": "00003195_4756556855000.jpg",
+   "truth": "both",
+   "vl": "one",
+   "vl_raw": "{\"lane_lines\": \"one\"}",
+   "pipeline_lane_valid": false
+  },
+  {
+   "frame": "00003227_4758888974000.jpg",
+   "truth": "both",
+   "vl": "one",
+   "vl_raw": "{\"lane_lines\": \"one\"}",
+   "pipeline_lane_valid": true
+  },
+  {
+   "frame": "00003260_4761087826000.jpg",
+   "truth": "both",
+   "vl": "one",
+   "vl_raw": "{\"lane_lines\": \"one\"}",
+   "pipeline_lane_valid": true
+  },
+  {
+   "frame": "00003292_4763220089000.jpg",
+   "truth": "both",
+   "vl": "one",
+   "vl_raw": "{\"lane_lines\": \"one\"}",
+   "pipeline_lane_valid": true
+  },
+  {
+   "frame": "00003325_4765452210000.jpg",
+   "truth": "both",
+   "vl": "one",
+   "vl_raw": "{\"lane_lines\": \"one\"}",
+   "pipeline_lane_valid": false
+  },
+  {
+   "frame": "00003357_4767551119000.jpg",
+   "truth": "both",
+   "vl": "none",
+   "vl_raw": "{\"lane_lines\": \"none\"}",
+   "pipeline_lane_valid": false
+  },
+  {
+   "frame": "00003390_4769883235000.jpg",
+   "truth": "both",
+   "vl": "both",
+   "vl_raw": "{\"lane_lines\": \"both\"}",
+   "pipeline_lane_valid": true
+  },
+  {
+   "frame": "00003423_4772015456000.jpg",
+   "truth": "both",
+   "vl": "none",
+   "vl_raw": "{\"lane_lines\": \"none\"}",
+   "pipeline_lane_valid": false
+  },
+  {
+   "frame": "00003455_4774214308000.jpg",
+   "truth": "both",
+   "vl": "one",
+   "vl_raw": "{\"lane_lines\": \"one\"}",
+   "pipeline_lane_valid": true
+  },
+  {
+   "frame": "00003488_4776413160000.jpg",
+   "truth": "both",
+   "vl": "one",
+   "vl_raw": "{\"lane_lines\": \"one\"}",
+   "pipeline_lane_valid": false
+  },
+  {
+   "frame": "00003520_4778745281000.jpg",
+   "truth": "both",
+   "vl": "one",
+   "vl_raw": "{\"lane_lines\": \"one\"}",
+   "pipeline_lane_valid": true
+  },
+  {
+   "frame": "00003553_4780810863000.jpg",
+   "truth": "both",
+   "vl": "one",
+   "vl_raw": "{\"lane_lines\": \"one\"}",
+   "pipeline_lane_valid": false
+  },
+  {
+   "frame": "00003585_4782709874000.jpg",
+   "truth": "both",
+   "vl": "one",
+   "vl_raw": "{\"lane_lines\": \"one\"}",
+   "pipeline_lane_valid": true
+  },
+  {
+   "frame": "00003618_4784942060000.jpg",
+   "truth": "both",
+   "vl": "one",
+   "vl_raw": "{\"lane_lines\": \"one\"}",
+   "pipeline_lane_valid": true
+  },
+  {
+   "frame": "00003650_4787174215000.jpg",
+   "truth": "both",
+   "vl": "one",
+   "vl_raw": "{\"lane_lines\": \"one\"}",
+   "pipeline_lane_valid": true
+  },
+  {
+   "frame": "00003683_4789539650000.jpg",
+   "truth": "both",
+   "vl": "none",
+   "vl_raw": "{\"lane_lines\": \"none\"}",
+   "pipeline_lane_valid": false
+  },
+  {
+   "frame": "00003715_4791305396000.jpg",
+   "truth": "both",
+   "vl": "one",
+   "vl_raw": "{\"lane_lines\": \"one\"}",
+   "pipeline_lane_valid": false
+  },
+  {
+   "frame": "00003749_4793271044000.jpg",
+   "truth": "none",
+   "vl": "none",
+   "vl_raw": "{\"lane_lines\": \"none\"}",
+   "pipeline_lane_valid": false
+  },
+  {
+   "frame": "00003781_4795536529000.jpg",
+   "truth": "none",
+   "vl": "none",
+   "vl_raw": "{\"lane_lines\": \"none\"}",
+   "pipeline_lane_valid": false
+  },
+  {
+   "frame": "00004334_4833017079000.jpg",
+   "truth": "one",
+   "vl": "none",
+   "vl_raw": "{\"lane_lines\": \"none\"}",
+   "pipeline_lane_valid": false
+  },
+  {
+   "frame": "00004367_4835082676000.jpg",
+   "truth": "one",
+   "vl": "none",
+   "vl_raw": "{\"lane_lines\": \"none\"}",
+   "pipeline_lane_valid": false
+  },
+  {
+   "frame": "00004400_4837514750000.jpg",
+   "truth": "one",
+   "vl": "none",
+   "vl_raw": "{\"lane_lines\": \"none\"}",
+   "pipeline_lane_valid": false
+  },
+  {
+   "frame": "00004432_4839946837000.jpg",
+   "truth": "one",
+   "vl": "none",
+   "vl_raw": "{\"lane_lines\": \"none\"}",
+   "pipeline_lane_valid": false
+  },
+  {
+   "frame": "00004465_4842245642000.jpg",
+   "truth": "one",
+   "vl": "none",
+   "vl_raw": "{\"lane_lines\": \"none\"}",
+   "pipeline_lane_valid": false
+  },
+  {
+   "frame": "00004497_4844477823000.jpg",
+   "truth": "one",
+   "vl": "none",
+   "vl_raw": "{\"lane_lines\": \"none\"}",
+   "pipeline_lane_valid": false
+  },
+  {
+   "frame": "00004663_4856171768000.jpg",
+   "truth": "none",
+   "vl": "none",
+   "vl_raw": "{\"lane_lines\": \"none\"}",
+   "pipeline_lane_valid": false
+  },
+  {
+   "frame": "00004695_4858470584000.jpg",
+   "truth": "none",
+   "vl": "none",
+   "vl_raw": "{\"lane_lines\": \"none\"}",
+   "pipeline_lane_valid": false
+  },
+  {
+   "frame": "00004728_4861002607000.jpg",
+   "truth": "both",
+   "vl": "one",
+   "vl_raw": "{\"lane_lines\": \"one\"}",
+   "pipeline_lane_valid": true
+  },
+  {
+   "frame": "00004760_4862834997000.jpg",
+   "truth": "both",
+   "vl": "both",
+   "vl_raw": "{\"lane_lines\": \"both\"}",
+   "pipeline_lane_valid": true
+  },
+  {
+   "frame": "00004793_4865067174000.jpg",
+   "truth": "both",
+   "vl": "both",
+   "vl_raw": "{\"lane_lines\": \"both\"}",
+   "pipeline_lane_valid": true
+  },
+  {
+   "frame": "00004826_4867266038000.jpg",
+   "truth": "both",
+   "vl": "one",
+   "vl_raw": "{\"lane_lines\": \"one\"}",
+   "pipeline_lane_valid": true
+  },
+  {
+   "frame": "00004858_4869098428000.jpg",
+   "truth": "both",
+   "vl": "one",
+   "vl_raw": "{\"lane_lines\": \"one\"}",
+   "pipeline_lane_valid": false
+  },
+  {
+   "frame": "00004891_4871363924000.jpg",
+   "truth": "both",
+   "vl": "both",
+   "vl_raw": "{\"lane_lines\": \"both\"}",
+   "pipeline_lane_valid": true
+  },
+  {
+   "frame": "00004923_4873596116000.jpg",
+   "truth": "both",
+   "vl": "both",
+   "vl_raw": "{\"lane_lines\": \"both\"}",
+   "pipeline_lane_valid": true
+  },
+  {
+   "frame": "00004956_4875861607000.jpg",
+   "truth": "both",
+   "vl": "one",
+   "vl_raw": "{\"lane_lines\": \"one\"}",
+   "pipeline_lane_valid": true
+  },
+  {
+   "frame": "00004988_4878293696000.jpg",
+   "truth": "both",
+   "vl": "one",
+   "vl_raw": "{\"lane_lines\": \"one\"}",
+   "pipeline_lane_valid": true
+  },
+  {
+   "frame": "00005021_4880525872000.jpg",
+   "truth": "both",
+   "vl": "none",
+   "vl_raw": "{\"lane_lines\": \"none\"}",
+   "pipeline_lane_valid": false
+  },
+  {
+   "frame": "00005053_4882591498000.jpg",
+   "truth": "both",
+   "vl": "both",
+   "vl_raw": "{\"lane_lines\": \"both\"}",
+   "pipeline_lane_valid": true
+  },
+  {
+   "frame": "00005088_4884723710000.jpg",
+   "truth": "both",
+   "vl": "both",
+   "vl_raw": "{\"lane_lines\": \"both\"}",
+   "pipeline_lane_valid": true
+  },
+  {
+   "frame": "00005121_4886855945000.jpg",
+   "truth": "both",
+   "vl": "one",
+   "vl_raw": "{\"lane_lines\": \"one\"}",
+   "pipeline_lane_valid": true
+  },
+  {
+   "frame": "00005154_4889221392000.jpg",
+   "truth": "both",
+   "vl": "both",
+   "vl_raw": "{\"lane_lines\": \"both\"}",
+   "pipeline_lane_valid": true
+  },
+  {
+   "frame": "00005186_4891253680000.jpg",
+   "truth": "both",
+   "vl": "both",
+   "vl_raw": "{\"lane_lines\": \"both\"}",
+   "pipeline_lane_valid": true
+  },
+  {
+   "frame": "00005219_4893086072000.jpg",
+   "truth": "both",
+   "vl": "one",
+   "vl_raw": "{\"lane_lines\": \"one\"}",
+   "pipeline_lane_valid": true
+  },
+  {
+   "frame": "00005251_4895318277000.jpg",
+   "truth": "both",
+   "vl": "none",
+   "vl_raw": "{\"lane_lines\": \"none\"}",
+   "pipeline_lane_valid": false
+  },
+  {
+   "frame": "00005284_4897450500000.jpg",
+   "truth": "both",
+   "vl": "both",
+   "vl_raw": "{\"lane_lines\": \"both\"}",
+   "pipeline_lane_valid": true
+  },
+  {
+   "frame": "00005317_4899749308000.jpg",
+   "truth": "both",
+   "vl": "both",
+   "vl_raw": "{\"lane_lines\": \"both\"}",
+   "pipeline_lane_valid": true
+  },
+  {
+   "frame": "00005349_4902014825000.jpg",
+   "truth": "both",
+   "vl": "one",
+   "vl_raw": "{\"lane_lines\": \"one\"}",
+   "pipeline_lane_valid": false
+  },
+  {
+   "frame": "00005382_4904080417000.jpg",
+   "truth": "both",
+   "vl": "both",
+   "vl_raw": "{\"lane_lines\": \"both\"}",
+   "pipeline_lane_valid": true
+  },
+  {
+   "frame": "00005414_4905879493000.jpg",
+   "truth": "both",
+   "vl": "one",
+   "vl_raw": "{\"lane_lines\": \"one\"}",
+   "pipeline_lane_valid": true
+  },
+  {
+   "frame": "00005447_4908144993000.jpg",
+   "truth": "both",
+   "vl": "both",
+   "vl_raw": "{\"lane_lines\": \"both\"}",
+   "pipeline_lane_valid": false
+  },
+  {
+   "frame": "00005479_4910277244000.jpg",
+   "truth": "both",
+   "vl": "one",
+   "vl_raw": "{\"lane_lines\": \"one\"}",
+   "pipeline_lane_valid": true
+  },
+  {
+   "frame": "00005512_4912509418000.jpg",
+   "truth": "both",
+   "vl": "one",
+   "vl_raw": "{\"lane_lines\": \"one\"}",
+   "pipeline_lane_valid": true
+  },
+  {
+   "frame": "00005544_4914475090000.jpg",
+   "truth": "both",
+   "vl": "none",
+   "vl_raw": "{\"lane_lines\": \"none\"}",
+   "pipeline_lane_valid": true
+  },
+  {
+   "frame": "00005577_4916540682000.jpg",
+   "truth": "both",
+   "vl": "none",
+   "vl_raw": "{\"lane_lines\": \"none\"}",
+   "pipeline_lane_valid": true
+  },
+  {
+   "frame": "00005610_4918906139000.jpg",
+   "truth": "both",
+   "vl": "one",
+   "vl_raw": "{\"lane_lines\": \"one\"}",
+   "pipeline_lane_valid": true
+  },
+  {
+   "frame": "00005643_4921105012000.jpg",
+   "truth": "both",
+   "vl": "both",
+   "vl_raw": "{\"lane_lines\": \"both\"}",
+   "pipeline_lane_valid": true
+  },
+  {
+   "frame": "00005675_4923303880000.jpg",
+   "truth": "both",
+   "vl": "both",
+   "vl_raw": "{\"lane_lines\": \"both\"}",
+   "pipeline_lane_valid": true
+  },
+  {
+   "frame": "00005740_4927601674000.jpg",
+   "truth": "both",
+   "vl": "none",
+   "vl_raw": "{\"lane_lines\": \"none\"}",
+   "pipeline_lane_valid": false
+  },
+  {
+   "frame": "00005773_4929933822000.jpg",
+   "truth": "none",
+   "vl": "none",
+   "vl_raw": "{\"lane_lines\": \"none\"}",
+   "pipeline_lane_valid": false
+  },
+  {
+   "frame": "00005805_4932066065000.jpg",
+   "truth": "none",
+   "vl": "none",
+   "vl_raw": "{\"lane_lines\": \"none\"}",
+   "pipeline_lane_valid": false
+  },
+  {
+   "frame": "00005838_4934231617000.jpg",
+   "truth": "none",
+   "vl": "none",
+   "vl_raw": "{\"lane_lines\": \"none\"}",
+   "pipeline_lane_valid": false
+  },
+  {
+   "frame": "00005871_4936430487000.jpg",
+   "truth": "none",
+   "vl": "none",
+   "vl_raw": "{\"lane_lines\": \"none\"}",
+   "pipeline_lane_valid": false
+  },
+  {
+   "frame": "00005903_4938496137000.jpg",
+   "truth": "none",
+   "vl": "none",
+   "vl_raw": "{\"lane_lines\": \"none\"}",
+   "pipeline_lane_valid": false
+  },
+  {
+   "frame": "00005936_4940661653000.jpg",
+   "truth": "none",
+   "vl": "none",
+   "vl_raw": "{\"lane_lines\": \"none\"}",
+   "pipeline_lane_valid": false
+  },
+  {
+   "frame": "00005968_4942560686000.jpg",
+   "truth": "none",
+   "vl": "none",
+   "vl_raw": "{\"lane_lines\": \"none\"}",
+   "pipeline_lane_valid": false
+  }
+ ]
+}
