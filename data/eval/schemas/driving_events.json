@@ -1,0 +1,23 @@
+{
+  "name": "driving events",
+  "csv": "data/eval/events_gt_{session}.csv",
+  "columns": ["id", "status", "source", "type", "t_start", "t_end", "side", "detail", "confidence", "hint", "notes"],
+  "id_column": "id",
+  "time_columns": ["t_start", "t_end"],
+  "color_by": "type",
+  "fields": [
+    {"name": "status", "options": ["?", "yes", "no"]},
+    {"name": "type", "options": ["stop_sign", "other_stop", "turn", "lane_change", "curve", "lane_departure"]},
+    {"name": "side", "options_by": {"type": {"stop_sign": [""], "other_stop": [""], "*": ["left", "right"]}}},
+    {"name": "detail", "options_by": {"type": {
+      "stop_sign": ["full_stop", "rolling_stop", "no_stop"],
+      "turn": ["blinker", "late_blinker", "no_blinker"],
+      "lane_change": ["blinker", "late_blinker", "no_blinker"],
+      "*": [""]}}},
+    {"name": "confidence", "options": ["", "sure", "unsure"]},
+    {"name": "notes", "text": true}
+  ],
+  "show": ["source", "hint"],
+  "new_row": {"status": "yes", "source": "added"},
+  "check": "label_events"
+}

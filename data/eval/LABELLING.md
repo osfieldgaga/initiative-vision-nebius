@@ -7,30 +7,38 @@ Budget: about 1.5 h, 2 h at most.
 ## Setup
 
 ```bash
-.venv/bin/python src/scripts/virtual_pi.py test_sessions/private-640/20261022T164127Z-084b --no-upload
-.venv/bin/python src/scripts/virtual_pi.py test_sessions/private-640/20261022T164127Z-084b --no-upload --start 165 --speed 0.5
+.venv/bin/python src/scripts/label_tool.py test_sessions/private-640/20261022T164127Z-084b
+.venv/bin/python src/scripts/label_tool.py test_sessions/private-640/20261022T164127Z-084b --start 165 --speed 0.5
 ```
 
-- The overlay's **`drive 171.3s`** is the clock to use for every time in the file (same clock as the pipeline).
-- Keys: space pause, a / d jump 10 s, click the timeline to seek, q quit. `--start` opens at a time,
-  `--speed 0.5` plays at half speed.
-- The CAN panel shows speed, steering, gear and the blinker arrows: use them.
-- Open the CSV in LibreOffice Calc (keep **CSV format**, comma separator, when saving) or a text editor.
-- Use only the virtual Pi (raw camera + CAN) while labelling, not the overlay videos or the results page, so the
+The label tool is the virtual Pi (camera, CAN panel, timeline) with a label panel on the right, reading
+and writing the CSV directly. What it labels comes from `data/eval/schemas/driving_events.json`.
+
+- The overlay's **`drive 171.3s`** is the clock for every time (same clock as the pipeline).
+- The panel shows the row whose time span holds the current moment, pre-filled from the CSV (Tab if
+  several). Click an option to change it, `= now` (or `s` / `e`) to set start / end to the current
+  frame, then **Save (Enter)**: it writes the CSV at once (a `.bak` of the file is kept on the first save).
+- Keys: space pause, a / d jump 10 s, `,` / `.` one frame back / forward, `[` / `]` slower / faster,
+  n new row, r revert, q quit. Click the timeline to seek. The marks under it are the rows:
+  amber = still `?`, grey = `no`, coloured by type = `yes`.
+- Use only the tool (raw camera + CAN) while labelling, not the overlay videos or the results page, so the
   pipeline's output can't steer your answers.
 
 ## Steps
 
-1. **Watch the whole drive once at normal speed** (8 min) with the CSV open. Note anything that happens that
-   isn't in the list.
-2. **Go through the rows in order.** Jump to `t_start` (seek, or restart with `--start`), watch, then set:
+1. **Watch the whole drive once at normal speed** (8 min). Pause on anything the list doesn't have
+   (no row in the panel) and press n to add it right away.
+2. **Go through the rows in order** (the amber marks): for each, check it at half speed, then set:
    - `status`: `yes` = this event happened, `no` = it didn't (or it's a duplicate, or parking-lot manoeuvring).
-   - For `yes`: fix `type`, `t_start`, `t_end`, `side`, `detail` to what really happened (the pre-filled values
+   - For `yes`: fix `type`, start / end, `side`, `detail` to what really happened (the pre-filled values
      are guesses), and optionally `confidence` = `sure` / `unsure`.
-   - `hint` is why the row was suggested. Leave it as is. `notes` is free text.
-3. **Add every event the list missed** as a new row: next free `id`, `status` = `yes`, `source` = `added`.
-4. **Check the file:** `.venv/bin/python src/scripts/label_events.py check data/eval/events_gt_20261022T164127Z-084b.csv`.
-   It prints problems by line, then `OK`.
+   - `hint` (shown under the times) is why the row was suggested. `notes` is free text.
+   - Save.
+3. **Check the file:** `.venv/bin/python src/scripts/label_events.py check data/eval/events_gt_20261022T164127Z-084b.csv`.
+   It prints problems by line, then `OK` (the tool already refuses to save a row that fails it).
+
+A new drive: run `vision_batch.py`, `fuse.py` and `label_events.py prefill` on it for a pre-filled list,
+or open it in the label tool straight away and add every event by hand (the CSV is created on the first save).
 
 ## Event definitions
 
