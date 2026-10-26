@@ -9,3 +9,4 @@ __pycache__/
 /docs/cloudwatch-full.png
 /data/videos
 docs/video/*.html
+/runs/
