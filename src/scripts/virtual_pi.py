@@ -120,21 +120,23 @@ def first_timestamp_ns(session_dir):
 
 
 class CanTrack:
-    """The CAN_SIGNALS values from a session's decoded.csv, looked up by drive time.
+    """CAN signals ({name: (decoded.csv column(s), scale)}, default CAN_SIGNALS) from a session's
+    decoded.csv, looked up by drive time.
 
     decoded.csv rows are full snapshots (each column forward-filled with its last decoded value),
     so the state at time t is simply the last row at or before t."""
 
-    def __init__(self, path, t0_ns):
+    def __init__(self, path, t0_ns, signals=CAN_SIGNALS):
         self.available = Path(path).exists()
-        self.t, self.values = np.zeros(0), {}
+        self.signals = signals
+        self.t, self.ts_ns, self.values = np.zeros(0), np.zeros(0, dtype=np.int64), {}
         if not self.available:
             return
         with open(path, newline="") as f:
             reader = csv.reader(f)
             header = next(reader)
             cols = {}
-            for name, (candidates, _) in CAN_SIGNALS.items():
+            for name, (candidates, _) in signals.items():
                 col = next((c for c in candidates if c in header), None)
                 if col is not None:
                     cols[name] = header.index(col)
@@ -144,9 +146,10 @@ class CanTrack:
                 t.append(int(row[it]))
                 for name, i in cols.items():
                     raw[name].append(row[i])
-        self.t = (np.array(t, dtype=np.int64) - t0_ns) / 1e9
+        self.ts_ns = np.array(t, dtype=np.int64)  # as recorded, to cite the exact row
+        self.t = (self.ts_ns - t0_ns) / 1e9
         for name, vals in raw.items():
-            scale = CAN_SIGNALS[name][1]
+            scale = signals[name][1]
             if scale is None:
                 self.values[name] = vals
             else:
@@ -155,7 +158,7 @@ class CanTrack:
     def at(self, t):
         """{signal: value or None} as of t seconds into the drive (None before it was ever seen)."""
         i = int(np.searchsorted(self.t, t, side="right")) - 1
-        out = {name: None for name in CAN_SIGNALS}
+        out = {name: None for name in self.signals}
         if i < 0:
             return out
         for name, vals in self.values.items():
