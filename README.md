@@ -127,7 +127,8 @@ text in the request still matches, the call is replayed and counted.
 | `runs/20261022T164127Z-084b/` | Every intermediate output of the shared drive, the agent's recordings, repeat runs |
 | `scenarios/20261022T164127Z-084b/` | The MATLAB scenarios, `expected.json`, `verify.json` |
 | `lld.py`, `signs.py` | The OpenCV perception pipeline, imported unchanged from the OpenCV entry |
-| `lld_aws.py`, `live_view.py`, `src/lambda/`, `phase2/`, `infra/` | The live AWS pipeline of the OpenCV entry (history, not used here) |
+| `src/scripts/virtual_pi.py`, `src/lambda/on_live_frame.py` | The OpenCV entry's drive player, which the labelling tool and fusion reuse (its AWS upload path isn't used here) |
+| `src/scripts/privacy_package.py`, `label_lanes.py`, `export_onnx.py` | Privacy copy of a new drive; the lane labels used by `eval_vl_lanes.py`; the YOLOPv2 ONNX export |
 
 `src/tests/` has the unit tests: `for t in src/tests/test_*.py; do .venv/bin/python -m unittest "$t"; done`.
 

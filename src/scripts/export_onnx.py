@@ -17,8 +17,7 @@ Outputs (fixed 1x3x640x640 float input, RGB, 0..1):
     det16  1x255x40x40  before sigmoid -- decoded by lld.decode_detections
     det32  1x255x20x20
 
-Run once on a machine with torch (it isn't needed at inference time). Check the result
-against TorchScript with src/scripts/compare_onnx.py.
+Run once on a machine with torch (it isn't needed at inference time).
 """
 
 from __future__ import annotations
