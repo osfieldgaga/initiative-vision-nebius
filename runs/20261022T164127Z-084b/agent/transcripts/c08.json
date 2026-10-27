@@ -197,7 +197,7 @@
     ]
    },
    "response": {
-    "id": "chatcmpl-90f394dc6cd525b36450850735f3b300",
+    "id": "chatcmpl-bc87fb24098fbf52",
     "choices": [
      {
       "finish_reason": "tool_calls",
@@ -212,7 +212,7 @@
        "function_call": null,
        "tool_calls": [
         {
-         "id": "chatcmpl-tool-a2c74804ec57c8c1",
+         "id": "chatcmpl-tool-8e3068e2e6c01eea",
          "function": {
           "arguments": "{\"t_start\": 93, \"t_end\": 99}",
           "name": "get_window"
@@ -228,7 +228,7 @@
       "routed_experts": null
      }
     ],
-    "created": 1792987086,
+    "created": 1793119696,
     "model": "nvidia/nemotron-3-super-120b-a12b",
     "object": "chat.completion",
     "moderation": null,
@@ -262,7 +262,7 @@
    }
   },
   {
-   "sha256": "912ab79565a061a3f5b7a7353d653c4b4d0c57a584bdc8e7f3f6783951d29807",
+   "sha256": "03ecd88650b2b4b47874978c1f74e73f8572dc12ec8d9913fec11651c4e4645f",
    "request": {
     "model": "nvidia/nemotron-3-super-120b-a12b",
     "temperature": 0,
@@ -281,7 +281,7 @@
       "content": "",
       "tool_calls": [
        {
-        "id": "chatcmpl-tool-a2c74804ec57c8c1",
+        "id": "chatcmpl-tool-8e3068e2e6c01eea",
         "type": "function",
         "function": {
          "arguments": "{\"t_start\": 93, \"t_end\": 99}",
@@ -292,7 +292,7 @@
      },
      {
       "role": "tool",
-      "tool_call_id": "chatcmpl-tool-a2c74804ec57c8c1",
+      "tool_call_id": "chatcmpl-tool-8e3068e2e6c01eea",
       "content": "{\"columns\": [\"seq\", \"t\", \"can_row\", \"mph\", \"steer\", \"blinker\", \"standstill\", \"brake\", \"gear\", \"accel\", \"lane_valid\", \"offset_m\", \"departure\", \"signs\"], \"rows\": [[1449, 93.05, 4642315761837, 4.9, 77.1, \"left\", false, false, \"D\", 0.75, false, null, null, []], [1451, 93.25, 4642516960761, 5.2, 90.1, \"left\", false, false, \"D\", 0.61, false, null, null, []], [1452, 93.35, 4642616190644, 5.2, 96.2, \"left\", false, false, \"D\", 0.67, false, null, null, []], [1459, 93.72, 4642981794078, 5.8, 119.0, \"left\", false, false, \"D\", 0.41, false, null, null, []], [1464, 94.05, 4643315711327, 6.0, 153.3, \"left\", false, false, \"D\", 0.42, false, null, null, []], [1468, 94.38, 4643647009830, 6.2, 189.0, \"left\", false, false, \"D\", 0.27, false, null, null, []], [1473, 94.72, 4643979954005, 6.5, 224.9, \"left\", false, false, \"D\", 0.25, false, null, null, []], [1478, 95.05, 4644315930311, 6.7, 223.4, \"left\", false, false, \"D\", 0.29, false, null, null, []], [1483, 95.38, 4644648602429, 6.9, 231.8, \"left\", false, false, \"D\", 0.63, false, null, null, []], [1484, 95.45, 4644715167466, 6.9, 234.1, \"left\", false, false, \"D\", 0.62, false, null, null, []], [1489, 95.72, 4644975579583, 7.5, 235.4, \"left\", false, false, \"D\", 0.77, false, null, null, []], [1494, 96.08, 4645335244895, 8.1, 235.4, \"left\", false, false, \"D\", 0.86, false, null, null, []], [1498, 96.35, 4645599708001, 8.7, 235.4, \"left\", false, false, \"D\", 0.76, false, null, null, []], [1504, 96.68, 4645935527316, 9.3, 203.5, \"left\", false, false, \"D\", 0.81, false, null, null, []], [1510, 97.02, 4646281567013, 9.7, 181.6, \"left\", false, false, \"D\", 0.69, false, null, null, []], [1514, 97.38, 4646635783148, 10.5, 146.6, null, false, false, \"D\", 0.65, false, null, null, []], [1516, 97.48, 4646743486675, 10.5, 141.2, null, false, false, \"D\", 0.63, false, null, null, []], [1519, 97.68, 4646947677059, 10.8, 131.6, null, false, false, \"D\", 0.63, false, null, null, []], [1525, 98.01, 4647280929074, 11.3, 105.4, null, false, false, \"D\", 0.56, false, null, null, []], [1529, 98.38, 4647641978239, 11.7, 86.4, null, false, false, \"D\", 0.48, false, null, null, []], [1533, 98.71, 4647980892848, 12.3, 60.8, null, false, false, \"D\", 0.46, false, null, null, []]]}"
      }
     ],
@@ -477,7 +477,7 @@
     ]
    },
    "response": {
-    "id": "chatcmpl-a7c219478e83b770a1fefbc5f0eb81bb",
+    "id": "chatcmpl-becb04ee2a40f4d2",
     "choices": [
      {
       "finish_reason": "tool_calls",
@@ -492,46 +492,46 @@
        "function_call": null,
        "tool_calls": [
         {
-         "id": "chatcmpl-tool-8f71e5b37d120e3e",
+         "id": "chatcmpl-tool-ad6a2d0b5eaa817b",
          "function": {
-          "arguments": "{\"verdict\": \"confirmed\", \"type\": \"turn\", \"t_start\": 93.25, \"t_end\": 98.01, \"side\": \"left\", \"detail\": \"blinker\", \"claims\": [{\"seq\": 1451, \"field\": \"steer\", \"value\": \"90.1\"}, {\"seq\": 1451, \"field\": \"blinker\", \"value\": \"left\"}, {\"seq\": 1525, \"field\": \"steer\", \"value\": \"105.4\"}], \"reason\": \"The vehicle began a left turn with steering exceeding 90\u00b0 while the left blinker was already on, and continued turning through the interval.\"}",
+          "arguments": "{\"verdict\": \"confirmed\", \"type\": \"turn\", \"t_start\": 93.25, \"t_end\": 98.01, \"side\": \"left\", \"detail\": \"blinker\", \"claims\": [{\"seq\": 1449, \"field\": \"steer\", \"value\": \"77.1\"}, {\"seq\": 1449, \"field\": \"blinker\", \"value\": \"left\"}, {\"seq\": 1451, \"field\": \"steer\", \"value\": \"90.1\"}, {\"seq\": 1451, \"field\": \"blinker\", \"value\": \"left\"}, {\"seq\": 1514, \"field\": \"blinker\", \"value\": \"null\"}], \"reason\": \"The driver initiated a left turn with steering exceeding 90\u00b0 while the left blinker was already on, satisfying the blinker-before-steer condition, and completed the turn as the wheel returned toward center and the blinker turned off.\"}",
           "name": "emit_event"
          },
          "type": "function"
         }
        ],
-       "reasoning": "We need verify turn details: steering >90 deg from ~93.2 onward, ends when wheel straight (~105 deg at 98.01 still turned). Actually steer goes down gradually, still >90 until maybe later. At 98.01 steer 105.4 still >90. Blinker left present until 97.0 sec approx. In data, blinker left appears up to seq 1510 (97.02) then becomes null at 1514 (97.38). So blinker on before steering started? Steering started at 93.25 with 90.1 deg, blinker already left from earlier? Need check earlier frames before 93.25: we don't have but rule says left blinker 85.7-97.0 s, so blinker on before steering. Detail \"blinker\" matches. Side left. Event likely a turn left. Confirm.\n\nNeed emit_event with confirmed. Provide claims: steering >90 at start, blinker left, end when steer returns to near zero? We have at 98.01 still 105.4, but maybe after window ends it straightens. Use t_end 98.01 as per candidate. Provide claim for steer at start seq 1451 value 90.1, blinker left at same seq, and at t_end steer 105.4 still turned but okay. Provide reason: left turn with blinker.\n\nLet's craft.",
-       "reasoning_content": "We need verify turn details: steering >90 deg from ~93.2 onward, ends when wheel straight (~105 deg at 98.01 still turned). Actually steer goes down gradually, still >90 until maybe later. At 98.01 steer 105.4 still >90. Blinker left present until 97.0 sec approx. In data, blinker left appears up to seq 1510 (97.02) then becomes null at 1514 (97.38). So blinker on before steering started? Steering started at 93.25 with 90.1 deg, blinker already left from earlier? Need check earlier frames before 93.25: we don't have but rule says left blinker 85.7-97.0 s, so blinker on before steering. Detail \"blinker\" matches. Side left. Event likely a turn left. Confirm.\n\nNeed emit_event with confirmed. Provide claims: steering >90 at start, blinker left, end when steer returns to near zero? We have at 98.01 still 105.4, but maybe after window ends it straightens. Use t_end 98.01 as per candidate. Provide claim for steer at start seq 1451 value 90.1, blinker left at same seq, and at t_end steer 105.4 still turned but okay. Provide reason: left turn with blinker.\n\nLet's craft."
+       "reasoning": "We need verify turn details: steering >90 deg from ~93.2 onward until around 98.0 when steer reduces below maybe threshold. Blinker left active from 85.7-97.0 per rule. In data we see blinker left present until seq 1510 (97.02) still left, then at 1514 (97.38) blinker null. So blinker on before steering started? Steering started at 93.25 (seq 1451) with steer 90.1. Blinker already left from earlier (since 85.7). So detail blinker correct. Need confirm it's a turn (left) at intersection? Speed low ~5-11 mph, seems like turning left onto a road. No signs etc. So confirmed.\n\nProvide emit_event with claims: need samples showing steer >90, blinker left, and that blinker was on before steering started (maybe at 93.05 shows left blinker and steer 77.1 (<90)). Also show that after t_end blinker off and steer returning.\n\nLet's pick seq 1450? Actually we have 1449 at 93.05: steer 77.1, blinker left. Show that before steering >90. Then seq 1451 at 93.25: steer 90.1, blinker left (start). Then seq 1514 at 97.38: blinker null, steer 141.2 still >90 but blinker off after steering started? Actually detail blinker just requires blinker on before steering started; it's okay if later off. Provide claim for blinker off after end maybe.\n\nAlso need side left.\n\nEmit.",
+       "reasoning_content": "We need verify turn details: steering >90 deg from ~93.2 onward until around 98.0 when steer reduces below maybe threshold. Blinker left active from 85.7-97.0 per rule. In data we see blinker left present until seq 1510 (97.02) still left, then at 1514 (97.38) blinker null. So blinker on before steering started? Steering started at 93.25 (seq 1451) with steer 90.1. Blinker already left from earlier (since 85.7). So detail blinker correct. Need confirm it's a turn (left) at intersection? Speed low ~5-11 mph, seems like turning left onto a road. No signs etc. So confirmed.\n\nProvide emit_event with claims: need samples showing steer >90, blinker left, and that blinker was on before steering started (maybe at 93.05 shows left blinker and steer 77.1 (<90)). Also show that after t_end blinker off and steer returning.\n\nLet's pick seq 1450? Actually we have 1449 at 93.05: steer 77.1, blinker left. Show that before steering >90. Then seq 1451 at 93.25: steer 90.1, blinker left (start). Then seq 1514 at 97.38: blinker null, steer 141.2 still >90 but blinker off after steering started? Actually detail blinker just requires blinker on before steering started; it's okay if later off. Provide claim for blinker off after end maybe.\n\nAlso need side left.\n\nEmit."
       },
       "stop_reason": null,
       "token_ids": null,
       "routed_experts": null
      }
     ],
-    "created": 1792987088,
+    "created": 1793119698,
     "model": "nvidia/nemotron-3-super-120b-a12b",
     "object": "chat.completion",
     "moderation": null,
     "service_tier": null,
     "system_fingerprint": "vllm-0.1.dev1+g5001743e3-tp2-05adddbc",
     "usage": {
-     "completion_tokens": 544,
+     "completion_tokens": 669,
      "prompt_tokens": 3879,
-     "total_tokens": 4423,
+     "total_tokens": 4548,
      "completion_tokens_details": {
       "accepted_prediction_tokens": null,
       "audio_tokens": null,
-      "reasoning_tokens": 336,
+      "reasoning_tokens": 397,
       "rejected_prediction_tokens": null
      },
      "prompt_tokens_details": {
       "audio_tokens": null,
-      "cached_tokens": 0,
+      "cached_tokens": 2400,
       "created_cache_tokens": 0,
       "multimodal_tokens": null
      },
-     "prompt_cache_hit_tokens": 0,
-     "prompt_cache_miss_tokens": 3879
+     "prompt_cache_hit_tokens": 2400,
+     "prompt_cache_miss_tokens": 1479
     },
     "prompt_logprobs": null,
     "prompt_token_ids": null,

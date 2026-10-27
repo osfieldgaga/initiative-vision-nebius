@@ -29,6 +29,7 @@ from __future__ import annotations
 import argparse
 import csv
 import json
+import re
 import sys
 from pathlib import Path
 
@@ -42,7 +43,7 @@ import tokenfactory as tf  # noqa: E402
 from label_events import SIDED, TYPES  # noqa: E402
 
 MAX_TURNS = 8
-MAX_EMITS = 3
+MAX_EMITS = 4
 MAX_WINDOW_S = 60
 MAX_ROWS = 60
 MAX_RERUN_S = 3.0
@@ -140,7 +141,8 @@ TOOLS = {
 }
 
 VL_PROMPT = ("Dashcam frames from a car driving in the US (camera behind the windshield, the car's hood at the "
-             "bottom). Answer briefly and factually; say so if you can't tell.\n\nQuestion: ")
+             "bottom). Answer briefly and factually; say so if you can't tell. Answer for each frame separately, "
+             "one line per frame starting with its label, e.g. \"Frame 2720: ...\".\n\nQuestion: ")
 
 
 def upright_jpeg(path):
@@ -261,7 +263,7 @@ def validate(ev, sess, answers=None):
         errors.append(f"need 0 <= t_start <= t_end <= {end:.1f}")
     claims = ev.get("claims") or []
     if not 1 <= len(claims) <= MAX_CLAIMS:
-        errors.append(f"cite 1 to {MAX_CLAIMS} claims, the ones that decide the event")
+        errors.append(f"cite 1 to {MAX_CLAIMS} claims, the ones that decide the event (you gave {len(claims)})")
     for c in claims:
         seq, field = c.get("seq"), c.get("field")
         row = sess.rows.get(seq)
@@ -272,7 +274,7 @@ def validate(ev, sess, answers=None):
             errors.append(f"claim seq {seq}: unknown field {field!r}")
             continue
         if field == "frame_check":  # must be an answer look_at_frames gave about this frame
-            said = [a for q, a in (answers or {}).items() if seq in q]
+            said = [about(a, seq) for q, a in (answers or {}).items() if seq in q]
             if not any(norm(str(c.get("value"))) and norm(str(c.get("value"))) in norm(a) for a in said):
                 errors.append(f"claim seq {seq}: frame_check must quote an answer look_at_frames gave for that frame")
             continue
@@ -328,6 +330,13 @@ def validate(ev, sess, answers=None):
     return errors
 
 
+def about(answer, seq):
+    """The part of a look_at_frames answer about one frame: its "Frame <seq>:" line, or the whole answer
+    if the model didn't answer frame by frame."""
+    lines = [ln for ln in answer.splitlines() if re.match(rf"\W*frame\s+{seq}\b", ln.strip(), re.I)]
+    return "\n".join(lines) if lines else answer
+
+
 def look(sess, client, seqs, question):
     seqs = [int(s) for s in seqs][:MAX_FRAMES]
     missing = [s for s in seqs if s not in sess.frames]
@@ -336,7 +345,7 @@ def look(sess, client, seqs, question):
     content = [{"type": "text", "text": VL_PROMPT + question}]
     for s in seqs:
         name, _, t = sess.frames[s]
-        content += [{"type": "text", "text": f"Frame seq {s}, t = {t:.2f} s:"}, tf.image_part(upright_jpeg(sess.dir / name))]
+        content += [{"type": "text", "text": f"Frame {s} (t = {t:.2f} s):"}, tf.image_part(upright_jpeg(sess.dir / name))]
     body = {"model": tf.VL, "temperature": 0, "max_tokens": 400, "messages": [{"role": "user", "content": content}],
             "chat_template_kwargs": {"enable_thinking": False}}
     answer = client.chat(body)["choices"][0]["message"].get("content") or ""
@@ -437,11 +446,14 @@ def main(argv=None):
     p.add_argument("--replay", action="store_true", help="answer from the recorded transcripts (no key, no cost)")
     p.add_argument("--max-usd", type=float, default=0.25, help="stop calling the API past this estimated spend")
     p.add_argument("--no-vl", action="store_true", help="without look_at_frames (the step 5 agent)")
-    p.add_argument("--out", help="default <run-dir>/agent/events.json")
+    p.add_argument("--agent-dir", help="where transcripts and events.json go (default <run-dir>/agent); "
+                   "e.g. a repeat run that leaves the final one alone")
+    p.add_argument("--out", help="default <agent-dir>/events.json")
     args = p.parse_args(argv)
 
     run_dir = Path(args.run_dir) if args.run_dir else ROOT / "runs" / Path(args.session_dir).name
-    agent_dir = run_dir / "agent" if not args.no_vl else run_dir / "agent_no_vl"
+    agent_dir = (Path(args.agent_dir) if args.agent_dir else
+                 run_dir / "agent" if not args.no_vl else run_dir / "agent_no_vl")
     out = Path(args.out) if args.out else agent_dir / "events.json"
     sess = Session(args.session_dir, run_dir)
     cands = json.loads((run_dir / "candidates.json").read_text())

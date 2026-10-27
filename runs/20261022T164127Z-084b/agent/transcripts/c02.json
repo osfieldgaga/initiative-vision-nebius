@@ -197,7 +197,7 @@
     ]
    },
    "response": {
-    "id": "chatcmpl-3a74dbd24f637cef24437a38e4447f72",
+    "id": "chatcmpl-ab7e87072d7f89d7",
     "choices": [
      {
       "finish_reason": "tool_calls",
@@ -212,7 +212,7 @@
        "function_call": null,
        "tool_calls": [
         {
-         "id": "chatcmpl-tool-99711fa878d72871",
+         "id": "chatcmpl-tool-bb482262f33bff51",
          "function": {
           "arguments": "{\"t_start\": 33, \"t_end\": 36}",
           "name": "get_window"
@@ -228,7 +228,7 @@
       "routed_experts": null
      }
     ],
-    "created": 1792987033,
+    "created": 1793119652,
     "model": "nvidia/nemotron-3-super-120b-a12b",
     "object": "chat.completion",
     "moderation": null,
@@ -262,7 +262,7 @@
    }
   },
   {
-   "sha256": "688bbbf5fe2af6d93df49ef200f43aa35f7f892a6ba087f59ba532d3ef998ed6",
+   "sha256": "81f00a2d7d618cec524562cb4e59d041d37dcf5bfd7e46ee29c2d29eb056452f",
    "request": {
     "model": "nvidia/nemotron-3-super-120b-a12b",
     "temperature": 0,
@@ -281,7 +281,7 @@
       "content": "",
       "tool_calls": [
        {
-        "id": "chatcmpl-tool-99711fa878d72871",
+        "id": "chatcmpl-tool-bb482262f33bff51",
         "type": "function",
         "function": {
          "arguments": "{\"t_start\": 33, \"t_end\": 36}",
@@ -292,7 +292,7 @@
      },
      {
       "role": "tool",
-      "tool_call_id": "chatcmpl-tool-99711fa878d72871",
+      "tool_call_id": "chatcmpl-tool-bb482262f33bff51",
       "content": "{\"columns\": [\"seq\", \"t\", \"can_row\", \"mph\", \"steer\", \"blinker\", \"standstill\", \"brake\", \"gear\", \"accel\", \"lane_valid\", \"offset_m\", \"departure\", \"signs\"], \"rows\": [[528, 33.02, 4582272874477, 2.8, 43.7, null, true, false, \"D\", 0.36, false, null, null, []], [533, 33.35, 4582612989657, 3.3, 56.9, null, true, false, \"D\", 0.36, false, null, null, []], [538, 33.68, 4582947880557, 3.6, 121.6, null, true, false, \"D\", 0.28, false, null, null, []], [542, 34.02, 4583281790324, 3.8, 152.8, null, true, false, \"D\", 0.29, false, null, null, []], [548, 34.38, 4583646694083, 3.9, 144.1, null, true, false, \"D\", 0.25, false, null, null, []], [554, 34.75, 4584011630513, 4.3, 123.8, null, true, false, \"D\", 0.19, false, null, null, []], [559, 35.05, 4584314455744, 4.4, 100.8, null, true, false, \"D\", 0.2, false, null, null, []], [565, 35.35, 4584612707226, 4.5, 92.3, null, true, false, \"D\", 0.16, false, null, null, []], [570, 35.71, 4584979552191, 4.6, 70.9, null, true, false, \"D\", 0.16, false, null, null, []]]}"
      }
     ],
@@ -477,7 +477,7 @@
     ]
    },
    "response": {
-    "id": "chatcmpl-318aea84e83224576b0db5e53b5b48d5",
+    "id": "chatcmpl-92229a9beecadf90",
     "choices": [
      {
       "finish_reason": "tool_calls",
@@ -492,36 +492,36 @@
        "function_call": null,
        "tool_calls": [
         {
-         "id": "chatcmpl-tool-b1617eb90dbcf2f2",
+         "id": "chatcmpl-tool-94f6c48a63b2bf9e",
          "function": {
-          "arguments": "{\"verdict\": \"confirmed\", \"type\": \"turn\", \"t_start\": 33.68, \"t_end\": 35.35, \"side\": \"left\", \"detail\": \"no_blinker\", \"claims\": [{\"seq\": 542, \"field\": \"steer\", \"value\": \"152.8\"}, {\"seq\": 542, \"field\": \"blinker\", \"value\": \"null\"}, {\"seq\": 542, \"field\": \"gear\", \"value\": \"D\"}, {\"seq\": 542, \"field\": \"mph\", \"value\": \"3.8\"}], \"reason\": \"The steering wheel turned left past 90\u00b0 and returned to center while the left blinker was off, indicating a left turn without signaling.\"}",
+          "arguments": "{\"verdict\": \"confirmed\", \"type\": \"turn\", \"t_start\": 33.68, \"t_end\": 35.35, \"side\": \"left\", \"detail\": \"no_blinker\", \"claims\": [{\"seq\": 538, \"field\": \"steer\", \"value\": \"121.6\"}, {\"seq\": 542, \"field\": \"steer\", \"value\": \"152.8\"}, {\"seq\": 542, \"field\": \"blinker\", \"value\": \"null\"}, {\"seq\": 559, \"field\": \"steer\", \"value\": \"100.8\"}, {\"seq\": 565, \"field\": \"steer\", \"value\": \"92.3\"}], \"reason\": \"The steering wheel turned left past 90\u00b0 and returned toward center, indicating a left turn, while the blinker remained off throughout.\"}",
           "name": "emit_event"
          },
          "type": "function"
         }
        ],
-       "reasoning": "We need verify if it's a turn left without blinker. The data shows steer goes high positive (left) from ~121 to 152 then decreasing. No blinker column is null throughout. Gear D constant. Speed around 3-4 mph (~1.5-2 m/s). That seems like turning left at intersection maybe. Need confirm if actually a turn (road change). Could be just maneuver within lane? But steering >90 suggests turning. We'll accept as turn left, no_blinker. Provide claims: seq 542 steer 152.8, blinker null, etc. Also need side left. Use emit_event.",
-       "reasoning_content": "We need verify if it's a turn left without blinker. The data shows steer goes high positive (left) from ~121 to 152 then decreasing. No blinker column is null throughout. Gear D constant. Speed around 3-4 mph (~1.5-2 m/s). That seems like turning left at intersection maybe. Need confirm if actually a turn (road change). Could be just maneuver within lane? But steering >90 suggests turning. We'll accept as turn left, no_blinker. Provide claims: seq 542 steer 152.8, blinker null, etc. Also need side left. Use emit_event."
+       "reasoning": "We need verify if turn actually occurred. Steering goes high positive (left) ~152 then decreasing. No blinker. It seems like a left turn without blinker. Need ensure it's a turn (intersection) not just curve. Check lane_valid etc all false. Probably a turn. Confirm as turn left no_blinker. Provide claims: seq 542 steer 152.8, blinker null, maybe also seq 538 steer 121.6, etc. Also need t_start/t_end match. Use given times. Provide reason.",
+       "reasoning_content": "We need verify if turn actually occurred. Steering goes high positive (left) ~152 then decreasing. No blinker. It seems like a left turn without blinker. Need ensure it's a turn (intersection) not just curve. Check lane_valid etc all false. Probably a turn. Confirm as turn left no_blinker. Provide claims: seq 542 steer 152.8, blinker null, maybe also seq 538 steer 121.6, etc. Also need t_start/t_end match. Use given times. Provide reason."
       },
       "stop_reason": null,
       "token_ids": null,
       "routed_experts": null
      }
     ],
-    "created": 1792987035,
+    "created": 1793119653,
     "model": "nvidia/nemotron-3-super-120b-a12b",
     "object": "chat.completion",
     "moderation": null,
     "service_tier": null,
     "system_fingerprint": "vllm-0.1.dev1+g5001743e3-tp2-05adddbc",
     "usage": {
-     "completion_tokens": 365,
+     "completion_tokens": 377,
      "prompt_tokens": 3082,
-     "total_tokens": 3447,
+     "total_tokens": 3459,
      "completion_tokens_details": {
       "accepted_prediction_tokens": null,
       "audio_tokens": null,
-      "reasoning_tokens": 140,
+      "reasoning_tokens": 122,
       "rejected_prediction_tokens": null
      },
      "prompt_tokens_details": {

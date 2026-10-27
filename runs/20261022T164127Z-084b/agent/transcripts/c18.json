@@ -197,7 +197,7 @@
     ]
    },
    "response": {
-    "id": "chatcmpl-1c2ad864c87bdd5f12d186de8a48e151",
+    "id": "chatcmpl-a2d79f0526c9d6bc",
     "choices": [
      {
       "finish_reason": "tool_calls",
@@ -212,36 +212,36 @@
        "function_call": null,
        "tool_calls": [
         {
-         "id": "chatcmpl-tool-9a34810646d1551a",
+         "id": "chatcmpl-tool-b68de7f12f9cd2ea",
          "function": {
-          "arguments": "{\"t_start\": 264, \"t_end\": 266}",
+          "arguments": "{\"t_start\": 264.5, \"t_end\": 265.5}",
           "name": "get_window"
          },
          "type": "function"
         }
        ],
-       "reasoning": "We need evaluate candidate turn at single instant? Likely incorrect. Need get_window around 265 sec.",
-       "reasoning_content": "We need evaluate candidate turn at single instant? Likely incorrect. Need get_window around 265 sec."
+       "reasoning": "We need evaluate candidate turn at single instant likely false. Need check around 265 sec. Use get_window maybe small range.",
+       "reasoning_content": "We need evaluate candidate turn at single instant likely false. Need check around 265 sec. Use get_window maybe small range."
       },
       "stop_reason": null,
       "token_ids": null,
       "routed_experts": null
      }
     ],
-    "created": 1792987167,
+    "created": 1793119821,
     "model": "nvidia/nemotron-3-super-120b-a12b",
     "object": "chat.completion",
     "moderation": null,
     "service_tier": null,
     "system_fingerprint": "vllm-0.1.dev1+g5001743e3-tp2-05adddbc",
     "usage": {
-     "completion_tokens": 66,
+     "completion_tokens": 70,
      "prompt_tokens": 2422,
-     "total_tokens": 2488,
+     "total_tokens": 2492,
      "completion_tokens_details": {
       "accepted_prediction_tokens": null,
       "audio_tokens": null,
-      "reasoning_tokens": 23,
+      "reasoning_tokens": 27,
       "rejected_prediction_tokens": null
      },
      "prompt_tokens_details": {
@@ -262,7 +262,7 @@
    }
   },
   {
-   "sha256": "a3b6984c74207b1d077027cfcd94cd5bbee5ca358f75812bc9cf76789bd34ce8",
+   "sha256": "b58f7ec5a86f7fc056f9a513eaaf9f8e50b44585ecf7069a330b17c0cba83c8b",
    "request": {
     "model": "nvidia/nemotron-3-super-120b-a12b",
     "temperature": 0,
@@ -281,10 +281,10 @@
       "content": "",
       "tool_calls": [
        {
-        "id": "chatcmpl-tool-9a34810646d1551a",
+        "id": "chatcmpl-tool-b68de7f12f9cd2ea",
         "type": "function",
         "function": {
-         "arguments": "{\"t_start\": 264, \"t_end\": 266}",
+         "arguments": "{\"t_start\": 264.5, \"t_end\": 265.5}",
          "name": "get_window"
         }
        }
@@ -292,8 +292,8 @@
      },
      {
       "role": "tool",
-      "tool_call_id": "chatcmpl-tool-9a34810646d1551a",
-      "content": "{\"columns\": [\"seq\", \"t\", \"can_row\", \"mph\", \"steer\", \"blinker\", \"standstill\", \"brake\", \"gear\", \"accel\", \"lane_valid\", \"offset_m\", \"departure\", \"signs\"], \"rows\": [[4049, 264.09, 4813355881671, 8.0, -55.6, null, false, true, \"D\", -0.82, false, null, null, []], [4053, 264.36, 4813626874959, 7.7, -66.7, null, false, true, \"D\", -0.85, false, null, null, []], [4060, 264.73, 4813987929325, 7.0, -89.2, null, false, true, \"D\", -0.74, false, null, null, []], [4066, 265.06, 4814323387848, 6.2, -101.2, null, false, true, \"D\", -0.49, false, null, null, []], [4071, 265.39, 4814646584808, 5.8, -69.4, null, false, true, \"D\", -0.46, false, null, null, []], [4074, 265.69, 4814955708548, 5.9, -0.8, null, false, true, \"D\", -0.46, false, null, null, []], [4076, 265.86, 4815123500499, 5.3, 29.6, null, false, true, \"D\", -0.51, false, null, null, []]]}"
+      "tool_call_id": "chatcmpl-tool-b68de7f12f9cd2ea",
+      "content": "{\"columns\": [\"seq\", \"t\", \"can_row\", \"mph\", \"steer\", \"blinker\", \"standstill\", \"brake\", \"gear\", \"accel\", \"lane_valid\", \"offset_m\", \"departure\", \"signs\"], \"rows\": [[4060, 264.73, 4813987929325, 7.0, -89.2, null, false, true, \"D\", -0.74, false, null, null, []], [4066, 265.06, 4814323387848, 6.2, -101.2, null, false, true, \"D\", -0.49, false, null, null, []], [4071, 265.39, 4814646584808, 5.8, -69.4, null, false, true, \"D\", -0.46, false, null, null, []]]}"
      }
     ],
     "tools": [
@@ -477,7 +477,7 @@
     ]
    },
    "response": {
-    "id": "chatcmpl-fae37281aa6f8f2fa307814b1898a0a9",
+    "id": "chatcmpl-96fce26c3e8ff229",
     "choices": [
      {
       "finish_reason": "tool_calls",
@@ -492,36 +492,36 @@
        "function_call": null,
        "tool_calls": [
         {
-         "id": "chatcmpl-tool-9ae199590b13e4d8",
+         "id": "chatcmpl-tool-b50be473bdf9669d",
          "function": {
-          "arguments": "{\"seqs\": [4066], \"question\": \"Is the vehicle turning at an intersection or into a driveway/parking lot? Describe the scene.\"}",
+          "arguments": "{\"seqs\": [4066], \"question\": \"Is the vehicle making a turn at an intersection or just steering within the lane?\"}",
           "name": "look_at_frames"
          },
          "type": "function"
         }
        ],
-       "reasoning": "We need to see if turning occurred. The steer goes negative (left?) Actually positive is left. Here steer values are negative => right turn? Negative indicates right turn. At 265.06 steer -101.2 (right). Then later steer goes to -0.8 (near straight) then positive 29.6 (left). So a right turn around that time. Blinker is null throughout. So no blinker. The candidate says turn right, no_blinker. Need to verify if it's a turn at intersection or into driveway. Speed ~6.2 mph decreasing to 5.8 then 5.9 then 5.3. That's low speed, could be turning into a driveway. Need to check if it's on road vs parking lot. Look at frames maybe. Use look_at_frames on seq 4066 to see scene. Let's ask if there is an intersection or driveway.",
-       "reasoning_content": "We need to see if turning occurred. The steer goes negative (left?) Actually positive is left. Here steer values are negative => right turn? Negative indicates right turn. At 265.06 steer -101.2 (right). Then later steer goes to -0.8 (near straight) then positive 29.6 (left). So a right turn around that time. Blinker is null throughout. So no blinker. The candidate says turn right, no_blinker. Need to verify if it's a turn at intersection or into driveway. Speed ~6.2 mph decreasing to 5.8 then 5.9 then 5.3. That's low speed, could be turning into a driveway. Need to check if it's on road vs parking lot. Look at frames maybe. Use look_at_frames on seq 4066 to see scene. Let's ask if there is an intersection or driveway."
+       "reasoning": "We need to see if turning occurred. The steer goes negative (left?) Actually positive = left, so negative is right turn. Steer around -101 deg indicates right turn. No blinker. Need to verify if actually a turn (road change) vs just steering wiggle. Check speed ~6 mph, low, could be turning into driveway? Need to see if it's an intersection. Look at frames maybe. Use look_at_frames on seq 4066 to see if turning.",
+       "reasoning_content": "We need to see if turning occurred. The steer goes negative (left?) Actually positive = left, so negative is right turn. Steer around -101 deg indicates right turn. No blinker. Need to verify if actually a turn (road change) vs just steering wiggle. Check speed ~6 mph, low, could be turning into driveway? Need to see if it's an intersection. Look at frames maybe. Use look_at_frames on seq 4066 to see if turning."
       },
       "stop_reason": null,
       "token_ids": null,
       "routed_experts": null
      }
     ],
-    "created": 1792987168,
+    "created": 1793119822,
     "model": "nvidia/nemotron-3-super-120b-a12b",
     "object": "chat.completion",
     "moderation": null,
     "service_tier": null,
     "system_fingerprint": "vllm-0.1.dev1+g5001743e3-tp2-05adddbc",
     "usage": {
-     "completion_tokens": 256,
-     "prompt_tokens": 2978,
-     "total_tokens": 3234,
+     "completion_tokens": 159,
+     "prompt_tokens": 2731,
+     "total_tokens": 2890,
      "completion_tokens_details": {
       "accepted_prediction_tokens": null,
       "audio_tokens": null,
-      "reasoning_tokens": 196,
+      "reasoning_tokens": 103,
       "rejected_prediction_tokens": null
      },
      "prompt_tokens_details": {
@@ -531,7 +531,7 @@
       "multimodal_tokens": null
      },
      "prompt_cache_hit_tokens": 2400,
-     "prompt_cache_miss_tokens": 578
+     "prompt_cache_miss_tokens": 331
     },
     "prompt_logprobs": null,
     "prompt_token_ids": null,
@@ -542,7 +542,7 @@
    }
   },
   {
-   "sha256": "99cb01d32a3c8ad30e78258cda742f174a1a4af2a9da4fba43f43455dd9fe778",
+   "sha256": "465f3ba6084a45e7010fb85da368ffbcdbfa77c059ae38a1f3592829a9e90c15",
    "request": {
     "model": "nvidia/Nemotron-3.5-Super-VL",
     "temperature": 0,
@@ -553,11 +553,11 @@
       "content": [
        {
         "type": "text",
-        "text": "Dashcam frames from a car driving in the US (camera behind the windshield, the car's hood at the bottom). Answer briefly and factually; say so if you can't tell.\n\nQuestion: Is the vehicle turning at an intersection or into a driveway/parking lot? Describe the scene."
+        "text": "Dashcam frames from a car driving in the US (camera behind the windshield, the car's hood at the bottom). Answer briefly and factually; say so if you can't tell. Answer for each frame separately, one line per frame starting with its label, e.g. \"Frame 2720: ...\".\n\nQuestion: Is the vehicle making a turn at an intersection or just steering within the lane?"
        },
        {
         "type": "text",
-        "text": "Frame seq 4066, t = 265.06 s:"
+        "text": "Frame 4066 (t = 265.06 s):"
        },
        {
         "type": "image_url",
@@ -571,14 +571,14 @@
     }
    },
    "response": {
-    "id": "chatcmpl-632187700d348964a618e41ff6046af8",
+    "id": "chatcmpl-8f03b47cca6c4e2d",
     "choices": [
      {
       "finish_reason": "stop",
       "index": 0,
       "logprobs": null,
       "message": {
-       "content": "The vehicle is not turning; it is driving straight on a road. The scene shows a tree-lined road with the sun low in the sky, creating glare. There is no visible intersection, driveway, or parking lot entrance.",
+       "content": "Frame 4066: The vehicle is not at an intersection; it appears to be driving straight within a lane on a road lined with trees.",
        "refusal": null,
        "role": "assistant",
        "annotations": null,
@@ -592,16 +592,16 @@
       "routed_experts": null
      }
     ],
-    "created": 1792987171,
+    "created": 1793119825,
     "model": "nvidia/Nemotron-3.5-Super-VL",
     "object": "chat.completion",
     "moderation": null,
     "service_tier": null,
     "system_fingerprint": "vllm-0.1.dev1+g1bed5fc81-tp2-9705eecb",
     "usage": {
-     "completion_tokens": 47,
-     "prompt_tokens": 477,
-     "total_tokens": 524,
+     "completion_tokens": 32,
+     "prompt_tokens": 502,
+     "total_tokens": 534,
      "completion_tokens_details": {
       "accepted_prediction_tokens": null,
       "audio_tokens": null,
@@ -626,7 +626,7 @@
    }
   },
   {
-   "sha256": "8021ac1619d252c9f613c8cf0a481d2f3e9e3a8d8142a92aaab82dd07a7b65d5",
+   "sha256": "806592e0ea6c2a43e8dce016f11ee87da481d4982a38f62bac012183dd154462",
    "request": {
     "model": "nvidia/nemotron-3-super-120b-a12b",
     "temperature": 0,
@@ -645,10 +645,10 @@
       "content": "",
       "tool_calls": [
        {
-        "id": "chatcmpl-tool-9a34810646d1551a",
+        "id": "chatcmpl-tool-b68de7f12f9cd2ea",
         "type": "function",
         "function": {
-         "arguments": "{\"t_start\": 264, \"t_end\": 266}",
+         "arguments": "{\"t_start\": 264.5, \"t_end\": 265.5}",
          "name": "get_window"
         }
        }
@@ -656,18 +656,18 @@
      },
      {
       "role": "tool",
-      "tool_call_id": "chatcmpl-tool-9a34810646d1551a",
-      "content": "{\"columns\": [\"seq\", \"t\", \"can_row\", \"mph\", \"steer\", \"blinker\", \"standstill\", \"brake\", \"gear\", \"accel\", \"lane_valid\", \"offset_m\", \"departure\", \"signs\"], \"rows\": [[4049, 264.09, 4813355881671, 8.0, -55.6, null, false, true, \"D\", -0.82, false, null, null, []], [4053, 264.36, 4813626874959, 7.7, -66.7, null, false, true, \"D\", -0.85, false, null, null, []], [4060, 264.73, 4813987929325, 7.0, -89.2, null, false, true, \"D\", -0.74, false, null, null, []], [4066, 265.06, 4814323387848, 6.2, -101.2, null, false, true, \"D\", -0.49, false, null, null, []], [4071, 265.39, 4814646584808, 5.8, -69.4, null, false, true, \"D\", -0.46, false, null, null, []], [4074, 265.69, 4814955708548, 5.9, -0.8, null, false, true, \"D\", -0.46, false, null, null, []], [4076, 265.86, 4815123500499, 5.3, 29.6, null, false, true, \"D\", -0.51, false, null, null, []]]}"
+      "tool_call_id": "chatcmpl-tool-b68de7f12f9cd2ea",
+      "content": "{\"columns\": [\"seq\", \"t\", \"can_row\", \"mph\", \"steer\", \"blinker\", \"standstill\", \"brake\", \"gear\", \"accel\", \"lane_valid\", \"offset_m\", \"departure\", \"signs\"], \"rows\": [[4060, 264.73, 4813987929325, 7.0, -89.2, null, false, true, \"D\", -0.74, false, null, null, []], [4066, 265.06, 4814323387848, 6.2, -101.2, null, false, true, \"D\", -0.49, false, null, null, []], [4071, 265.39, 4814646584808, 5.8, -69.4, null, false, true, \"D\", -0.46, false, null, null, []]]}"
      },
      {
       "role": "assistant",
       "content": "",
       "tool_calls": [
        {
-        "id": "chatcmpl-tool-9ae199590b13e4d8",
+        "id": "chatcmpl-tool-b50be473bdf9669d",
         "type": "function",
         "function": {
-         "arguments": "{\"seqs\": [4066], \"question\": \"Is the vehicle turning at an intersection or into a driveway/parking lot? Describe the scene.\"}",
+         "arguments": "{\"seqs\": [4066], \"question\": \"Is the vehicle making a turn at an intersection or just steering within the lane?\"}",
          "name": "look_at_frames"
         }
        }
@@ -675,8 +675,8 @@
      },
      {
       "role": "tool",
-      "tool_call_id": "chatcmpl-tool-9ae199590b13e4d8",
-      "content": "{\"seqs\": [4066], \"answer\": \"The vehicle is not turning; it is driving straight on a road. The scene shows a tree-lined road with the sun low in the sky, creating glare. There is no visible intersection, driveway, or parking lot entrance.\"}"
+      "tool_call_id": "chatcmpl-tool-b50be473bdf9669d",
+      "content": "{\"seqs\": [4066], \"answer\": \"Frame 4066: The vehicle is not at an intersection; it appears to be driving straight within a lane on a road lined with trees.\"}"
      }
     ],
     "tools": [
@@ -860,7 +860,7 @@
     ]
    },
    "response": {
-    "id": "chatcmpl-976021918a3dd78c07d9503a37f7fc3a",
+    "id": "chatcmpl-98deca91b073fefb",
     "choices": [
      {
       "finish_reason": "tool_calls",
@@ -875,36 +875,36 @@
        "function_call": null,
        "tool_calls": [
         {
-         "id": "chatcmpl-tool-a88075411cc518c8",
+         "id": "chatcmpl-tool-b02d36ddd2370133",
          "function": {
-          "arguments": "{\"verdict\": \"rejected\", \"type\": \"turn\", \"t_start\": 265.06, \"t_end\": 265.06, \"side\": \"right\", \"detail\": \"no_blinker\", \"claims\": [{\"seq\": 4066, \"field\": \"steer\", \"value\": \"-101.2\"}], \"reason\": \"The vehicle continued straight without entering an intersection or driveway.\"}",
+          "arguments": "{\"verdict\": \"rejected\", \"type\": \"turn\", \"t_start\": 265.06, \"t_end\": 265.06, \"side\": \"right\", \"detail\": \"no_blinker\", \"claims\": [{\"seq\": 4066, \"field\": \"steer\", \"value\": \"-101.2\"}, {\"seq\": 4066, \"field\": \"blinker\", \"value\": \"null\"}, {\"seq\": 4066, \"field\": \"gear\", \"value\": \"D\"}, {\"seq\": 4066, \"field\": \"mph\", \"value\": \"6.2\"}], \"reason\": \"The vehicle was not at an intersection; it was steering within a lane on a straight road.\"}",
           "name": "emit_event"
          },
          "type": "function"
         }
        ],
-       "reasoning": "We need to produce corrected/rejected etc. It appears not a turn, so reject. Provide reason.",
-       "reasoning_content": "We need to produce corrected/rejected etc. It appears not a turn, so reject. Provide reason."
+       "reasoning": "We need to decide verdict. Candidate says turn at t 265.06, side right, no_blinker. Data shows steer negative (left?) Actually steer -101.2 deg (negative = right? positive = left per description: positive = left). Negative indicates right turn steering. But look_at_frames says not at intersection, driving straight within lane. So it's not a turn; maybe lane departure? No departure flag null. It's just steering within lane maybe curve? But it's brief. Likely rejected because not a turn event. Provide corrected? Could be lane_departure? No departure. So reject.\n\nProvide reason: not an intersection, just steering within lane.\n\nClaims: need seq, field, value. Use seq 4066 steer -101.2, blinker null, gear D, etc.\n\nEmit_event with verdict rejected.",
+       "reasoning_content": "We need to decide verdict. Candidate says turn at t 265.06, side right, no_blinker. Data shows steer negative (left?) Actually steer -101.2 deg (negative = right? positive = left per description: positive = left). Negative indicates right turn steering. But look_at_frames says not at intersection, driving straight within lane. So it's not a turn; maybe lane departure? No departure flag null. It's just steering within lane maybe curve? But it's brief. Likely rejected because not a turn event. Provide corrected? Could be lane_departure? No departure. So reject.\n\nProvide reason: not an intersection, just steering within lane.\n\nClaims: need seq, field, value. Use seq 4066 steer -101.2, blinker null, gear D, etc.\n\nEmit_event with verdict rejected."
       },
       "stop_reason": null,
       "token_ids": null,
       "routed_experts": null
      }
     ],
-    "created": 1792987172,
+    "created": 1793119826,
     "model": "nvidia/nemotron-3-super-120b-a12b",
     "object": "chat.completion",
     "moderation": null,
     "service_tier": null,
     "system_fingerprint": "vllm-0.1.dev1+g5001743e3-tp2-05adddbc",
     "usage": {
-     "completion_tokens": 167,
-     "prompt_tokens": 3114,
-     "total_tokens": 3281,
+     "completion_tokens": 406,
+     "prompt_tokens": 2848,
+     "total_tokens": 3254,
      "completion_tokens_details": {
       "accepted_prediction_tokens": null,
       "audio_tokens": null,
-      "reasoning_tokens": 21,
+      "reasoning_tokens": 185,
       "rejected_prediction_tokens": null
      },
      "prompt_tokens_details": {
@@ -914,7 +914,7 @@
       "multimodal_tokens": null
      },
      "prompt_cache_hit_tokens": 0,
-     "prompt_cache_miss_tokens": 3114
+     "prompt_cache_miss_tokens": 2848
     },
     "prompt_logprobs": null,
     "prompt_token_ids": null,

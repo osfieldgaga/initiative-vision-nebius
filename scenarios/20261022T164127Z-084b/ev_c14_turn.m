@@ -1,21 +1,24 @@
-function [scenario, egoVehicle] = ev_c14_turn()
+function [scenario, egoVehicle] = ev_c14_turn(speedup)
 %EV_C14_TURN turn right blinker at 243.7-245.3 s, from a real drive.
-%   scenario = ev_c14_turn(); plot(scenario); while advance(scenario), pause(0.05), end
+%   ev_c14_turn                      plays it in a figure (no output requested)
+%   ev_c14_turn(4)                   plays it 4x faster
+%   scenario = ev_c14_turn();        returns it without playing
 %   drivingScenarioDesigner(ev_c14_turn())
 %
 %   Drive 20261022T164127Z-084b, drive time 240.7-248.3 s (the event +/- 3 s).
-%   Event (agent verdict: confirmed, validator: passed): type turn, side right,
-%   detail blinker, 243.70-245.34 s. Agent's reason (not validated): The steering wheel turned right (negative values) starting at 243.7 s and remained turned until 245.34 s, with the right blinker on before the turn began and staying on until shortly after the turn started, matching a right turn with blinker.
+%   Event (agent verdict: confirmed, validator: passed, hand label: row 14 agrees): type turn, side right,
+%   detail blinker, 243.70-245.34 s. Agent's reason (not validated): The steer angle went negative (>90 deg magnitude) indicating a right turn, and the right blinker was on before steering began and remained on during the early part of the turn.
 %   Validated claims:
-%   seq 3749 steer = -285.0  (frame 00003749_4793271044000.jpg, CAN row 4793269858652)
-%   seq 3749 blinker = right  (frame 00003749_4793271044000.jpg, CAN row 4793269858652)
-%   seq 3762 blinker = null  (frame 00003762_4794303843000.jpg, CAN row 4794297082197)
+%   seq 3745 blinker = right  (frame 00003745_4792971198000.jpg, CAN row 4792929923114)
 %   seq 3745 steer = -278.8  (frame 00003745_4792971198000.jpg, CAN row 4792929923114)
+%   seq 3749 steer = -285.0  (frame 00003749_4793271044000.jpg, CAN row 4793269858652)
+%   seq 3762 blinker = null  (frame 00003762_4794303843000.jpg, CAN row 4794297082197)
 %
 %   Ego: the car's speed profile (CAN front wheel speed) along its path (CAN yaw rate, calibrated
 %   (raw - 2.5) * 0.112 deg/s), starting at the origin facing +x. Road: two 3.5 m
 %   lanes along the path, ego in the right lane. Made by src/scripts/export_matlab.py.
 
+if nargin < 1, speedup = 1; end
 scenario = drivingScenario('SampleTime', 0.1);  % runs until the ego's trajectory ends (7.6 s of drive)
 
 roadCenters = [0.000 1.750 0.000; 4.090 1.733 0.000; 8.498 1.552 0.000; 12.886 1.133 0.000; 17.246 0.479 0.000; 21.899 -0.943 0.000; 25.394 -4.011 0.000; 28.016 -7.885 0.000; 30.014 -11.953 0.000; 31.526 -15.902 0.000; 33.313 -20.572 0.000];
@@ -26,4 +29,23 @@ waypoints = [0.000 0.000 0.000; 0.722 -0.000 0.000; 1.426 -0.001 0.000; 2.112 -0
 speed = [7.322; 7.123; 6.950; 6.769; 6.600; 6.419; 6.242; 6.164; 6.164; 6.164; 6.164; 6.164; 6.164; 6.164; 6.164; 6.164; 6.164; 6.164; 6.164; 6.164; 6.164; 6.164; 6.164; 6.164; 6.164; 6.164; 6.164; 6.164; 6.164; 6.164; 6.164; 3.905; 3.892; 3.844; 3.913; 3.978; 4.056; 4.125; 4.147; 4.203; 4.324; 4.393; 4.393; 4.561; 4.626; 4.738; 4.859; 4.924; 5.015; 5.080; 5.101; 5.075; 5.101; 5.166; 5.166; 5.244; 5.244; 5.330; 5.365; 5.365];
 waittime = [0.000; 0.000; 0.000; 0.000; 0.000; 0.000; 0.000; 0.000; 0.000; 0.000; 0.000; 0.000; 0.000; 0.000; 0.000; 0.000; 0.000; 0.000; 0.000; 0.000; 0.000; 0.000; 0.000; 0.000; 0.000; 0.000; 0.000; 0.000; 0.000; 0.000; 0.000; 0.000; 0.000; 0.000; 0.000; 0.000; 0.000; 0.000; 0.000; 0.000; 0.000; 0.000; 0.000; 0.000; 0.000; 0.000; 0.000; 0.000; 0.000; 0.000; 0.000; 0.000; 0.000; 0.000; 0.000; 0.000; 0.000; 0.000; 0.000; 0.000];
 trajectory(egoVehicle, waypoints, speed, waittime);
+
+if nargout == 0  % called on its own (or with Run): show it
+    driveStart = 240.70;  % drive time (s) at the scenario's start
+    eventTimes = [243.70 245.34];
+    eventNames = {'c14 turn right blinker'};
+    plot(scenario, 'Waypoints', 'on');
+    ax = gca;
+    chasePlot(egoVehicle);
+    frame = tic;
+    while advance(scenario)
+        t = driveStart + scenario.SimulationTime;
+        now = eventNames(eventTimes(:, 1) <= t & t <= eventTimes(:, 2));
+        title(ax, sprintf('drive %.1f s   %.0f km/h   %s', t, 3.6 * norm(egoVehicle.Velocity), strjoin(now, ', ')), ...
+              'Interpreter', 'none');
+        pause(max(scenario.SampleTime / speedup - toc(frame), 0.001));  % drawing takes time too
+        frame = tic;
+    end
+    clear scenario egoVehicle  % don't print the object
+end
 end

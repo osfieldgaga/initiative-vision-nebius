@@ -197,7 +197,7 @@
     ]
    },
    "response": {
-    "id": "chatcmpl-fdaf7c61b22363a8d39f92ca556b8529",
+    "id": "chatcmpl-b82247b6a0b0aac3",
     "choices": [
      {
       "finish_reason": "tool_calls",
@@ -212,7 +212,7 @@
        "function_call": null,
        "tool_calls": [
         {
-         "id": "chatcmpl-tool-877d11a283825801",
+         "id": "chatcmpl-tool-8d5b07223567c3d7",
          "function": {
           "arguments": "{\"t_start\": 443.03, \"t_end\": 460.36}",
           "name": "get_window"
@@ -220,28 +220,28 @@
          "type": "function"
         }
        ],
-       "reasoning": "We need evaluate candidate other_stop. Likely it's actually turning/parking etc. Check stats: max steer 504 deg left indicates big turn maybe U-turn? Gear includes P,R,N,D -> likely parking maneuver. Probably rejected because it's parking lot maneuver. Let's get window around 443-460.",
-       "reasoning_content": "We need evaluate candidate other_stop. Likely it's actually turning/parking etc. Check stats: max steer 504 deg left indicates big turn maybe U-turn? Gear includes P,R,N,D -> likely parking maneuver. Probably rejected because it's parking lot maneuver. Let's get window around 443-460."
+       "reasoning": "We need evaluate other_stop candidate. Likely it's actually turning/maneuvering in parking lot due to gear changes etc. Probably rejected because it's parking lot maneuver. Let's get window around 443-460.",
+       "reasoning_content": "We need evaluate other_stop candidate. Likely it's actually turning/maneuvering in parking lot due to gear changes etc. Probably rejected because it's parking lot maneuver. Let's get window around 443-460."
       },
       "stop_reason": null,
       "token_ids": null,
       "routed_experts": null
      }
     ],
-    "created": 1792987319,
+    "created": 1793120000,
     "model": "nvidia/nemotron-3-super-120b-a12b",
     "object": "chat.completion",
     "moderation": null,
     "service_tier": null,
     "system_fingerprint": "vllm-0.1.dev1+g5001743e3-tp2-05adddbc",
     "usage": {
-     "completion_tokens": 115,
+     "completion_tokens": 95,
      "prompt_tokens": 2414,
-     "total_tokens": 2529,
+     "total_tokens": 2509,
      "completion_tokens_details": {
       "accepted_prediction_tokens": null,
       "audio_tokens": null,
-      "reasoning_tokens": 70,
+      "reasoning_tokens": 50,
       "rejected_prediction_tokens": null
      },
      "prompt_tokens_details": {
@@ -262,7 +262,7 @@
    }
   },
   {
-   "sha256": "8ba4b9105f6d1198406cf95728de30708b493b189bf65addc3234efdeec85bd3",
+   "sha256": "aed5e2fdce62d26d4675c5397f19bd9505c297581b3b6956c8fd14b5a0bcb6b4",
    "request": {
     "model": "nvidia/nemotron-3-super-120b-a12b",
     "temperature": 0,
@@ -281,7 +281,7 @@
       "content": "",
       "tool_calls": [
        {
-        "id": "chatcmpl-tool-877d11a283825801",
+        "id": "chatcmpl-tool-8d5b07223567c3d7",
         "type": "function",
         "function": {
          "arguments": "{\"t_start\": 443.03, \"t_end\": 460.36}",
@@ -292,7 +292,7 @@
      },
      {
       "role": "tool",
-      "tool_call_id": "chatcmpl-tool-877d11a283825801",
+      "tool_call_id": "chatcmpl-tool-8d5b07223567c3d7",
       "content": "{\"columns\": [\"seq\", \"t\", \"can_row\", \"mph\", \"steer\", \"blinker\", \"standstill\", \"brake\", \"gear\", \"accel\", \"lane_valid\", \"offset_m\", \"departure\", \"signs\"], \"rows\": [[6724, 443.04, 4992301299573, 7.6, -4.0, null, false, true, \"D\", -0.35, false, null, null, []], [6729, 443.33, 4992597540538, 7.3, 4.4, null, false, true, \"D\", -0.43, false, null, null, []], [6732, 443.57, 4992833303784, 7.2, 13.8, null, false, true, \"D\", -0.36, false, null, null, []], [6734, 443.74, 4992999959502, 7.0, 32.9, null, false, true, \"D\", -0.41, false, null, null, []], [6738, 444.0, 4993266664442, 6.8, 67.6, null, false, true, \"D\", -0.39, false, null, null, []], [6744, 444.33, 4993600923566, 6.2, 169.7, null, false, false, \"D\", -0.25, false, null, null, []], [6750, 444.67, 4993930608261, 6.2, 251.4, null, false, false, \"D\", -0.27, false, null, null, []], [6756, 445.0, 4994265617642, 6.3, 298.6, null, false, false, \"D\", 0.05, false, null, null, []], [6762, 445.33, 4994599511371, 6.3, 381.2, null, false, false, \"D\", 0.27, false, null, null, []], [6764, 445.5, 4994762997632, 6.4, 407.6, null, false, false, \"D\", 0.23, false, null, null, []], [6767, 445.7, 4994963099994, 6.5, 430.8, null, false, false, \"D\", 0.19, false, null, null, []], [6772, 446.0, 4995266757971, 6.5, 453.6, null, false, false, \"D\", -0.01, false, null, null, []], [6776, 446.37, 4995621236380, 6.6, 503.8, null, false, false, \"D\", -0.43, false, null, null, []], [6782, 446.7, 4995959808204, 6.3, 504.5, null, false, false, \"D\", -0.42, false, null, null, []], [6788, 447.03, 4996291271385, 5.8, 492.4, null, false, false, \"D\", -0.52, false, null, null, []], [6793, 447.37, 4996628593244, 5.5, 399.1, null, false, false, \"D\", -0.62, false, null, null, []], [6797, 447.6, 4996863723260, 5.1, 331.6, null, false, true, \"D\", -0.73, false, null, null, []], [6799, 447.7, 4996955679335, 4.8, 296.4, null, false, true, \"D\", -0.88, false, null, null, []], [6804, 448.03, 4997298886812, 4.6, 173.0, null, true, true, \"D\", -1.04, false, null, null, []], [6809, 448.37, 4997629714082, 3.1, 17.0, null, true, true, \"D\", -0.94, false, null, null, []], [6815, 448.7, 4997965888587, 2.5, -84.6, null, true, true, \"D\", -0.83, false, null, null, []], [6822, 449.03, 4998286552595, 2.1, -49.1, null, true, true, \"D\", -0.79, false, null, null, []], [6828, 449.37, 4998629127234, 1.3, -2.0, null, true, true, \"D\", -0.97, false, null, null, []], [6832, 449.73, 4998983953912, 0.6, -8.3, null, true, true, \"D\", -0.68, false, null, null, []], [6838, 450.03, 4999297693026, 0.0, -8.3, null, true, true, \"D\", -0.35, false, null, null, []], [6843, 450.4, 4999659969711, 0.0, -8.3, null, true, true, \"D\", 0.0, false, null, null, []], [6848, 450.73, 4999995601234, 0.0, -8.3, null, true, true, \"N\", 0.0, false, null, null, []], [6853, 451.03, 5000296297822, 0.0, -8.3, null, true, true, \"N\", 0.0, false, null, null, []], [6859, 451.36, 5000630724065, 0.0, -8.3, null, true, true, \"N\", 0.0, false, null, null, []], [6864, 451.7, 5000959197209, 0.0, -8.3, null, true, false, \"N\", 0.0, false, null, null, []], [6870, 452.03, 5001287711923, 0.0, -8.3, null, true, false, \"N\", 0.0, false, null, null, []], [6877, 452.43, 5001695935066, 0.0, -8.3, null, true, true, \"R\", 0.0, false, null, null, []], [6882, 452.73, 5001994865616, 0.0, -8.3, null, true, true, \"P\", 0.0, false, null, null, []], [6887, 453.03, 5002291971782, 0.0, -8.3, null, true, true, \"P\", 0.0, false, null, null, []], [6893, 453.4, 5002662667498, 0.0, -8.3, null, true, false, \"P\", 0.0, false, null, null, []], [6899, 453.73, 5002991493787, 0.0, -8.3, null, true, false, \"P\", 0.0, false, null, null, []], [6904, 454.03, 5003294492289, 0.0, -8.3, null, true, false, \"P\", 0.0, false, null, null, []], [6908, 454.4, 5003655960452, 0.0, -8.3, null, true, false, \"P\", 0.0, false, null, null, []], [6914, 454.73, 5003994177650, 0.0, -8.3, null, true, false, \"P\", 0.0, false, null, null, []], [6919, 455.03, 5004295924471, 0.0, -8.3, null, true, false, \"P\", 0.0, false, null, null, []], [6925, 455.39, 5004647824359, 0.0, -8.3, null, true, false, \"P\", 0.0, false, null, null, []], [6931, 455.69, 5004960379188, 0.0, -8.3, null, true, false, \"P\", 0.0, false, null, null, []], [6937, 456.03, 5005293840933, 0.0, -8.3, null, true, false, \"P\", 0.0, false, null, null, []], [6941, 456.36, 5005626483840, 0.0, -8.3, null, true, false, \"P\", 0.0, false, null, null, []], [6947, 456.69, 5005959602471, 0.0, -8.3, null, true, false, \"P\", 0.0, false, null, null, []], [6953, 457.03, 5006292904127, 0.0, -8.3, null, true, false, \"P\", 0.0, false, null, null, []], [6958, 457.36, 5006627804343, 0.0, -8.3, null, true, false, \"P\", 0.0, false, null, null, []], [6964, 457.69, 5006958886936, 0.0, -8.3, null, true, false, \"P\", 0.0, false, null, null, []], [6970, 458.03, 5007292424745, 0.0, -8.3, null, true, false, \"P\", 0.0, false, null, null, []], [6975, 458.36, 5007626973159, 0.0, -8.3, null, true, false, \"P\", 0.0, false, null, null, []], [6982, 458.73, 5007993956634, 0.0, -8.3, null, true, false, \"P\", 0.0, false, null, null, []], [6988, 459.03, 5008292259198, 0.0, -8.3, null, true, false, \"P\", 0.0, false, null, null, []], [6994, 459.36, 5008557725515, 0.0, -8.3, null, true, false, \"P\", 0.0, false, null, null, []], [7001, 459.73, 5008557725515, 0.0, -8.3, null, true, false, \"P\", 0.0, false, null, null, []], [7006, 460.03, 5008557725515, 0.0, -8.3, null, true, false, \"P\", 0.0, false, null, null, []], [7011, 460.36, 5008557725515, 0.0, -8.3, null, true, false, \"P\", 0.0, false, null, null, []]]}"
      }
     ],
@@ -477,7 +477,7 @@
     ]
    },
    "response": {
-    "id": "chatcmpl-79e39a8bbe2fcff3047631c2dfabaf07",
+    "id": "chatcmpl-98ac1c71012edc76",
     "choices": [
      {
       "finish_reason": "tool_calls",
@@ -492,36 +492,36 @@
        "function_call": null,
        "tool_calls": [
         {
-         "id": "chatcmpl-tool-8dc3691f3fe3aa31",
+         "id": "chatcmpl-tool-b00e77d2a5f66da6",
          "function": {
-          "arguments": "{\"verdict\": \"rejected\", \"type\": \"other_stop\", \"t_start\": 443.03, \"t_end\": 460.36, \"side\": \"\", \"detail\": \"\", \"claims\": [{\"seq\": 6804, \"field\": \"standstill\", \"value\": \"true\"}, {\"seq\": 6804, \"field\": \"mph\", \"value\": \"4.6\"}, {\"seq\": 6882, \"field\": \"gear\", \"value\": \"P\"}, {\"seq\": 6882, \"field\": \"standstill\", \"value\": \"true\"}, {\"seq\": 6882, \"field\": \"mph\", \"value\": \"0.0\"}], \"reason\": \"The vehicle shows prolonged standstill with gear shifting to P and zero speed, indicating a parking maneuver rather than a stop for traffic or signal.\"}",
+          "arguments": "{\"verdict\": \"rejected\", \"type\": \"other_stop\", \"t_start\": 443.03, \"t_end\": 460.36, \"side\": \"\", \"detail\": \"\", \"claims\": [{\"seq\": 6804, \"field\": \"mph\", \"value\": \"4.6\"}, {\"seq\": 6838, \"field\": \"mph\", \"value\": \"0.0\"}, {\"seq\": 6877, \"field\": \"gear\", \"value\": \"R\"}, {\"seq\": 6882, \"field\": \"gear\", \"value\": \"P\"}], \"reason\": \"The vehicle performs a parking maneuver with reverse and park gears, indicating movement inside a parking lot/driveway rather than a road stop.\"}",
           "name": "emit_event"
          },
          "type": "function"
         }
        ],
-       "reasoning": "We need to determine if other_stop is correct. The data shows from ~448 sec onward standstill true, speed goes to 0, gear goes D->N->R->P etc. This looks like parking maneuver, not a stop for traffic. It's inside a parking lot/driveway? The rule says standstill flag 448-460.4, no stop sign seen. Likely it's a stop due to parking (standing still). According to definitions, we should reject maneuvers inside a parking lot or driveway. Since gear includes P,R,N,D and standstill true while speed 0, likely it's parking. So reject.\n\nWe need to provide evidence: show that speed 0 and gear P etc. Use claims from rows maybe at 452.73 (gear P) etc. Also show standstill true. Provide reason: it's parking maneuver, not a traffic stop.\n\nThus verdict rejected, type other_stop? Actually if rejected we still need to output type as per candidate? The emit_event expects type field; we can keep same type but verdict rejected. Provide claims showing standstill true and gear P etc. Provide reason.\n\nLet's pick a few rows: seq 6882 t 452.73 gear P, standstill true, mph 0.0. Also seq 6804 t 448.03 standstill true, mph 4.6 (still moving). Show transition.\n\nWe'll call emit_event.",
-       "reasoning_content": "We need to determine if other_stop is correct. The data shows from ~448 sec onward standstill true, speed goes to 0, gear goes D->N->R->P etc. This looks like parking maneuver, not a stop for traffic. It's inside a parking lot/driveway? The rule says standstill flag 448-460.4, no stop sign seen. Likely it's a stop due to parking (standing still). According to definitions, we should reject maneuvers inside a parking lot or driveway. Since gear includes P,R,N,D and standstill true while speed 0, likely it's parking. So reject.\n\nWe need to provide evidence: show that speed 0 and gear P etc. Use claims from rows maybe at 452.73 (gear P) etc. Also show standstill true. Provide reason: it's parking maneuver, not a traffic stop.\n\nThus verdict rejected, type other_stop? Actually if rejected we still need to output type as per candidate? The emit_event expects type field; we can keep same type but verdict rejected. Provide claims showing standstill true and gear P etc. Provide reason.\n\nLet's pick a few rows: seq 6882 t 452.73 gear P, standstill true, mph 0.0. Also seq 6804 t 448.03 standstill true, mph 4.6 (still moving). Show transition.\n\nWe'll call emit_event."
+       "reasoning": "We need determine if other_stop valid. The data shows from ~448 sec onward standstill true, speed goes to 0, gear cycles D->N->R->P etc. This looks like parking maneuver (reversing, shifting). It's inside a parking lot/driveway likely. According to rule: reject maneuvers inside parking lot/driveway. Since they shifted to reverse and park, it's parking lot maneuver. So reject.\n\nProvide corrected verdict rejected.",
+       "reasoning_content": "We need determine if other_stop valid. The data shows from ~448 sec onward standstill true, speed goes to 0, gear cycles D->N->R->P etc. This looks like parking maneuver (reversing, shifting). It's inside a parking lot/driveway likely. According to rule: reject maneuvers inside parking lot/driveway. Since they shifted to reverse and park, it's parking lot maneuver. So reject.\n\nProvide corrected verdict rejected."
       },
       "stop_reason": null,
       "token_ids": null,
       "routed_experts": null
      }
     ],
-    "created": 1792987321,
+    "created": 1793120002,
     "model": "nvidia/nemotron-3-super-120b-a12b",
     "object": "chat.completion",
     "moderation": null,
     "service_tier": null,
     "system_fingerprint": "vllm-0.1.dev1+g5001743e3-tp2-05adddbc",
     "usage": {
-     "completion_tokens": 559,
+     "completion_tokens": 320,
      "prompt_tokens": 5997,
-     "total_tokens": 6556,
+     "total_tokens": 6317,
      "completion_tokens_details": {
       "accepted_prediction_tokens": null,
       "audio_tokens": null,
-      "reasoning_tokens": 315,
+      "reasoning_tokens": 99,
       "rejected_prediction_tokens": null
      },
      "prompt_tokens_details": {

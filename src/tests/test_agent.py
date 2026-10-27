@@ -101,6 +101,12 @@ class ValidateTest(unittest.TestCase):
         errors = agent.validate(self.stop(), self.sess, {(2652,): "No."})
         self.assertTrue(any("frame_check must quote" in e for e in errors))
 
+    def test_frame_check_quotes_the_answer_about_that_frame(self):
+        both = {(2652, 2660): "Frame 2652: Yes, a stop sign on the right.\nFrame 2660: No sign visible."}
+        self.assertEqual(agent.validate(self.stop(), self.sess, both), [])
+        wrong = self.stop(claims=self.stop()["claims"][:2] + [{"seq": 2652, "field": "frame_check", "value": "No sign"}])
+        self.assertTrue(any("frame_check must quote" in e for e in agent.validate(wrong, self.sess, both)))
+
     def test_turn_blinker_and_side(self):
         turn = {"verdict": "confirmed", "type": "turn", "t_start": 93.25, "t_end": 98.0, "side": "left",
                 "detail": "blinker", "reason": "", "claims": [{"seq": 1451, "field": "steer", "value": "90.1"}]}
@@ -111,7 +117,7 @@ class ValidateTest(unittest.TestCase):
 
     def test_claim_count(self):
         many = [{"seq": 2720, "field": "mph", "value": "1.1"}] * (agent.MAX_CLAIMS + 1)
-        self.assertTrue(any("claims" in e for e in agent.validate(self.stop(claims=many), self.sess)))
+        self.assertTrue(any("(you gave 7)" in e for e in agent.validate(self.stop(claims=many), self.sess)))
 
     def test_rejection_only_needs_true_claims(self):
         ev = self.stop(verdict="rejected", detail="whatever", t_start=251.4, t_end=257.4,

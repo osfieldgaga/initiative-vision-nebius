@@ -5,18 +5,11 @@
   "end_err": 2.0
  },
  "scenarios": {
-  "ev_c02_turn": {
-   "ok": true,
-   "speed_rms": 0.21,
-   "duration_err": 0.4,
-   "end_err": 0.01,
-   "pass": true
-  },
   "ev_c04_other_stop": {
    "ok": true,
-   "speed_rms": 0.082,
-   "duration_err": 0.2,
-   "end_err": 0.1,
+   "speed_rms": 0.032,
+   "duration_err": -0.0,
+   "end_err": 0.05,
    "pass": true
   },
   "ev_c06_turn": {
@@ -26,18 +19,11 @@
    "end_err": 0.3,
    "pass": true
   },
-  "ev_c07_other_stop": {
-   "ok": true,
-   "speed_rms": 0.198,
-   "duration_err": 0.4,
-   "end_err": 0.12,
-   "pass": true
-  },
   "ev_c08_turn": {
    "ok": true,
-   "speed_rms": 0.195,
-   "duration_err": 0.2,
-   "end_err": 0.52,
+   "speed_rms": 0.051,
+   "duration_err": -0.0,
+   "end_err": 0.14,
    "pass": true
   },
   "ev_c09_turn": {
@@ -47,20 +33,6 @@
    "end_err": 0.0,
    "pass": true
   },
-  "ev_c11_stop_sign": {
-   "ok": true,
-   "speed_rms": 0.05,
-   "duration_err": -0.1,
-   "end_err": 0.03,
-   "pass": true
-  },
-  "ev_c12_turn": {
-   "ok": true,
-   "speed_rms": 0.039,
-   "duration_err": -0.1,
-   "end_err": 0.54,
-   "pass": true
-  },
   "ev_c14_turn": {
    "ok": true,
    "speed_rms": 0.025,
@@ -68,81 +40,32 @@
    "end_err": 0.01,
    "pass": true
   },
-  "ev_c22_turn": {
-   "ok": true,
-   "speed_rms": 0.248,
-   "duration_err": 0.2,
-   "end_err": 0.37,
-   "pass": true
-  },
   "ev_c23_stop_sign": {
    "ok": true,
-   "speed_rms": 0.204,
-   "duration_err": 0.3,
-   "end_err": 0.12,
+   "speed_rms": 0.043,
+   "duration_err": -0.1,
+   "end_err": 0.33,
    "pass": true
   },
   "ev_c24_turn": {
    "ok": true,
-   "speed_rms": 0.025,
-   "duration_err": -0.0,
-   "end_err": 0.01,
+   "speed_rms": 0.031,
+   "duration_err": -0.1,
+   "end_err": 0.79,
    "pass": true
   },
   "ev_c29_turn": {
    "ok": true,
-   "speed_rms": 0.014,
+   "speed_rms": 0.015,
    "duration_err": -0.0,
    "end_err": 0.03,
    "pass": true
   },
-  "ev_c30_curve": {
+  "full_drive": {
    "ok": true,
-   "speed_rms": 0.011,
-   "duration_err": -0.0,
+   "speed_rms": 0.05,
+   "duration_err": 0.1,
    "end_err": 0.02,
-   "pass": true
-  },
-  "ev_c31_other_stop": {
-   "ok": true,
-   "speed_rms": 0.083,
-   "duration_err": 0.4,
-   "end_err": 0.06,
-   "pass": true
-  },
-  "ev_c32_turn": {
-   "ok": true,
-   "speed_rms": 0.039,
-   "duration_err": 0.2,
-   "end_err": 0.05,
-   "pass": true
-  },
-  "ev_c33_turn": {
-   "ok": true,
-   "speed_rms": 0.073,
-   "duration_err": 0.1,
-   "end_err": 0.08,
-   "pass": true
-  },
-  "ev_c34_turn": {
-   "ok": true,
-   "speed_rms": 0.089,
-   "duration_err": 0.1,
-   "end_err": 0.11,
-   "pass": true
-  },
-  "ev_c35_turn": {
-   "ok": true,
-   "speed_rms": 0.026,
-   "duration_err": -0.1,
-   "end_err": 0.39,
-   "pass": true
-  },
-  "ev_c37_turn": {
-   "ok": true,
-   "speed_rms": 0.026,
-   "duration_err": 0.1,
-   "end_err": 0.0,
    "pass": true
   }
  }

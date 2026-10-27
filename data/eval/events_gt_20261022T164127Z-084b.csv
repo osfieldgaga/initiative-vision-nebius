@@ -1,37 +1,39 @@
 id,status,source,type,t_start,t_end,side,detail,confidence,hint,notes
-1,?,prefill,other_stop,0.0,56.0,,,,"standstill 0.0-56.0 s; max 5 mph, gear N/D",
-2,?,prefill,turn,33.7,35.3,left,no_blinker,,"steering past 90 deg; left blinker not on; max 4 mph, gear D",
-3,?,prefill,turn,38.0,38.4,right,no_blinker,,"steering past 90 deg; right blinker not on; max 5 mph, gear D",
-4,?,prefill,other_stop,52.3,66.7,,,,"standstill 57.3-66.7 s; max 4 mph, gear D",
-5,?,prefill,turn,56.3,58.0,left,no_blinker,,"steering past 90 deg; left blinker not on; max 2 mph, gear D",
-6,?,prefill,turn,64.4,70.4,right,no_blinker,,"steering past 90 deg; right blinker not on; max 7 mph, gear D",
-7,?,prefill,other_stop,83.4,91.0,,,,"standstill 88.4-91.0 s; max 9 mph, gear D",
-8,?,prefill,turn,93.2,98.0,left,blinker,,"steering past 90 deg; left blinker 85.7-97.0 s; max 11 mph, gear D",
-9,?,prefill,turn,117.0,122.0,left,blinker,,"steering past 90 deg; left blinker 110.7-122.7 s; max 9 mph, gear D",
-10,?,prefill,stop_sign,170.7,176.1,,full_stop,,"standstill 174.0-176.1 s; stop sign seen by vision 170.7-173.0 s; max 9 mph, gear D",
-11,?,prefill,lane_departure,170.7,172.7,left,,,"vision flagged departing left 170.7-172.7 s; max 9 mph, gear D",
-12,?,prefill,turn,179.0,182.3,right,blinker,,"steering past 90 deg; right blinker 164.3-181.3 s; max 9 mph, gear D",
-13,?,prefill,lane_departure,181.0,184.7,left,,,"vision flagged departing left 181.0-184.7 s; max 13 mph, gear D",
-14,?,prefill,turn,243.7,245.3,right,blinker,,"steering past 90 deg; right blinker 239.3-244.7 s; max 15 mph, gear D",
-15,?,prefill,curve,253.4,255.4,left,,,"steering 20-90 deg for 2.0 s; max 14 mph, gear D",
-16,?,prefill,other_stop,261.8,270.4,,,,"standstill 266.8-270.4 s; max 12 mph, gear R/N/D",
-17,?,prefill,turn,265.1,265.1,right,no_blinker,,"steering past 90 deg; right blinker not on; max 6 mph, gear D",
-18,?,prefill,turn,266.4,271.1,left,no_blinker,,"steering past 90 deg; left blinker not on; max 5 mph, gear R/N/D",
-19,?,prefill,other_stop,267.4,275.4,,,,"standstill 272.4-275.4 s; max 4 mph, gear R/N/D",
-20,?,prefill,turn,272.0,275.4,right,no_blinker,,"steering past 90 deg; right blinker not on; max 3 mph, gear R/N/D",
-21,?,prefill,turn,276.1,279.7,left,no_blinker,,"steering past 90 deg; left blinker not on; max 10 mph, gear D",
-22,?,prefill,stop_sign,296.0,304.4,,full_stop,,"standstill 297.4-304.4 s; stop sign seen by vision 296.0-296.0 s; max 5 mph, gear D",
-23,?,prefill,turn,306.0,310.0,left,blinker,,"steering past 90 deg; left blinker 290.7-309.0 s; max 14 mph, gear D",
-24,?,prefill,lane_departure,310.3,311.3,right,,,"vision flagged departing right 310.3-311.3 s; max 18 mph, gear D",
-25,?,prefill,lane_departure,316.8,319.1,left,,,"vision flagged departing left 316.8-319.1 s; max 22 mph, gear D",
-26,?,prefill,lane_departure,365.7,369.7,right,,,"vision flagged departing right 365.7-369.7 s; max 27 mph, gear D",
-27,?,prefill,lane_departure,371.8,374.7,right,,,"vision flagged departing right 371.8-374.7 s; max 22 mph, gear D",
-28,?,prefill,turn,376.4,380.0,left,blinker,,"steering past 90 deg; left blinker 365.0-379.0 s; max 13 mph, gear D",
-29,?,prefill,curve,391.4,394.1,left,,,"steering 20-90 deg for 2.7 s; max 18 mph, gear D",
-30,?,prefill,other_stop,394.1,421.3,,,,"standstill 399.1-421.3 s; max 15 mph, gear D",
-31,?,prefill,turn,395.4,400.7,right,blinker,,"steering past 90 deg; right blinker 389.1-399.4 s; max 11 mph, gear D",
-32,?,prefill,turn,419.3,424.4,right,no_blinker,,"steering past 90 deg; right blinker not on; max 4 mph, gear D",
-33,?,prefill,turn,425.3,428.0,left,no_blinker,,"steering past 90 deg; left blinker not on; max 10 mph, gear D",
-34,?,prefill,turn,431.3,437.3,right,no_blinker,,"steering past 90 deg; right blinker not on; max 11 mph, gear D",
-35,?,prefill,other_stop,443.0,460.4,,,,"standstill 448.0-460.4 s; max 8 mph, gear P/R/N/D",
-36,?,prefill,turn,444.3,448.0,left,no_blinker,,"steering past 90 deg; left blinker not on; max 7 mph, gear D",
+1,no,prefill,other_stop,0,33.4,,,,"standstill 0.0-56.0 s; max 5 mph, gear N/D","standstill before driving off in parking lot; parking lot, so no (LABELLING.md)"
+2,no,prefill,turn,33.7,35.3,left,no_blinker,,"steering past 90 deg; left blinker not on; max 4 mph, gear D","turning on parking lot; parking lot, so no (LABELLING.md)"
+3,no,prefill,turn,38,38.4,right,no_blinker,,"steering past 90 deg; right blinker not on; max 5 mph, gear D","turning on parking lot; parking lot, so no (LABELLING.md)"
+4,yes,prefill,other_stop,52.3,66.7,,,,"standstill 57.3-66.7 s; max 4 mph, gear D",
+5,no,prefill,turn,56.3,58,left,no_blinker,,"steering past 90 deg; left blinker not on; max 2 mph, gear D",
+6,yes,prefill,turn,64.4,70.4,right,no_blinker,,"steering past 90 deg; right blinker not on; max 7 mph, gear D",turning out of lot onto the street
+7,yes,prefill,stop_sign,83.4,91,,full_stop,sure,"standstill 88.4-91.0 s; max 9 mph, gear D",very brief full stop at stop sign; slightly went past it for visibility onto the transversal street
+8,yes,prefill,turn,93.2,98,left,blinker,,"steering past 90 deg; left blinker 85.7-97.0 s; max 11 mph, gear D",
+9,yes,prefill,turn,117,122,left,blinker,,"steering past 90 deg; left blinker 110.7-122.7 s; max 9 mph, gear D",
+10,yes,prefill,stop_sign,170.7,176.1,,full_stop,,"standstill 174.0-176.1 s; stop sign seen by vision 170.7-173.0 s; max 9 mph, gear D",stopping slightly past the stop sign for visibility
+11,no,prefill,lane_departure,170.7,172.7,left,,,"vision flagged departing left 170.7-172.7 s; max 9 mph, gear D","turning onto the street, not a lane departure"
+12,yes,prefill,turn,179,182.3,right,blinker,,"steering past 90 deg; right blinker 164.3-181.3 s; max 9 mph, gear D",
+13,no,prefill,lane_departure,181,184.7,left,,,"vision flagged departing left 181.0-184.7 s; max 13 mph, gear D",
+14,yes,prefill,turn,243.7,245.3,right,blinker,,"steering past 90 deg; right blinker 239.3-244.7 s; max 15 mph, gear D",
+15,no,prefill,curve,253.4,255.4,left,,,"steering 20-90 deg for 2.0 s; max 14 mph, gear D",straight road just adjusting car position to avoid an obstacle
+16,no,prefill,other_stop,261.8,270.4,,,,"standstill 266.8-270.4 s; max 12 mph, gear R/N/D","stop for u-turn; U-turn on a dead-end street, like a driveway, so no"
+17,no,prefill,turn,265.1,265.1,right,no_blinker,,"steering past 90 deg; right blinker not on; max 6 mph, gear D",blip
+18,no,prefill,turn,266.4,271.1,left,no_blinker,,"steering past 90 deg; left blinker not on; max 5 mph, gear R/N/D","u-turning; U-turn on a dead-end street, like a driveway, so no"
+19,no,prefill,other_stop,267.4,275.4,,,,"standstill 272.4-275.4 s; max 4 mph, gear R/N/D","u-turning; U-turn on a dead-end street, like a driveway, so no"
+20,no,prefill,turn,272,275.4,right,no_blinker,,"steering past 90 deg; right blinker not on; max 3 mph, gear R/N/D",u-turning
+21,no,prefill,turn,276.1,279.7,left,no_blinker,,"steering past 90 deg; left blinker not on; max 10 mph, gear D","u-turning; U-turn on a dead-end street, like a driveway, so no"
+22,yes,prefill,stop_sign,296,304.4,,full_stop,,"standstill 297.4-304.4 s; stop sign seen by vision 296.0-296.0 s; max 5 mph, gear D",full stop slightly past stop sign
+23,yes,prefill,turn,306,310,left,blinker,,"steering past 90 deg; left blinker 290.7-309.0 s; max 14 mph, gear D",
+24,no,prefill,lane_departure,310.3,311.3,right,,,"vision flagged departing right 310.3-311.3 s; max 18 mph, gear D",driving onto the street from a turn no real lane departure
+25,yes,prefill,lane_departure,316.8,319.1,left,,,"vision flagged departing left 316.8-319.1 s; max 22 mph, gear D",not a real departure; driving close to the left lane
+26,no,prefill,lane_departure,365.7,369.7,right,,,"vision flagged departing right 365.7-369.7 s; max 27 mph, gear D",just driving close to the right lane no departure
+27,yes,prefill,lane_departure,371.8,374.7,left,,,"vision flagged departing right 371.8-374.7 s; max 22 mph, gear D",driving onto the left turn lane
+28,yes,prefill,turn,376.4,380,left,blinker,,"steering past 90 deg; left blinker 365.0-379.0 s; max 13 mph, gear D",
+29,no,prefill,curve,391.4,394.1,left,,,"steering 20-90 deg for 2.7 s; max 18 mph, gear D",straight line adjusting car position on wide road
+30,no,prefill,other_stop,394.1,421.3,,,,"standstill 399.1-421.3 s; max 15 mph, gear D","stopping at parking lot fence; parking lot, so no (LABELLING.md)"
+31,yes,prefill,turn,395.4,400.7,right,blinker,,"steering past 90 deg; right blinker 389.1-399.4 s; max 11 mph, gear D",
+32,no,prefill,turn,419.3,424.4,right,no_blinker,,"steering past 90 deg; right blinker not on; max 4 mph, gear D","turning on parking lot; parking lot, so no (LABELLING.md)"
+33,no,prefill,turn,425.3,428,left,no_blinker,,"steering past 90 deg; left blinker not on; max 10 mph, gear D","turning on parking lot; parking lot, so no (LABELLING.md)"
+34,no,prefill,turn,431.3,437.3,right,no_blinker,,"steering past 90 deg; right blinker not on; max 11 mph, gear D","turning on parking lot; parking lot, so no (LABELLING.md)"
+35,no,prefill,other_stop,443,460.4,,,,"standstill 448.0-460.4 s; max 8 mph, gear P/R/N/D","parking the car on the lot; parking lot, so no (LABELLING.md)"
+36,no,prefill,turn,444.3,448,left,no_blinker,,"steering past 90 deg; left blinker not on; max 7 mph, gear D",adjusting the steering wheel after parking
+37,no,added,other_stop,41.8,41.8,,,,,"stopping on parking lot; waitng fr gate open; parking lot, so no (LABELLING.md)"
+38,yes,added,turn,74.1,80,right,no_blinker,sure,,slight turn right; adjusting position on the street

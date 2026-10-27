@@ -13,3 +13,4 @@ docs/video/*.html
 !/runs/20261022T164127Z-084b/
 /runs/*/*.log
 .~lock.*#
+*.csv.bak

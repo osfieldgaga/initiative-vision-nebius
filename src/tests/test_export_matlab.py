@@ -46,7 +46,13 @@ class WaypointsTest(unittest.TestCase):
         wps = em.waypoints(t, v, x, np.zeros_like(x))
         stops = [w for w in wps if w[2] == 0.0]
         self.assertEqual(len(stops), 1)
-        self.assertAlmostEqual(stops[0][3], 1.9, places=6)  # 2.0-3.9 s
+        # MATLAB's time to each waypoint (even speed change per leg, plus waits) lands on the car's time
+        # right after the stop, so a delay can't build up over a drive
+        clock, after = wps[0][4], wps.index(stops[0]) + 1
+        for a, b in zip(wps[:after], wps[1:after + 1]):
+            clock += a[3] + 2 * np.hypot(b[0] - a[0], b[1] - a[1]) / (a[2] + b[2])
+        self.assertAlmostEqual(clock, wps[after][4], places=6)
+        self.assertLess(stops[0][3], 2.0)  # shorter than the 2 s stop: the slow-down and start take longer
         for a, b in zip(wps, wps[1:]):
             self.assertGreater(np.hypot(b[0] - a[0], b[1] - a[1]), 0.04)  # trajectory() rejects repeated points
         self.assertTrue(all(w[3] == 0.0 for w in wps if w[2] > 0))  # waits only where stopped
@@ -67,10 +73,37 @@ class FileTest(unittest.TestCase):
               "claims": [{"seq": 2720, "field": "mph", "value": "1.1", "frame": "00002720_1.jpg", "can_row": 4725}]}
         text = em.matlab_file("ev_c11_stop_sign", ev, "S", 167.7, 179.1, [(0, 0, 5.0, 0.0), (5, 0, 0.0, 2.0)],
                               [(0, 1.75), (20, 1.75)])
-        self.assertTrue(text.startswith("function [scenario, egoVehicle] = ev_c11_stop_sign()"))
+        self.assertTrue(text.startswith("function [scenario, egoVehicle] = ev_c11_stop_sign(speedup)"))
         self.assertIn("seq 2720 mph = 1.1  (frame 00002720_1.jpg, CAN row 4725)", text)
         self.assertIn("waittime = [0.000; 2.000];", text)
         self.assertNotIn("%%", text)  # a cell break would split MATLAB's help text
+        self.assertIn("if nargout == 0", text)  # plays itself when run on its own
+        self.assertIn("eventNames = {'c11 stop_sign rolling_stop'};", text)
+
+    def test_full_drive_lists_every_event(self):
+        evs = [{"id": "c11", "type": "stop_sign", "side": "", "detail": "rolling_stop", "t_start": 170.7, "t_end": 176.1},
+               {"id": "c29", "type": "turn", "side": "left", "detail": "blinker", "t_start": 376.0, "t_end": 381.0}]
+        text = em.drive_file("full_drive", "S", 0.0, 459.3, [(0, 0, 5.0, 0.0), (5, 0, 0.0, 2.0)],
+                             [(0, 1.75), (20, 1.75)], evs)
+        self.assertTrue(text.startswith("function [scenario, egoVehicle] = full_drive(speedup)"))
+        self.assertIn("ev_c29_turn.m", text)
+        self.assertIn("eventTimes = [170.70 176.10; 376.00 381.00];", text)
+        self.assertIn("'Waypoints', 'off'", text)
+
+
+class AgreedTest(unittest.TestCase):
+    def test_only_events_the_labels_agree_with(self):
+        ev = lambda i, typ, t0, side="", detail="", verdict="confirmed": {  # noqa: E731
+            "id": i, "type": typ, "t_start": t0, "t_end": t0 + 4, "side": side, "detail": detail, "verdict": verdict}
+        events = [ev("c1", "turn", 10, "left", "blinker"), ev("c2", "turn", 30, "left", "no_blinker"),
+                  ev("c3", "stop_sign", 50, detail="rolling_stop"), ev("c4", "turn", 70, "right", verdict="rejected")]
+        row = lambda i, typ, t0, side="", detail="", status="yes": {  # noqa: E731
+            "id": i, "status": status, "source": "prefill", "type": typ, "t_start": str(t0), "t_end": str(t0 + 3),
+            "side": side, "detail": detail, "confidence": ""}
+        labels = [row("1", "turn", 10.5, "left", "blinker"), row("2", "turn", 30, "right", "no_blinker"),
+                  row("3", "stop_sign", 50, detail="full_stop"), row("4", "turn", 70, "right", status="yes")]
+        got = em.agreed(events, labels)
+        self.assertEqual([(e["id"], e["label"]) for e in got], [("c1", "1")])  # c2 wrong side, c3 detail, c4 rejected
 
 
 if __name__ == "__main__":

@@ -197,7 +197,7 @@
     ]
    },
    "response": {
-    "id": "chatcmpl-214e5995718eee567801be84db86fee3",
+    "id": "chatcmpl-971e825b8b21c07c",
     "choices": [
      {
       "finish_reason": "tool_calls",
@@ -212,7 +212,7 @@
        "function_call": null,
        "tool_calls": [
         {
-         "id": "chatcmpl-tool-964fbc308b1de4b5",
+         "id": "chatcmpl-tool-a52fe6f7fef18507",
          "function": {
           "arguments": "{\"t_start\": 253.37, \"t_end\": 255.4}",
           "name": "get_window"
@@ -220,28 +220,28 @@
          "type": "function"
         }
        ],
-       "reasoning": "We need verify curve. Use get_window around 253.37-255.4.",
-       "reasoning_content": "We need verify curve. Use get_window around 253.37-255.4."
+       "reasoning": "We need verify curve. Use get_window around those times.",
+       "reasoning_content": "We need verify curve. Use get_window around those times."
       },
       "stop_reason": null,
       "token_ids": null,
       "routed_experts": null
      }
     ],
-    "created": 1792987154,
+    "created": 1793119804,
     "model": "nvidia/nemotron-3-super-120b-a12b",
     "object": "chat.completion",
     "moderation": null,
     "service_tier": null,
     "system_fingerprint": "vllm-0.1.dev1+g5001743e3-tp2-05adddbc",
     "usage": {
-     "completion_tokens": 67,
+     "completion_tokens": 56,
      "prompt_tokens": 2400,
-     "total_tokens": 2467,
+     "total_tokens": 2456,
      "completion_tokens_details": {
       "accepted_prediction_tokens": null,
       "audio_tokens": null,
-      "reasoning_tokens": 23,
+      "reasoning_tokens": 12,
       "rejected_prediction_tokens": null
      },
      "prompt_tokens_details": {
@@ -262,7 +262,7 @@
    }
   },
   {
-   "sha256": "b72931557ec25465d4ef1d965cdbd17785a49d74fe067c31d166d40a7406c604",
+   "sha256": "977910201c262a91b82e8fdb4049edd3d7fac67d719ef8212d2222d1dec54471",
    "request": {
     "model": "nvidia/nemotron-3-super-120b-a12b",
     "temperature": 0,
@@ -281,7 +281,7 @@
       "content": "",
       "tool_calls": [
        {
-        "id": "chatcmpl-tool-964fbc308b1de4b5",
+        "id": "chatcmpl-tool-a52fe6f7fef18507",
         "type": "function",
         "function": {
          "arguments": "{\"t_start\": 253.37, \"t_end\": 255.4}",
@@ -292,7 +292,7 @@
      },
      {
       "role": "tool",
-      "tool_call_id": "chatcmpl-tool-964fbc308b1de4b5",
+      "tool_call_id": "chatcmpl-tool-a52fe6f7fef18507",
       "content": "{\"columns\": [\"seq\", \"t\", \"can_row\", \"mph\", \"steer\", \"blinker\", \"standstill\", \"brake\", \"gear\", \"accel\", \"lane_valid\", \"offset_m\", \"departure\", \"signs\"], \"rows\": [[3892, 253.8, 4803064193668, 13.7, 29.1, null, false, false, \"D\", 0.04, false, null, null, []], [3896, 254.03, 4803295046146, 13.6, 27.6, null, false, false, \"D\", -0.04, false, null, null, []], [3903, 254.37, 4803631551149, 13.8, 25.3, null, false, false, \"D\", -0.05, false, null, null, []], [3909, 254.73, 4803995695167, 13.7, 21.0, null, false, false, \"D\", -0.08, false, null, null, []], [3912, 255.0, 4804263956682, 13.7, 20.4, null, false, false, \"D\", -0.03, false, null, null, []], [3913, 255.06, 4804311639978, 13.7, 20.3, null, false, false, \"D\", -0.09, false, null, null, []], [3918, 255.4, 4804663926293, 13.6, 20.1, null, false, false, \"D\", 0.02, false, null, null, []]]}"
      }
     ],
@@ -477,7 +477,7 @@
     ]
    },
    "response": {
-    "id": "chatcmpl-d896e86952a650ca297f10906f258019",
+    "id": "chatcmpl-8ab372719b83d4b5",
     "choices": [
      {
       "finish_reason": "tool_calls",
@@ -492,36 +492,36 @@
        "function_call": null,
        "tool_calls": [
         {
-         "id": "chatcmpl-tool-be67d0569e3301cf",
+         "id": "chatcmpl-tool-8c119fef4afa6e27",
          "function": {
-          "arguments": "{\"verdict\": \"rejected\", \"type\": \"curve\", \"t_start\": 253.37, \"t_end\": 255.4, \"side\": \"left\", \"detail\": \"\", \"claims\": [{\"seq\": 3892, \"field\": \"steer\", \"value\": \"29.1\"}, {\"seq\": 3918, \"field\": \"steer\", \"value\": \"20.1\"}], \"reason\": \"Steering remained left (>20 deg) throughout the interval and did not return to straight, so the maneuver does not match a curve definition.\"}",
+          "arguments": "{\"verdict\": \"rejected\", \"type\": \"curve\", \"t_start\": 253.37, \"t_end\": 255.4, \"side\": \"left\", \"detail\": \"\", \"claims\": [{\"seq\": 3892, \"field\": \"steer\", \"value\": \"29.1\"}, {\"seq\": 3918, \"field\": \"steer\", \"value\": \"20.1\"}], \"reason\": \"Steering remained left (>20 deg) throughout the interval and did not return to straight, so a curve event did not occur.\"}",
           "name": "emit_event"
          },
          "type": "function"
         }
        ],
-       "reasoning": "We need to see if curve exists: steer stays around 20-29 left, decreasing slowly, still >20 at end. No return to straight. So not a curve (should return to straight). Likely rejected or corrected as maybe lane_change? But no lane change indicated. Probably rejected because not a curve (no return to straight). Provide reason.",
-       "reasoning_content": "We need to see if curve exists: steer stays around 20-29 left, decreasing slowly, still >20 at end. No return to straight. So not a curve (should return to straight). Likely rejected or corrected as maybe lane_change? But no lane change indicated. Probably rejected because not a curve (no return to straight). Provide reason."
+       "reasoning": "We need to see if curve exists: steering stays >20 deg left for ~2 sec. Data shows steer around 29 down to 20.1 over interval, still positive left. No return to center yet. At end still 20.1 left. Curve ends when steering straight again; not seen. So maybe not a curve because didn't return to straight within window. Could be ongoing curve beyond window. But definition: curve: steering starts \u2192 straight again. Since we don't see straight again, not a curve. Could be part of a turn? But no blinker, gear D, speed ~13.6 mph (~6 m/s). That's low speed for a turn? Might be a gentle curve in road. However we lack straightening. So reject as curve? But could be corrected to a curve with longer t_end? We only have given window. Since we cannot confirm straightening, we reject as curve. Provide reason: steering never returned to near zero. Use claims: show steer values >20 across window. Also show no zero crossing. Provide claim for seq where steer ~20.1 still left. Show that steer never <=5 maybe. Let's add claim for seq 3918 steer 20.1 left. Also show that at start steer 29.1 left. No sign of straightening. Provide reason.",
+       "reasoning_content": "We need to see if curve exists: steering stays >20 deg left for ~2 sec. Data shows steer around 29 down to 20.1 over interval, still positive left. No return to center yet. At end still 20.1 left. Curve ends when steering straight again; not seen. So maybe not a curve because didn't return to straight within window. Could be ongoing curve beyond window. But definition: curve: steering starts \u2192 straight again. Since we don't see straight again, not a curve. Could be part of a turn? But no blinker, gear D, speed ~13.6 mph (~6 m/s). That's low speed for a turn? Might be a gentle curve in road. However we lack straightening. So reject as curve? But could be corrected to a curve with longer t_end? We only have given window. Since we cannot confirm straightening, we reject as curve. Provide reason: steering never returned to near zero. Use claims: show steer values >20 across window. Also show no zero crossing. Provide claim for seq where steer ~20.1 still left. Show that steer never <=5 maybe. Let's add claim for seq 3918 steer 20.1 left. Also show that at start steer 29.1 left. No sign of straightening. Provide reason."
       },
       "stop_reason": null,
       "token_ids": null,
       "routed_experts": null
      }
     ],
-    "created": 1792987156,
+    "created": 1793119806,
     "model": "nvidia/nemotron-3-super-120b-a12b",
     "object": "chat.completion",
     "moderation": null,
     "service_tier": null,
     "system_fingerprint": "vllm-0.1.dev1+g5001743e3-tp2-05adddbc",
     "usage": {
-     "completion_tokens": 259,
+     "completion_tokens": 468,
      "prompt_tokens": 2965,
-     "total_tokens": 3224,
+     "total_tokens": 3433,
      "completion_tokens_details": {
       "accepted_prediction_tokens": null,
       "audio_tokens": null,
-      "reasoning_tokens": 75,
+      "reasoning_tokens": 286,
       "rejected_prediction_tokens": null
      },
      "prompt_tokens_details": {

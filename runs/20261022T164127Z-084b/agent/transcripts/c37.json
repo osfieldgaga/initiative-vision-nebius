@@ -197,7 +197,7 @@
     ]
    },
    "response": {
-    "id": "chatcmpl-947a6f9aa2c8e72ec9aa0f1f52958678",
+    "id": "chatcmpl-9c4ec572c5195897",
     "choices": [
      {
       "finish_reason": "tool_calls",
@@ -212,7 +212,7 @@
        "function_call": null,
        "tool_calls": [
         {
-         "id": "chatcmpl-tool-a25f6bb2a2fc09ef",
+         "id": "chatcmpl-tool-a08e826d6423f6f6",
          "function": {
           "arguments": "{\"t_start\": 444, \"t_end\": 449}",
           "name": "get_window"
@@ -220,28 +220,28 @@
          "type": "function"
         }
        ],
-       "reasoning": "We need evaluate candidate turn left from 444.33 to 448.03 sec, no blinker. Check data around those times. Use get_window.",
-       "reasoning_content": "We need evaluate candidate turn left from 444.33 to 448.03 sec, no blinker. Check data around those times. Use get_window."
+       "reasoning": "We need evaluate candidate turn left at ~444-448 sec. Check data around those times. Use get_window.",
+       "reasoning_content": "We need evaluate candidate turn left at ~444-448 sec. Check data around those times. Use get_window."
       },
       "stop_reason": null,
       "token_ids": null,
       "routed_experts": null
      }
     ],
-    "created": 1792987325,
+    "created": 1793120004,
     "model": "nvidia/nemotron-3-super-120b-a12b",
     "object": "chat.completion",
     "moderation": null,
     "service_tier": null,
     "system_fingerprint": "vllm-0.1.dev1+g5001743e3-tp2-05adddbc",
     "usage": {
-     "completion_tokens": 81,
+     "completion_tokens": 70,
      "prompt_tokens": 2422,
-     "total_tokens": 2503,
+     "total_tokens": 2492,
      "completion_tokens_details": {
       "accepted_prediction_tokens": null,
       "audio_tokens": null,
-      "reasoning_tokens": 38,
+      "reasoning_tokens": 27,
       "rejected_prediction_tokens": null
      },
      "prompt_tokens_details": {
@@ -262,7 +262,7 @@
    }
   },
   {
-   "sha256": "4f46ddb8d8c42d41592bb2ed0f3e9c364a5c8008f459375f667f140977ba094f",
+   "sha256": "19a0fbd26a4d94cca819f2c483ff96866d8e05623ed00ec173be3110ab0646f9",
    "request": {
     "model": "nvidia/nemotron-3-super-120b-a12b",
     "temperature": 0,
@@ -281,7 +281,7 @@
       "content": "",
       "tool_calls": [
        {
-        "id": "chatcmpl-tool-a25f6bb2a2fc09ef",
+        "id": "chatcmpl-tool-a08e826d6423f6f6",
         "type": "function",
         "function": {
          "arguments": "{\"t_start\": 444, \"t_end\": 449}",
@@ -292,7 +292,7 @@
      },
      {
       "role": "tool",
-      "tool_call_id": "chatcmpl-tool-a25f6bb2a2fc09ef",
+      "tool_call_id": "chatcmpl-tool-a08e826d6423f6f6",
       "content": "{\"columns\": [\"seq\", \"t\", \"can_row\", \"mph\", \"steer\", \"blinker\", \"standstill\", \"brake\", \"gear\", \"accel\", \"lane_valid\", \"offset_m\", \"departure\", \"signs\"], \"rows\": [[6738, 444.0, 4993266664442, 6.8, 67.6, null, false, true, \"D\", -0.39, false, null, null, []], [6744, 444.33, 4993600923566, 6.2, 169.7, null, false, false, \"D\", -0.25, false, null, null, []], [6750, 444.67, 4993930608261, 6.2, 251.4, null, false, false, \"D\", -0.27, false, null, null, []], [6756, 445.0, 4994265617642, 6.3, 298.6, null, false, false, \"D\", 0.05, false, null, null, []], [6762, 445.33, 4994599511371, 6.3, 381.2, null, false, false, \"D\", 0.27, false, null, null, []], [6764, 445.5, 4994762997632, 6.4, 407.6, null, false, false, \"D\", 0.23, false, null, null, []], [6767, 445.7, 4994963099994, 6.5, 430.8, null, false, false, \"D\", 0.19, false, null, null, []], [6772, 446.0, 4995266757971, 6.5, 453.6, null, false, false, \"D\", -0.01, false, null, null, []], [6776, 446.37, 4995621236380, 6.6, 503.8, null, false, false, \"D\", -0.43, false, null, null, []], [6782, 446.7, 4995959808204, 6.3, 504.5, null, false, false, \"D\", -0.42, false, null, null, []], [6788, 447.03, 4996291271385, 5.8, 492.4, null, false, false, \"D\", -0.52, false, null, null, []], [6793, 447.37, 4996628593244, 5.5, 399.1, null, false, false, \"D\", -0.62, false, null, null, []], [6797, 447.6, 4996863723260, 5.1, 331.6, null, false, true, \"D\", -0.73, false, null, null, []], [6799, 447.7, 4996955679335, 4.8, 296.4, null, false, true, \"D\", -0.88, false, null, null, []], [6804, 448.03, 4997298886812, 4.6, 173.0, null, true, true, \"D\", -1.04, false, null, null, []], [6809, 448.37, 4997629714082, 3.1, 17.0, null, true, true, \"D\", -0.94, false, null, null, []], [6815, 448.7, 4997965888587, 2.5, -84.6, null, true, true, \"D\", -0.83, false, null, null, []]]}"
      }
     ],
@@ -477,7 +477,7 @@
     ]
    },
    "response": {
-    "id": "chatcmpl-a58b78cd32ead6d36cc9501b2088de61",
+    "id": "chatcmpl-a8e208764c9f4266",
     "choices": [
      {
       "finish_reason": "tool_calls",
@@ -492,46 +492,46 @@
        "function_call": null,
        "tool_calls": [
         {
-         "id": "chatcmpl-tool-83e608807c55d5c7",
+         "id": "chatcmpl-tool-82822d7956b7619f",
          "function": {
-          "arguments": "{\"verdict\": \"confirmed\", \"type\": \"turn\", \"t_start\": 444.33, \"t_end\": 448.03, \"side\": \"left\", \"detail\": \"no_blinker\", \"claims\": [{\"seq\": 6744, \"field\": \"steer\", \"value\": \"169.7\"}, {\"seq\": 6782, \"field\": \"steer\", \"value\": \"504.5\"}, {\"seq\": 6782, \"field\": \"blinker\", \"value\": \"null\"}], \"reason\": \"The steering angle exceeds 90 degrees left from 444.33\u202fs onward, peaking at 504.5\u00b0, while the blinker remains off, indicating a left turn without signal.\"}",
+          "arguments": "{\"verdict\": \"corrected\", \"type\": \"turn\", \"t_start\": 444.33, \"t_end\": 448.37, \"side\": \"left\", \"detail\": \"no_blinker\", \"claims\": [{\"seq\": 6782, \"field\": \"steer\", \"value\": \"504.5\"}, {\"seq\": 6809, \"field\": \"steer\", \"value\": \"17.0\"}, {\"seq\": 6782, \"field\": \"blinker\", \"value\": \"null\"}, {\"seq\": 6809, \"field\": \"blinker\", \"value\": \"null\"}, {\"seq\": 6782, \"field\": \"gear\", \"value\": \"D\"}], \"reason\": \"The steering angle exceeds 90\u00b0 indicating a left turn, with no blinker activation throughout, and the wheel returns to near\u2011straight by 448.37\u202fs.\"}",
           "name": "emit_event"
          },
          "type": "function"
         }
        ],
-       "reasoning": "We need to verify if it's a left turn without blinker. The data shows steer goes high positive (left) > 90 deg around 444.33 onward, peaks at 504.5 deg at seq 6782 (t 446.7). Blinker stays null throughout. Gear D. Speed ~6 mph decreasing to ~4.6 at end. This looks like a left turn at an intersection? Need to see if it's turning from road to something else. No signs. Likely a turn. Confirm as turn left, detail no_blinker. Provide claims: seq 6782 steer 504.5, blinker null, maybe also show start of steering >90 at seq 6744 steer 169.7. Provide t_start 444.33, t_end 448.03. Use claims.\n\nLet's craft emit_event.",
-       "reasoning_content": "We need to verify if it's a left turn without blinker. The data shows steer goes high positive (left) > 90 deg around 444.33 onward, peaks at 504.5 deg at seq 6782 (t 446.7). Blinker stays null throughout. Gear D. Speed ~6 mph decreasing to ~4.6 at end. This looks like a left turn at an intersection? Need to see if it's turning from road to something else. No signs. Likely a turn. Confirm as turn left, detail no_blinker. Provide claims: seq 6782 steer 504.5, blinker null, maybe also show start of steering >90 at seq 6744 steer 169.7. Provide t_start 444.33, t_end 448.03. Use claims.\n\nLet's craft emit_event."
+       "reasoning": "We need verify if turn actually occurred. The steer goes high positive > 90 indicates left turn. Blinker null throughout. No blinker. It seems a left turn without blinker. Need ensure it's a turn (intersection) not just curve. Check lane_valid etc all false. Probably turning left at intersection. Confirm as turn left, detail no_blinker. Provide claims: steering >90 at seq 6750 etc, blinker null, gear D, maybe speed. Use key_seq 6782 shows steer 504.5. Provide claim for steer value, blinker null, maybe gear D. Also need t_start/t_end maybe adjust to when steering starts and ends. Start when steer exceeds threshold? At 444.33 steer 169.7 already >90. End when steer returns near zero? At 448.03 steer 173 still >90, but after that at 448.37 steer 17 still low. So t_end maybe 448.37. But candidate gave 448.03. We'll keep as is? Could correct t_end to 448.37. Let's see data: at 448.03 steer 173, still turning. At 448.37 steer 17 near straight. So actual end ~448.37. We'll correct t_end. Provide reason. Use claims: seq 6782 steer 504.5, seq 6809 steer 17.0, blinker null at those seqs, gear D. Emit corrected.",
+       "reasoning_content": "We need verify if turn actually occurred. The steer goes high positive > 90 indicates left turn. Blinker null throughout. No blinker. It seems a left turn without blinker. Need ensure it's a turn (intersection) not just curve. Check lane_valid etc all false. Probably turning left at intersection. Confirm as turn left, detail no_blinker. Provide claims: steering >90 at seq 6750 etc, blinker null, gear D, maybe speed. Use key_seq 6782 shows steer 504.5. Provide claim for steer value, blinker null, maybe gear D. Also need t_start/t_end maybe adjust to when steering starts and ends. Start when steer exceeds threshold? At 444.33 steer 169.7 already >90. End when steer returns near zero? At 448.03 steer 173 still >90, but after that at 448.37 steer 17 still low. So t_end maybe 448.37. But candidate gave 448.03. We'll keep as is? Could correct t_end to 448.37. Let's see data: at 448.03 steer 173, still turning. At 448.37 steer 17 near straight. So actual end ~448.37. We'll correct t_end. Provide reason. Use claims: seq 6782 steer 504.5, seq 6809 steer 17.0, blinker null at those seqs, gear D. Emit corrected."
       },
       "stop_reason": null,
       "token_ids": null,
       "routed_experts": null
      }
     ],
-    "created": 1792987326,
+    "created": 1793120005,
     "model": "nvidia/nemotron-3-super-120b-a12b",
     "object": "chat.completion",
     "moderation": null,
     "service_tier": null,
     "system_fingerprint": "vllm-0.1.dev1+g5001743e3-tp2-05adddbc",
     "usage": {
-     "completion_tokens": 429,
+     "completion_tokens": 628,
      "prompt_tokens": 3613,
-     "total_tokens": 4042,
+     "total_tokens": 4241,
      "completion_tokens_details": {
       "accepted_prediction_tokens": null,
       "audio_tokens": null,
-      "reasoning_tokens": 202,
+      "reasoning_tokens": 361,
       "rejected_prediction_tokens": null
      },
      "prompt_tokens_details": {
       "audio_tokens": null,
-      "cached_tokens": 2400,
+      "cached_tokens": 0,
       "created_cache_tokens": 0,
       "multimodal_tokens": null
      },
-     "prompt_cache_hit_tokens": 2400,
-     "prompt_cache_miss_tokens": 1213
+     "prompt_cache_hit_tokens": 0,
+     "prompt_cache_miss_tokens": 3613
     },
     "prompt_logprobs": null,
     "prompt_token_ids": null,

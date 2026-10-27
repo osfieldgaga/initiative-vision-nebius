@@ -197,7 +197,7 @@
     ]
    },
    "response": {
-    "id": "chatcmpl-ccde772a6f0b6328c6ddcf38f3f146ec",
+    "id": "chatcmpl-9d2dece577e72449",
     "choices": [
      {
       "finish_reason": "tool_calls",
@@ -212,7 +212,7 @@
        "function_call": null,
        "tool_calls": [
         {
-         "id": "chatcmpl-tool-a34c3230f31e9815",
+         "id": "chatcmpl-tool-a4104a063bf1fbe2",
          "function": {
           "arguments": "{\"t_start\": 425, \"t_end\": 429}",
           "name": "get_window"
@@ -220,28 +220,28 @@
          "type": "function"
         }
        ],
-       "reasoning": "We need verify turn. Use get_window around 425-428. Then maybe look_at_frames for blinker? Actually blinker field available. Check steer >90 left. Let's fetch window.",
-       "reasoning_content": "We need verify turn. Use get_window around 425-428. Then maybe look_at_frames for blinker? Actually blinker field available. Check steer >90 left. Let's fetch window."
+       "reasoning": "We need verify turn. Use get_window around 425-428. Then maybe look_at_frames for blinker? Actually blinker field indicates left/right/null. We'll get data.",
+       "reasoning_content": "We need verify turn. Use get_window around 425-428. Then maybe look_at_frames for blinker? Actually blinker field indicates left/right/null. We'll get data."
       },
       "stop_reason": null,
       "token_ids": null,
       "routed_experts": null
      }
     ],
-    "created": 1792987308,
+    "created": 1793119989,
     "model": "nvidia/nemotron-3-super-120b-a12b",
     "object": "chat.completion",
     "moderation": null,
     "service_tier": null,
     "system_fingerprint": "vllm-0.1.dev1+g5001743e3-tp2-05adddbc",
     "usage": {
-     "completion_tokens": 88,
+     "completion_tokens": 85,
      "prompt_tokens": 2422,
-     "total_tokens": 2510,
+     "total_tokens": 2507,
      "completion_tokens_details": {
       "accepted_prediction_tokens": null,
       "audio_tokens": null,
-      "reasoning_tokens": 45,
+      "reasoning_tokens": 42,
       "rejected_prediction_tokens": null
      },
      "prompt_tokens_details": {
@@ -262,7 +262,7 @@
    }
   },
   {
-   "sha256": "d03894a2e42326f7cb8afa42667072301ed2348da3e4c98aae2d18c9c847cb69",
+   "sha256": "58f8640fee786e96b4afb6709f51e5d4aa4408816bdf267a75fac80b5bf32b68",
    "request": {
     "model": "nvidia/nemotron-3-super-120b-a12b",
     "temperature": 0,
@@ -281,7 +281,7 @@
       "content": "",
       "tool_calls": [
        {
-        "id": "chatcmpl-tool-a34c3230f31e9815",
+        "id": "chatcmpl-tool-a4104a063bf1fbe2",
         "type": "function",
         "function": {
          "arguments": "{\"t_start\": 425, \"t_end\": 429}",
@@ -292,7 +292,7 @@
      },
      {
       "role": "tool",
-      "tool_call_id": "chatcmpl-tool-a34c3230f31e9815",
+      "tool_call_id": "chatcmpl-tool-a4104a063bf1fbe2",
       "content": "{\"columns\": [\"seq\", \"t\", \"can_row\", \"mph\", \"steer\", \"blinker\", \"standstill\", \"brake\", \"gear\", \"accel\", \"lane_valid\", \"offset_m\", \"departure\", \"signs\"], \"rows\": [[6452, 425.01, 4974274318807, 4.3, 78.8, null, false, false, \"D\", 1.02, false, null, null, []], [6457, 425.34, 4974607699156, 5.5, 145.7, null, false, false, \"D\", 1.01, false, null, null, []], [6464, 425.71, 4974976658204, 6.4, 197.2, null, false, false, \"D\", 0.86, false, null, null, []], [6468, 426.08, 4975343733345, 7.1, 215.2, null, false, false, \"D\", 0.82, false, null, null, []], [6471, 426.31, 4975576275304, 7.5, 216.2, null, false, false, \"D\", 0.82, false, null, null, []], [6472, 426.41, 4975676374557, 7.7, 217.4, null, false, false, \"D\", 0.79, false, null, null, []], [6476, 426.68, 4975943976008, 8.0, 218.1, null, false, false, \"D\", 0.76, false, null, null, []], [6482, 427.01, 4976274328378, 8.7, 215.1, null, false, false, \"D\", 0.79, false, null, null, []], [6488, 427.38, 4976640633498, 9.7, 210.5, null, false, false, \"D\", 0.73, false, null, null, []], [6492, 427.68, 4976934358969, 9.8, 197.6, null, false, false, \"D\", 0.64, false, null, null, []], [6498, 428.04, 4977309737811, 10.4, 158.4, null, false, false, \"D\", 0.45, false, null, null, []], [6503, 428.38, 4977642422435, 10.8, 83.4, null, false, false, \"D\", 0.33, false, null, null, []], [6507, 428.71, 4977975782674, 10.9, 46.6, null, false, false, \"D\", 0.3, false, null, null, []]]}"
      }
     ],
@@ -477,7 +477,7 @@
     ]
    },
    "response": {
-    "id": "chatcmpl-02f01d41173485e1c61991c2298ebb14",
+    "id": "chatcmpl-ac6691e34c066033",
     "choices": [
      {
       "finish_reason": "tool_calls",
@@ -492,36 +492,36 @@
        "function_call": null,
        "tool_calls": [
         {
-         "id": "chatcmpl-tool-afa5c140593e9036",
+         "id": "chatcmpl-tool-a9edb2b8654b5e4b",
          "function": {
-          "arguments": "{\"verdict\": \"confirmed\", \"type\": \"turn\", \"t_start\": 425.34, \"t_end\": 428.04, \"side\": \"left\", \"detail\": \"no_blinker\", \"claims\": [{\"seq\": 6457, \"field\": \"steer\", \"value\": \"145.7\"}, {\"seq\": 6476, \"field\": \"steer\", \"value\": \"218.1\"}, {\"seq\": 6457, \"field\": \"blinker\", \"value\": \"null\"}, {\"seq\": 6476, \"field\": \"blinker\", \"value\": \"null\"}, {\"seq\": 6457, \"field\": \"gear\", \"value\": \"D\"}, {\"seq\": 6476, \"field\": \"gear\", \"value\": \"D\"}], \"reason\": \"The steering wheel turned left past 90\u00b0 and returned toward centre without any blinker activation, matching a left turn maneuver.\"}",
+          "arguments": "{\"verdict\": \"confirmed\", \"type\": \"turn\", \"t_start\": 425.34, \"t_end\": 428.04, \"side\": \"left\", \"detail\": \"no_blinker\", \"claims\": [{\"seq\": 6457, \"field\": \"steer\", \"value\": \"145.7\"}, {\"seq\": 6457, \"field\": \"blinker\", \"value\": \"null\"}, {\"seq\": 6476, \"field\": \"steer\", \"value\": \"218.1\"}, {\"seq\": 6503, \"field\": \"steer\", \"value\": \"83.4\"}], \"reason\": \"The steering wheel turned left (>90\u00b0) and returned toward center while the left blinker remained off, indicating a left turn without blinker.\"}",
           "name": "emit_event"
          },
          "type": "function"
         }
        ],
-       "reasoning": "We need verify if turn actually occurred. Steering goes high positive (left) ~218 deg then reduces. No blinker. Need see if it's a turn at intersection or just curve? Check lane_valid etc all false (no lane detection). Could be turning left onto a road. Need confirm it's a turn. Use look_at_frames maybe to see if intersection present. But we don't have visual. However rule: turning from road into parking lot etc. We assume it's a turn. Provide corrected? The candidate says detail no_blinker, matches data (blinker null). So confirmed. Provide claims: seq 6476 steer 218.1, blinker null, gear D, maybe start and end times. Need t_start 425.34 (seq 6457) and t_end 428.04 (seq 6498). Provide claims for start steering >90? At 6457 steer 145.7 (>90). End steering back below threshold? At 6498 steer 158.4 still >90 but decreasing. Actually straightening later after 428.04. But okay.\n\nWe'll emit confirmed.",
-       "reasoning_content": "We need verify if turn actually occurred. Steering goes high positive (left) ~218 deg then reduces. No blinker. Need see if it's a turn at intersection or just curve? Check lane_valid etc all false (no lane detection). Could be turning left onto a road. Need confirm it's a turn. Use look_at_frames maybe to see if intersection present. But we don't have visual. However rule: turning from road into parking lot etc. We assume it's a turn. Provide corrected? The candidate says detail no_blinker, matches data (blinker null). So confirmed. Provide claims: seq 6476 steer 218.1, blinker null, gear D, maybe start and end times. Need t_start 425.34 (seq 6457) and t_end 428.04 (seq 6498). Provide claims for start steering >90? At 6457 steer 145.7 (>90). End steering back below threshold? At 6498 steer 158.4 still >90 but decreasing. Actually straightening later after 428.04. But okay.\n\nWe'll emit confirmed."
+       "reasoning": "We need verify if it's a turn left without blinker. The data shows steer goes positive large (left turn) from ~145 to 218 then decreasing. Blinker null throughout. Gear D. No stop sign. This looks like a left turn at intersection? Need check if it's actually a turn (road change) vs curve. Since speed ~5-10 mph, could be turning. We need confirm or correct. Likely confirmed as turn left no_blinker. Provide claims: steering >90 at start, blinker null, gear D. Use seq 6457 (t 425.34) steer 145.7, blinker null. Also seq 6476 max steer 218.1. End seq 6503 steer 83.4 still >0 but decreasing. Provide t_start 425.34, t_end 428.04 as given. Emit confirmed.",
+       "reasoning_content": "We need verify if it's a turn left without blinker. The data shows steer goes positive large (left turn) from ~145 to 218 then decreasing. Blinker null throughout. Gear D. No stop sign. This looks like a left turn at intersection? Need check if it's actually a turn (road change) vs curve. Since speed ~5-10 mph, could be turning. We need confirm or correct. Likely confirmed as turn left no_blinker. Provide claims: steering >90 at start, blinker null, gear D. Use seq 6457 (t 425.34) steer 145.7, blinker null. Also seq 6476 max steer 218.1. End seq 6503 steer 83.4 still >0 but decreasing. Provide t_start 425.34, t_end 428.04 as given. Emit confirmed."
       },
       "stop_reason": null,
       "token_ids": null,
       "routed_experts": null
      }
     ],
-    "created": 1792987309,
+    "created": 1793119990,
     "model": "nvidia/nemotron-3-super-120b-a12b",
     "object": "chat.completion",
     "moderation": null,
     "service_tier": null,
     "system_fingerprint": "vllm-0.1.dev1+g5001743e3-tp2-05adddbc",
     "usage": {
-     "completion_tokens": 538,
+     "completion_tokens": 448,
      "prompt_tokens": 3368,
-     "total_tokens": 3906,
+     "total_tokens": 3816,
      "completion_tokens_details": {
       "accepted_prediction_tokens": null,
       "audio_tokens": null,
-      "reasoning_tokens": 263,
+      "reasoning_tokens": 210,
       "rejected_prediction_tokens": null
      },
      "prompt_tokens_details": {

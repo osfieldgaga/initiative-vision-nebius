@@ -197,7 +197,7 @@
     ]
    },
    "response": {
-    "id": "chatcmpl-016ac9c133713de8634b478395e06e98",
+    "id": "chatcmpl-9ac6e5f244ddf1f7",
     "choices": [
      {
       "finish_reason": "tool_calls",
@@ -212,7 +212,7 @@
        "function_call": null,
        "tool_calls": [
         {
-         "id": "chatcmpl-tool-ae7f423df09560ed",
+         "id": "chatcmpl-tool-af8e2a5eeed21c72",
          "function": {
           "arguments": "{\"t_start\": 117, \"t_end\": 122}",
           "name": "get_window"
@@ -228,7 +228,7 @@
       "routed_experts": null
      }
     ],
-    "created": 1792987091,
+    "created": 1793119702,
     "model": "nvidia/nemotron-3-super-120b-a12b",
     "object": "chat.completion",
     "moderation": null,
@@ -262,7 +262,7 @@
    }
   },
   {
-   "sha256": "02d15969bcd70ef3d2997c5bbe6db034e24b84757f465d11a61601685886e4dc",
+   "sha256": "8128afd7784e1851427cd4452e54a825d4584dc5daaa7e8bf914ba387f1f5ec4",
    "request": {
     "model": "nvidia/nemotron-3-super-120b-a12b",
     "temperature": 0,
@@ -281,7 +281,7 @@
       "content": "",
       "tool_calls": [
        {
-        "id": "chatcmpl-tool-ae7f423df09560ed",
+        "id": "chatcmpl-tool-af8e2a5eeed21c72",
         "type": "function",
         "function": {
          "arguments": "{\"t_start\": 117, \"t_end\": 122}",
@@ -292,7 +292,7 @@
      },
      {
       "role": "tool",
-      "tool_call_id": "chatcmpl-tool-ae7f423df09560ed",
+      "tool_call_id": "chatcmpl-tool-af8e2a5eeed21c72",
       "content": "{\"columns\": [\"seq\", \"t\", \"can_row\", \"mph\", \"steer\", \"blinker\", \"standstill\", \"brake\", \"gear\", \"accel\", \"lane_valid\", \"offset_m\", \"departure\", \"signs\"], \"rows\": [[1823, 117.0, 4666050154901, 9.3, 90.1, \"left\", false, false, \"D\", -0.07, false, null, null, []], [1830, 117.34, 4666050154901, 9.3, 90.1, \"left\", false, false, \"D\", 0.0, false, null, null, []], [1837, 117.7, 4666050154901, 9.3, 90.1, \"left\", false, false, \"D\", -0.38, false, null, null, []], [1843, 118.0, 4666050154901, 9.3, 90.1, \"left\", false, false, \"D\", -0.4, false, null, null, []], [1845, 118.2, 4667467810820, 8.4, 153.4, \"left\", false, false, \"D\", -0.46, false, null, null, []], [1846, 118.34, 4667596266726, 8.4, 153.9, \"left\", false, false, \"D\", -0.48, false, null, null, []], [1852, 118.77, 4668019324073, 8.2, 165.0, \"left\", false, false, \"D\", -0.08, false, null, null, []], [1856, 119.04, 4668302840957, 8.2, 173.3, \"left\", false, false, \"D\", -0.07, false, null, null, []], [1861, 119.37, 4668619983141, 8.2, 173.4, \"left\", false, false, \"D\", 0.12, false, null, null, []], [1864, 119.67, 4668935088745, 8.2, 173.4, \"left\", false, false, \"D\", 0.14, false, null, null, []], [1870, 120.04, 4669301201228, 8.3, 183.5, \"left\", false, false, \"D\", 0.21, false, null, null, []], [1875, 120.34, 4669599571668, 8.5, 189.2, \"left\", false, false, \"D\", 0.24, false, null, null, []], [1877, 120.47, 4669735640524, 8.6, 190.2, \"left\", false, false, \"D\", 0.21, false, null, null, []], [1881, 120.77, 4670035678934, 8.7, 193.9, \"left\", false, false, \"D\", 0.09, false, null, null, []], [1885, 121.0, 4670268145453, 8.7, 193.9, \"left\", false, false, \"D\", 0.13, false, null, null, []], [1891, 121.33, 4670599576657, 8.9, 192.2, \"left\", false, false, \"D\", -0.02, false, null, null, []], [1895, 121.67, 4670934769234, 8.9, 165.2, \"left\", false, false, \"D\", -0.07, false, null, null, []]]}"
      }
     ],
@@ -477,7 +477,7 @@
     ]
    },
    "response": {
-    "id": "chatcmpl-82b07cb93deda5bf29f2dd4c56dbc431",
+    "id": "chatcmpl-89c10c5a9e57d4ff",
     "choices": [
      {
       "finish_reason": "tool_calls",
@@ -492,36 +492,36 @@
        "function_call": null,
        "tool_calls": [
         {
-         "id": "chatcmpl-tool-9454610715ef90c5",
+         "id": "chatcmpl-tool-b7154304ac49f8a5",
          "function": {
-          "arguments": "{\"verdict\": \"confirmed\", \"type\": \"turn\", \"t_start\": 117, \"t_end\": 122, \"side\": \"left\", \"detail\": \"blinker\", \"claims\": [{\"seq\": 1845, \"field\": \"steer\", \"value\": \"153.4\"}, {\"seq\": 1845, \"field\": \"blinker\", \"value\": \"left\"}, {\"seq\": 1881, \"field\": \"steer\", \"value\": \"193.9\"}, {\"seq\": 1881, \"field\": \"blinker\", \"value\": \"left\"}, {\"seq\": 1895, \"field\": \"steer\", \"value\": \"165.2\"}, {\"seq\": 1895, \"field\": \"blinker\", \"value\": \"left\"}], \"reason\": \"The steering wheel angle exceeds 90 degrees left from ~118.2\u202fs to ~121.7\u202fs while the left blinker is continuously on, indicating a left turn with proper signalling.\"}",
+          "arguments": "{\"verdict\": \"confirmed\", \"type\": \"turn\", \"t_start\": 117, \"t_end\": 122, \"side\": \"left\", \"detail\": \"blinker\", \"claims\": [{\"seq\": 1845, \"field\": \"steer\", \"value\": \"153.4\"}, {\"seq\": 1881, \"field\": \"steer\", \"value\": \"193.9\"}, {\"seq\": 1856, \"field\": \"blinker\", \"value\": \"left\"}, {\"seq\": 1861, \"field\": \"mph\", \"value\": \"8.2\"}, {\"seq\": 1845, \"field\": \"gear\", \"value\": \"D\"}], \"reason\": \"The steering wheel turned left beyond 90\u00b0, the left blinker was on throughout, and the vehicle remained in drive while slowing to turning speed.\"}",
           "name": "emit_event"
          },
          "type": "function"
         }
        ],
-       "reasoning": "We need verify details: The rule said steering past 90 deg 117-122 s; left blinker 110.7-122.7 s. Data shows steer >90 starting around 118.2 sec (row 1845) and continues high until ~121.67 sec (row 1895) where steer drops to 165.2 still >90. At end 122? Not included maybe after. Blinker left present throughout rows shown. Need confirm turn left with blinker. Also need ensure it's a turn (intersection) not lane change etc. Speed ~8-9 mph (~3.6-4 m/s) which is low but could be turning after stop? No stop sign indicated. It's a left turn likely at intersection. We'll confirm as turn left blinker.\n\nNeed claims: Provide seq, field, value for steering >90, blinker left, maybe gear D, speed. Use rows.\n\nPick seq 1845 (t 118.2) steer 153.4, blinker left. Also seq 1881 steer 193.9 blinker left. Also maybe seq 1895 steer 165.2.\n\nEmit event confirmed.",
-       "reasoning_content": "We need verify details: The rule said steering past 90 deg 117-122 s; left blinker 110.7-122.7 s. Data shows steer >90 starting around 118.2 sec (row 1845) and continues high until ~121.67 sec (row 1895) where steer drops to 165.2 still >90. At end 122? Not included maybe after. Blinker left present throughout rows shown. Need confirm turn left with blinker. Also need ensure it's a turn (intersection) not lane change etc. Speed ~8-9 mph (~3.6-4 m/s) which is low but could be turning after stop? No stop sign indicated. It's a left turn likely at intersection. We'll confirm as turn left blinker.\n\nNeed claims: Provide seq, field, value for steering >90, blinker left, maybe gear D, speed. Use rows.\n\nPick seq 1845 (t 118.2) steer 153.4, blinker left. Also seq 1881 steer 193.9 blinker left. Also maybe seq 1895 steer 165.2.\n\nEmit event confirmed."
+       "reasoning": "We need to see if it's a real turn. The speeds ~8-9 mph (~3.5-4 m/s) which is low but could be turning from road to driveway? However gear D, blinker left on entire window. Steer goes from 90 to >190 left, indicating left turn. Need to verify if actually turning at intersection or just maneuver? Look at frames maybe around key_seq 1881 (t~120.77). Use look_at_frames to see if there is an intersection. We'll ask: Is there an intersection ahead? But we need to confirm if it's a turn event. Probably yes, a left turn. Confirm.\n\nWe need claims: include seq, field, value. Provide several samples showing steer >90, blinker left, maybe gear D, speed.\n\nLet's pick seq 1845 (steer 153.4 left), seq 1881 (steer 193.9 left), seq 1856 (blinker left), seq 1861 (mph 8.2). Also maybe show that after t_end 122, steer returns? Not in window but okay.\n\nWe'll emit confirmed.",
+       "reasoning_content": "We need to see if it's a real turn. The speeds ~8-9 mph (~3.5-4 m/s) which is low but could be turning from road to driveway? However gear D, blinker left on entire window. Steer goes from 90 to >190 left, indicating left turn. Need to verify if actually turning at intersection or just maneuver? Look at frames maybe around key_seq 1881 (t~120.77). Use look_at_frames to see if there is an intersection. We'll ask: Is there an intersection ahead? But we need to confirm if it's a turn event. Probably yes, a left turn. Confirm.\n\nWe need claims: include seq, field, value. Provide several samples showing steer >90, blinker left, maybe gear D, speed.\n\nLet's pick seq 1845 (steer 153.4 left), seq 1881 (steer 193.9 left), seq 1856 (blinker left), seq 1861 (mph 8.2). Also maybe show that after t_end 122, steer returns? Not in window but okay.\n\nWe'll emit confirmed."
       },
       "stop_reason": null,
       "token_ids": null,
       "routed_experts": null
      }
     ],
-    "created": 1792987093,
+    "created": 1793119703,
     "model": "nvidia/nemotron-3-super-120b-a12b",
     "object": "chat.completion",
     "moderation": null,
     "service_tier": null,
     "system_fingerprint": "vllm-0.1.dev1+g5001743e3-tp2-05adddbc",
     "usage": {
-     "completion_tokens": 581,
+     "completion_tokens": 517,
      "prompt_tokens": 3640,
-     "total_tokens": 4221,
+     "total_tokens": 4157,
      "completion_tokens_details": {
       "accepted_prediction_tokens": null,
       "audio_tokens": null,
-      "reasoning_tokens": 286,
+      "reasoning_tokens": 262,
       "rejected_prediction_tokens": null
      },
      "prompt_tokens_details": {
