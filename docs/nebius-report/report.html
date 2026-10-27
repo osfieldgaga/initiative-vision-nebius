@@ -257,7 +257,7 @@ unit-tested on the real drive in <code>src/tests/test_agent.py</code>.</p>
 <p>Candidate <code>c23</code>, from the final run's recording <code>runs/…/agent/transcripts/c23.json</code> (5 calls).
 The rules proposed: stop sign read at 296.0 s, standstill until 304.4 s, detail <code>full_stop</code>.</p>
 <pre><b>1. Super</b>  (thinking) "verify stop sign detection around 296 sec"   → get_window(295, 305)
-<b>   code</b>   21 rows: speed 5.7 → 0.0 mph, sign "stop" read at frame 4507, left blinker on
+<b>   code</b>   31 rows: speed 5.7 → 0.0 mph, sign "stop" read at frame 4507, left blinker on
 
 <b>2. Super</b>  → look_at_frames([4507], "Is there a stop sign visible in this frame?")
 <b>   VL</b>     "Frame 4507: Yes"
