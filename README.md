@@ -1,161 +1,177 @@
-# Initiative Vision: live lane, vehicle and sign perception from a car, in the cloud
+# Initiative Vision: verified driving scenarios from a real car
 
-A Raspberry Pi camera in a real car uploads about one frame per second over cellular. On AWS,
-OpenCV 5 with COOL on Graviton finds the lane lines, the car's position in the lane, vehicles,
-stop signs and speed limits, and shows them on a live page, about 1.2 to 1.4 s after the camera
-captured the frame (measured from the Pi, 2026-10-22).
+A camera and the CAN bus of a real car record a drive. OpenCV finds the lanes and the stop signs,
+simple rules propose moments worth a look (stops, turns, curves, lane departures), and an agent on
+**Nebius Token Factory** (NVIDIA **Nemotron 3 Super**, with **Nemotron VL** to look at frames) checks
+each one against the data and confirms, corrects or rejects it. A validator checks every claim the
+agent makes against the source frames and CAN samples, so nothing reaches the output on the model's
+word alone. The events that the agent and a human labeller agree on become **MATLAB
+`drivingScenario` test cases** that replay the car's real speed and path.
 
-Entry for the [OpenCV AI Competition 2026](https://opencv26.devpost.com).
-Report: [docs/technical-report.pdf](docs/technical-report.pdf). Video: *link to come*. Live demo: [www.initiativelabs.cc/ivision-demo](https://www.initiativelabs.cc/ivision-demo) (password in the submission).
+Entry for the [Nebius x NVIDIA Global AI Hackathon](https://nebiusglobalaihackathon.devpost.com), Physical AI track.
+Technical report: [docs/nebius-technical-report.pdf](docs/nebius-technical-report.pdf). Video: *link to come*.
 
-> Not a safety system: it never controls the vehicle, and the driver must not rely on it.
+> Not a safety system: it never controls the vehicle. The drive was recorded with a camera and a CAN
+> logger on a Raspberry Pi in a normal car.
 
-## For judges: run the car yourself
+## Results on the shared drive (7.7 min, 15 hand-labelled events)
 
-You don't need the car or an AWS account. The virtual Pi replays a real drive on your computer and
-uploads it through the real AWS pipeline, exactly like the car does; you watch the results live.
+| | flagged | right | precision | found of 15 | recall |
+|---|---|---|---|---|---|
+| Rules alone | 37 | 12 | 0.32 | 12 | 0.80 |
+| Rules + agent, final run | 21 | 9 | 0.43 | 9 | 0.60 |
+| Rules + agent, 4 runs (final code) | 20-25 | 9-10 | 0.36-0.48 | 9-10 | 0.60-0.67 |
 
-1. **Get the code and the drive** (503 MB: 7.7 minutes of driving, privacy-processed, see `PRIVACY.md` inside):
+- **Precision** = how many of the events a method reports are real; **recall** = how many of the
+  real events it finds. Matching: same type and side, overlapping time (±1 s), one to one.
+- The agent cuts the rules' false alarms roughly in half, at the cost of some real events. Every event
+  it keeps carries claims that a validator checked against the data; 0 of 37 candidates in the final
+  run ended unverified.
+- **MATLAB:** 8 scenarios (events the agent and the labels agree on) plus the whole drive; all 9
+  replay the CAN speed within 0.05 m/s rms in MATLAB R2025a.
+- Small numbers: one event moves recall by 7 points. Failure cases and limits are in the report.
+
+## For judges: no car, no cloud account, no cost
+
+Everything below runs on a laptop (Linux, macOS or Windows, Python 3.12 or 3.13). The agent's calls
+to Token Factory were recorded, and `--replay` answers from those recordings, so it needs no API key.
+
+1. **Get the code and the drive** (503 MB: 7.7 minutes, privacy-processed: faces and plates blurred,
+   no GPS, no VIN; see `PRIVACY.md` inside):
    ```bash
-   git clone https://github.com/osfieldgaga/initiative-vision-aws.git && cd initiative-vision-aws
-   python3 -m venv .venv && .venv/bin/pip install -r requirements-dev.txt     # Python 3.12 or 3.13
+   git clone https://github.com/osfieldgaga/initiative-vision-nebius.git && cd initiative-vision-nebius
+   python3 -m venv .venv && .venv/bin/pip install -r requirements-dev.txt
    curl -L -O https://github.com/osfieldgaga/initiative-vision-aws/releases/download/v1.0/ivision-drive-20261022.zip
-   python3 -m zipfile -e ivision-drive-20261022.zip .
+   python3 -m zipfile -e ivision-drive-20261022.zip test_sessions/
+   D=test_sessions/20261022T164127Z-084b
    ```
-2. **Open the results page**, [www.initiativelabs.cc/ivision-demo](https://www.initiativelabs.cc/ivision-demo),
-   with the password from the submission's judging instructions, and press **Start the demo**. The cloud
-   instance takes 1-2 minutes to boot (it stops itself after 20 idle minutes).
-3. **Start the virtual Pi** (it asks for the same password and gets one-hour upload credentials from the site):
+2. **Replay the agent** over the 37 candidates (a few seconds). It rebuilds every request from the data and
+   the code and checks it against the recording, then writes `runs/20261022T164127Z-084b/agent/events.json`;
+   `git diff` shows it is identical to the committed run.
    ```bash
-   .venv/bin/python src/scripts/virtual_pi.py 20261022T164127Z-084b --demo
+   .venv/bin/python src/scripts/agent.py $D --replay
    ```
-   A window shows the camera next to the car's CAN data (speed, RPM, gear, steering, pedals, blinkers).
-   Keys: space pause, a / d or arrows seek 10 s, click the timeline to jump, q quit. Put it next to the
-   results page: the gap between them is the end-to-end lag.
-4. **When you close the virtual Pi**, the session's videos become downloadable on the results page about
-   30 s later.
+3. **Score it** against the hand labels:
+   ```bash
+   .venv/bin/python src/scripts/score.py runs/20261022T164127Z-084b/agent/events.json data/eval/events_gt_20261022T164127Z-084b.csv
+   ```
+4. **Trace an event to its source.** In `events.json`, every claim names its frame file and CAN row,
+   for example the full stop at the stop sign at 296 s (`c23`):
+   ```json
+   {"seq": 4592, "field": "mph", "value": "0.0", "frame": "00004592_4851274309000.jpg", "can_row": 4851272192169}
+   ```
+   The frame is in `$D/`, the CAN row is the `timestamp_ns` in `$D/decoded.csv`. The whole conversation
+   with the model, tool calls included, is in `runs/20261022T164127Z-084b/agent/transcripts/c23.json`.
+5. **Watch the drive with the labels** (optional): `.venv/bin/python src/scripts/label_tool.py $D`
+   (space pause, a / d seek, q quit).
+6. **MATLAB** (optional, needs the Automated Driving Toolbox): in `scenarios/20261022T164127Z-084b/`,
+   run `full_drive` to play the whole drive or `ev_c23_stop_sign` for one event. `full_drive(4)`
+   plays faster. Each file's header lists the event, the agent's verdict, the validated claims and the
+   hand label that agrees.
 
-`--no-upload` plays the drive locally without AWS. On Windows, use `.venv\Scripts\python` instead of `.venv/bin/python`.
+On Windows, use `.venv\Scripts\python` instead of `.venv/bin/python`.
+
+### Live run with your own key (optional)
+
+With a Token Factory key in `NEBIUS_API_KEY`, the agent calls the models for real. `--max-usd` stops it
+past an estimated spend (a full run was about $0.17). `--agent-dir` keeps the committed run untouched:
+
+```bash
+export NEBIUS_API_KEY=...        # or put it on the first line of apikey.md (git-ignored)
+.venv/bin/python src/scripts/agent.py $D --agent-dir runs/mine --max-usd 0.50
+.venv/bin/python src/scripts/score.py runs/mine/events.json data/eval/events_gt_20261022T164127Z-084b.csv
+```
+
+Answers can differ from run to run, even at temperature 0 (measured above).
 
 ## How it works
 
-![Architecture: the Pi uploads and queues each frame; OpenCV 5 with COOL on Graviton does the vision](docs/architecture.png)
-
 ```
-Pi (in the car)  upload_live_frame.py: 640x640 JPEG, 1 frame/s
-   ├─ PUT  s3://<bucket>/live/<session>/<frame time>.jpg
-   └─ send SQS message ─────────────▶ SQS FIFO ──▶ EC2 c8g (Graviton4), COOL OpenCV 5.1
-                                                    lld_aws.py live
-                                                      undistort → YOLOPv2 on cv.dnn (lanes, drivable area,
-                                                      vehicles) → bird's-eye view → lane offsets, departure
-                                                      → sign reader (colour, shape, CRNN OCR)
-                                                      ├─ live page (live_view.py)
-                                                      └─ s3://<bucket>/lld/<session>/ overlay.mp4, bev.mp4, metrics.json
+Raspberry Pi in the car: camera (15 fps) + CAN logger
+   │  recorded drive: frames + decoded.csv (speed, steering, yaw, blinker, brake, gear, standstill)
+   ▼
+1 vision_batch.py   OpenCV pipeline (lld.py, signs.py, unchanged from the OpenCV entry) at 3 fps
+                    lanes, lane offset, departure, stop signs                       → vision.jsonl
+2 fuse.py           each frame + the car's CAN state at that instant, with the CAN row → timeline.jsonl
+3 candidates.py     rules propose moments (standstill, steering, blinker, signs, departures),
+                    each with its evidence: frames, key frames, CAN rows, stats     → candidates.json
+4 agent.py          one conversation per candidate with Nemotron 3 Super on Token Factory
+                      tools: get_window (the data), look_at_frames (Nemotron VL), rerun_vision
+                             (OpenCV at 15 fps), emit_event (the answer, with claims)
+                      validator: every claim against the data; stop, blinker and side details
+                             recomputed from the full CAN log; vision events need a frame check
+                      errors go back to the model (4 tries), else "unverified"     → events.json
+5 score.py          against hand labels (label_events.py, label_tool.py)
+6 export_matlab.py  events the agent and the labels agree on → drivingScenario .m files
+  verify_matlab.py  runs them in MATLAB and checks they replay the CAN data
 ```
 
-Everything after the upload runs on OpenCV 5; PyTorch isn't needed at inference time. A Lambda
-path (S3 event → `src/lambda/on_live_frame.py` → SQS) remains as a fallback. Full setup with IAM,
-queues and costs: [`phase2/live-pipeline-setup.md`](phase2/live-pipeline-setup.md).
+Every Token Factory call goes through `tokenfactory.py`, which records the request's sha256 and the
+full response. On replay, a request that differs from the recording stops the run (`ReplayMismatch`),
+so a replay reproduces the recorded run or fails loudly. The one allowance: frame images are JPEGs
+this code encodes, and another OpenCV build may produce different bytes for the same frame; if every
+text in the request still matches, the call is replayed and counted.
 
 ## Repository layout
 
 | Path | What |
 |---|---|
-| `lld.py` | The perception pipeline: `undistort_frame`, `process_frame`, YOLOPv2 decoding, bird's-eye view, metrics |
-| `signs.py` | Stop-sign and speed-limit reader: HSV/edges → shape → CRNN OCR scored with lexicon-constrained CTC |
-| `lld_aws.py` | EC2 service: `live` (consume SQS) and `replay` (process an archived session) |
-| `live_view.py` | Live web page (stream, metrics, objects, signs, lag breakdown) |
-| `src/lambda/` | `on_live_frame.py` (fallback live path), `on_upload.py` (whole-session uploads) |
-| `src/scripts/` | `export_onnx.py`, `compare_onnx.py`, `dnn_bench.py`, `dnn_check.py`, `virtual_pi.py`, `upload_session.py` |
-| `src/tests/` | Unit tests |
-| `phase2/` | Setup guide, compute benchmark, competition checklist |
-| `archive/` | Early experiments, kept for history |
+| `src/scripts/vision_batch.py`, `fuse.py` | Steps 1-2: vision over a recorded drive, joined with CAN |
+| `src/scripts/candidates.py` | Step 3: rule candidates with evidence |
+| `src/scripts/agent.py`, `tokenfactory.py` | Step 4: the agent, its tools and validator; the recording Token Factory client |
+| `src/scripts/score.py` | Step 5: precision, recall and detail accuracy against hand labels |
+| `src/scripts/label_events.py`, `label_tool.py` | Pre-filled label list and format check; the labelling window |
+| `src/scripts/export_matlab.py`, `verify_matlab.py` | Step 6: MATLAB scenarios and their check |
+| `src/scripts/eval_vl_lanes.py` | How reliable the VL model is at seeing lane lines (95 labelled frames) |
+| `data/eval/` | Hand labels, labelling guide (`LABELLING.md`), label schema |
+| `runs/20261022T164127Z-084b/` | Every intermediate output of the shared drive, the agent's recordings, repeat runs |
+| `scenarios/20261022T164127Z-084b/` | The MATLAB scenarios, `expected.json`, `verify.json` |
+| `lld.py`, `signs.py` | The OpenCV perception pipeline, imported unchanged from the OpenCV entry |
+| `lld_aws.py`, `live_view.py`, `src/lambda/`, `phase2/`, `infra/` | The live AWS pipeline of the OpenCV entry (history, not used here) |
 
-The Pi-side recorder and uploader (camera + CAN logging on a Raspberry Pi 3B) live in a separate
-repository, `initiative-vision`.
+`src/tests/` has the unit tests: `for t in src/tests/test_*.py; do .venv/bin/python -m unittest "$t"; done`.
 
-## Quickstart
+## Built on the OpenCV entry
 
-### 1. Model weights (not in git)
+This project starts from [Initiative Vision](https://github.com/osfieldgaga/initiative-vision-aws), our
+OpenCV AI Competition 2026 entry: a Pi in a car streams frames to AWS, where OpenCV 5 finds lanes,
+vehicles and signs live. That entry stays as it was (it is being judged separately). New here, all
+written during the hackathon:
 
-```bash
-mkdir -p data/weights/ocr
-# YOLOPv2 (lanes, drivable area, vehicles), from the authors' release
-curl -L -o data/weights/yolopv2.pt https://github.com/CAIC-AD/YOLOPv2/releases/download/V0.0.1/yolopv2.pt
-# OpenCV model zoo CRNN text recognizer, for signs.py
-curl -L -o data/weights/ocr/text_recognition_CRNN_EN_2021sep.onnx \
-  https://huggingface.co/opencv/text_recognition_crnn/resolve/main/text_recognition_CRNN_EN_2021sep.onnx
-```
+- The offline pipeline over a recorded drive (vision batch, CAN fusion, rule candidates).
+- The agent on Token Factory with Nemotron 3 Super and Nemotron VL, its tools and the validator.
+- Record and replay of every model call, with a spend cap.
+- Hand labels with a labelling tool, the scorer, and a measured evaluation (including run-to-run noise
+  and how far the VL model can be trusted on lane lines).
+- The MATLAB scenario export and its check in MATLAB, with the yaw-rate calibration it needed.
 
-Then convert YOLOPv2 to ONNX for `cv.dnn`, once, on a machine with torch:
+Reused unchanged: `lld.py` and `signs.py` (the OpenCV vision), the recorded drive and its privacy copy.
 
-```bash
-pip install torch==2.14.0 onnx==1.23.2
-python src/scripts/export_onnx.py          # -> data/weights/yolopv2.onnx
-python src/scripts/compare_onnx.py <frames_dir>   # cv.dnn vs TorchScript, expect IoU 1.0000
-```
+## Running the vision from scratch (optional)
 
-### 2. Laptop: tests and the virtual Pi
-
-```bash
-python3.13 -m venv .venv && .venv/bin/pip install -r requirements-dev.txt
-for t in src/tests/test_*.py; do .venv/bin/python -m unittest "$t"; done   # 83 tests
-```
-
-`virtual_pi.py` replays a recorded drive in real time and uploads frames exactly as the Pi does,
-through the real AWS pipeline:
+The outputs of steps 1-3 are committed, so nothing above needs the vision models. To recompute them,
+get the weights as in the OpenCV entry's README (YOLOPv2 converted to ONNX, the OpenCV zoo CRNN text
+recognizer), then:
 
 ```bash
-LLD_QUEUE_URL=https://sqs.us-east-1.amazonaws.com/<account-id>/lld-frames.fifo \
-  .venv/bin/python src/scripts/virtual_pi.py <session_dir> --direct --size 640
+.venv/bin/python src/scripts/vision_batch.py $D --fps 3
+.venv/bin/python src/scripts/fuse.py $D
+.venv/bin/python src/scripts/candidates.py $D
 ```
 
-`--no-upload` only plays it locally.
+## Privacy
 
-To share a recorded session, make a privacy-safe copy first. Faces and plate areas are blurred, the GPS
-columns are removed from `decoded.csv`, and raw `can.csv` (which holds the VIN) is left out:
-
-```bash
-curl -L -o data/weights/privacy/face_detection_yunet_2023mar.onnx --create-dirs \
-  https://huggingface.co/opencv/face_detection_yunet/resolve/main/face_detection_yunet_2023mar.onnx
-.venv/bin/python src/scripts/privacy_package.py <session_dir> <out_dir> [--start 60 --end 600]
-```
-
-Check the before/after samples it writes to `<out_dir>/<session>-review/` before publishing.
-
-### 3. EC2: the live service
-
-On a COOL AMI instance (we use c8g.4xlarge for drives), inside COOL's venv. Don't install
-`opencv-python` there: it would shadow COOL's build.
-
-```bash
-sudo apt install -y ffmpeg        # session videos are converted to H.264 so they play in a browser
-/opt/cool/venvs/python_3.12/bin/pip install -r requirements.txt
-LLD_QUEUE_URL=https://sqs.us-east-1.amazonaws.com/<account-id>/lld-frames.fifo \
-  /opt/cool/venvs/python_3.12/bin/python lld_aws.py live
-# from the laptop: ssh -L 8080:localhost:8080 ubuntu@<instance>, then http://localhost:8080
-```
-
-Per-frame lag, inference and processing time go to CloudWatch (namespace `InitiativeVision`). The
-dashboard definition is `infra/cloudwatch-dashboard.json`; the IAM and setup steps are in the setup guide.
-
-Useful settings: `LLD_METRICS=0` turns CloudWatch off, `LLD_SIGNS=0` turns sign reading off, `LLD_MAX_LAG_S` sets how old a frame may
-get before live mode skips it, and `LLD_WEIGHTS=data/weights/yolopv2.pt` switches to TorchScript.
-
-## Results so far
-
-| | |
-|---|---|
-| Capture to result, live from the Pi (direct mode, 640 uploads) | ~1.2 to 1.4 s |
-| YOLOPv2 inference, COOL cv.dnn classic engine + FP16 target | 0.742 / 0.418 / 0.222 s on c8g.xlarge / 2xlarge / 4xlarge |
-| Same model, PyTorch, c8g.xlarge | 0.89 s |
-| cv.dnn vs TorchScript output, 40 real frames | mask IoU 1.0000, identical metrics |
-| Stop signs, false positives | 0 in 6,154 frames (1280) and 3,060 frames (640) |
-
-Method and full tables: [`phase2/ec2-compute-benchmark.md`](phase2/ec2-compute-benchmark.md).
+The shared drive is a privacy copy: faces and plate areas blurred, GPS columns removed, and the raw
+CAN log (which holds the VIN) left out. The yaw-rate calibration used the original drive's GPS on the
+recording laptop only; just the two calibration numbers are published. Model calls send frames of the
+privacy copy only.
 
 ## Limitations
 
-The detector only finds vehicles (YOLOPv2 merges all traffic objects into one class). Speed-limit
-reading has been validated only on synthetic signs so far. The bird's-eye view is valid only for
-the calibrated camera pose. Frames don't reach AWS in cellular dead zones.
+- One drive, 15 labelled events: the numbers are indicative, not a benchmark.
+- The agent's answers vary from run to run; it sometimes trusts a "no" from the VL model that it
+  shouldn't (a turn rejected because "no intersection is visible" mid-turn), and once ignored one it
+  should have heeded. Details in the report.
+- Scenarios hold only the ego car: no other road users, signs or real lane geometry. The path comes
+  from the yaw rate, so over a whole drive it drifts; it is right locally, not a map.
+- Lane departures depend on vision that misses faded lines; both labelled departures were missed.
