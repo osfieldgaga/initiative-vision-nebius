@@ -3,7 +3,10 @@
 Live: each request goes to Token Factory (OpenAI-compatible) and the request's sha256 and the full
 response are appended to a transcript file. Replay: requests are answered from the transcript in
 order; a request whose sha256 differs from the recorded one stops the replay (the code or inputs
-changed), so a replay reproduces the recorded run exactly or fails loudly.
+changed), so a replay reproduces the recorded run exactly or fails loudly. One allowance: images are
+JPEGs this code encodes (agent.upright_jpeg), and another OpenCV build may encode the same frame with
+different bytes. If only image bytes differ and every text in the request matches the recording, the
+call is replayed and counted in Client.image_mismatches, which the agent reports.
 
 Key: $NEBIUS_API_KEY, else the first line of apikey.md at the repo root (git-excluded). It is
 only ever sent in the Authorization header.
@@ -70,6 +73,17 @@ def summary(body):
     return strip(body)
 
 
+def text_only(request):
+    """A stored request summary without the images' hashes: what must match on replay."""
+    def strip(x):
+        if isinstance(x, dict):
+            return {"type": "image_url"} if x.get("type") == "image_url" else {k: strip(v) for k, v in x.items()}
+        if isinstance(x, list):
+            return [strip(v) for v in x]
+        return x
+    return json.dumps(strip(json.loads(json.dumps(request))), sort_keys=True)
+
+
 class Meter:
     """Running cost over every Client that shares it; raises BudgetExceeded past max_usd."""
 
@@ -100,13 +114,17 @@ class Client:
             if not self.path.exists():
                 raise ReplayMismatch(f"no recording at {self.path}")
             self.recorded = json.loads(self.path.read_text())["calls"]
-        self.calls = []
+        self.calls, self.image_mismatches = [], 0
 
     def chat(self, body):
         k = len(self.calls)
         if self.replay:
-            if k >= len(self.recorded) or self.recorded[k]["sha256"] != sha(body):
-                raise ReplayMismatch(f"{self.path.name}: call {k} differs from the recording")
+            if k >= len(self.recorded):
+                raise ReplayMismatch(f"{self.path.name}: call {k} isn't in the recording")
+            if self.recorded[k]["sha256"] != sha(body):
+                if text_only(summary(body)) != text_only(self.recorded[k]["request"]):
+                    raise ReplayMismatch(f"{self.path.name}: call {k} differs from the recording")
+                self.image_mismatches += 1  # same text, image bytes encoded differently
             response = self.recorded[k]["response"]
         else:
             self.meter.check()

@@ -1,0 +1,2961 @@
+[
+ {
+  "id": "c01",
+  "verdict": "rejected",
+  "type": "other_stop",
+  "t_start": 0,
+  "t_end": 56,
+  "side": "",
+  "detail": "",
+  "reason": "The car was already stationary at the start and remained stopped until it began moving again around 32\u202fs; there was no distinct braking\u2011initiated stop for traffic or other cause.",
+  "claims": [
+   {
+    "seq": 0,
+    "field": "mph",
+    "value": "0.0",
+    "t_s": 0.0,
+    "frame": "00000000_4549267007000.jpg",
+    "can_row": 4549267279072
+   },
+   {
+    "seq": 514,
+    "field": "mph",
+    "value": "2.3",
+    "t_s": 32.083,
+    "frame": "00000514_4581349695000.jpg",
+    "can_row": 4581339019633
+   },
+   {
+    "seq": 387,
+    "field": "brake",
+    "value": "true",
+    "t_s": 24.687,
+    "frame": "00000387_4573953680000.jpg",
+    "can_row": 4573951415004
+   },
+   {
+    "seq": 514,
+    "field": "brake",
+    "value": "false",
+    "t_s": 32.083,
+    "frame": "00000514_4581349695000.jpg",
+    "can_row": 4581339019633
+   }
+  ],
+  "frames_checked": [],
+  "validation": "passed",
+  "turns": 2,
+  "candidate": {
+   "id": "c01",
+   "type": "other_stop",
+   "t_start": 0,
+   "t_end": 56.0,
+   "side": "",
+   "detail": "",
+   "rule": "Standstill flag 0.0-56.0 s, no stop sign seen",
+   "stats": {
+    "min_speed_mps": 0.0,
+    "max_speed_mps": 2.14,
+    "max_left_steer_deg": 152.8,
+    "max_right_steer_deg": 93.4,
+    "blinker": [],
+    "gear": [
+     "N",
+     "D"
+    ]
+   },
+   "key_seqs": []
+  }
+ },
+ {
+  "id": "c02",
+  "verdict": "rejected",
+  "type": "turn",
+  "t_start": 33.68,
+  "t_end": 35.35,
+  "side": "left",
+  "detail": "no_blinker",
+  "reason": "The maneuver occurs at low speed with no lane markings, indicating a parking\u2011lot or driveway action rather than a road turn.",
+  "claims": [
+   {
+    "seq": 538,
+    "field": "mph",
+    "value": "3.6",
+    "t_s": 33.682,
+    "frame": "00000538_4582948839000.jpg",
+    "can_row": 4582947880557
+   },
+   {
+    "seq": 538,
+    "field": "lane_valid",
+    "value": "false",
+    "t_s": 33.682,
+    "frame": "00000538_4582948839000.jpg",
+    "can_row": 4582947880557
+   },
+   {
+    "seq": 542,
+    "field": "mph",
+    "value": "3.8",
+    "t_s": 34.015,
+    "frame": "00000542_4583281991000.jpg",
+    "can_row": 4583281790324
+   },
+   {
+    "seq": 542,
+    "field": "lane_valid",
+    "value": "false",
+    "t_s": 34.015,
+    "frame": "00000542_4583281991000.jpg",
+    "can_row": 4583281790324
+   },
+   {
+    "seq": 554,
+    "field": "mph",
+    "value": "4.3",
+    "t_s": 34.748,
+    "frame": "00000554_4584014942000.jpg",
+    "can_row": 4584011630513
+   },
+   {
+    "seq": 554,
+    "field": "lane_valid",
+    "value": "false",
+    "t_s": 34.748,
+    "frame": "00000554_4584014942000.jpg",
+    "can_row": 4584011630513
+   }
+  ],
+  "frames_checked": [],
+  "validation": "passed",
+  "turns": 3,
+  "candidate": {
+   "id": "c02",
+   "type": "turn",
+   "t_start": 33.68,
+   "t_end": 35.35,
+   "side": "left",
+   "detail": "no_blinker",
+   "rule": "steering past 90 deg 33.7-35.3 s; left blinker not on",
+   "stats": {
+    "min_speed_mps": 1.54,
+    "max_speed_mps": 1.94,
+    "max_left_steer_deg": 152.8,
+    "max_right_steer_deg": -92.3,
+    "blinker": [],
+    "gear": [
+     "D"
+    ]
+   },
+   "key_seqs": [
+    542
+   ]
+  }
+ },
+ {
+  "id": "c03",
+  "verdict": "rejected",
+  "type": "turn",
+  "t_start": 38.01,
+  "t_end": 38.38,
+  "side": "right",
+  "detail": "no_blinker",
+  "reason": "The steering was a lane adjustment within the lane, not a turn at an intersection.",
+  "claims": [
+   {
+    "seq": 605,
+    "field": "steer",
+    "value": "-93.4",
+    "t_s": 38.013,
+    "frame": "00000605_4587279853000.jpg",
+    "can_row": 4587276561879
+   },
+   {
+    "seq": 605,
+    "field": "mph",
+    "value": "4.8",
+    "t_s": 38.013,
+    "frame": "00000605_4587279853000.jpg",
+    "can_row": 4587276561879
+   },
+   {
+    "seq": 605,
+    "field": "blinker",
+    "value": "null",
+    "t_s": 38.013,
+    "frame": "00000605_4587279853000.jpg",
+    "can_row": 4587276561879
+   },
+   {
+    "seq": 605,
+    "field": "gear",
+    "value": "D",
+    "t_s": 38.013,
+    "frame": "00000605_4587279853000.jpg",
+    "can_row": 4587276561879
+   }
+  ],
+  "frames_checked": [
+   {
+    "seqs": [
+     600,
+     605,
+     610,
+     615
+    ],
+    "question": "Is the vehicle making a right turn at an intersection, or is it just steering within the lane?",
+    "answer": "Frame 600: It is just steering within the lane.\nFrame 605: It is just steering within the lane.\nFrame 610: It is just steering within the lane.\nFrame 615: It is just steering within the lane."
+   }
+  ],
+  "validation": "passed",
+  "turns": 3,
+  "candidate": {
+   "id": "c03",
+   "type": "turn",
+   "t_start": 38.01,
+   "t_end": 38.38,
+   "side": "right",
+   "detail": "no_blinker",
+   "rule": "steering past 90 deg 38.0-38.4 s; right blinker not on",
+   "stats": {
+    "min_speed_mps": 2.09,
+    "max_speed_mps": 2.13,
+    "max_left_steer_deg": -92.2,
+    "max_right_steer_deg": 93.4,
+    "blinker": [],
+    "gear": [
+     "D"
+    ]
+   },
+   "key_seqs": [
+    605
+   ]
+  }
+ },
+ {
+  "id": "c04",
+  "verdict": "rejected",
+  "type": "other_stop",
+  "t_start": 52.34,
+  "t_end": 66.7,
+  "side": "",
+  "detail": "",
+  "reason": "The car never braked and was moving slowly after 56.3\u202fs, so there was no stop for traffic, light, pedestrian or yielding.",
+  "claims": [
+   {
+    "seq": 874,
+    "field": "brake",
+    "value": "false",
+    "t_s": 56.336,
+    "frame": "00000874_4605603353000.jpg",
+    "can_row": 4605599954140
+   },
+   {
+    "seq": 874,
+    "field": "mph",
+    "value": "0.3",
+    "t_s": 56.336,
+    "frame": "00000874_4605603353000.jpg",
+    "can_row": 4605599954140
+   },
+   {
+    "seq": 900,
+    "field": "brake",
+    "value": "false",
+    "t_s": 58.035,
+    "frame": "00000900_4607302437000.jpg",
+    "can_row": 4607301791515
+   },
+   {
+    "seq": 900,
+    "field": "mph",
+    "value": "2.3",
+    "t_s": 58.035,
+    "frame": "00000900_4607302437000.jpg",
+    "can_row": 4607301791515
+   },
+   {
+    "seq": 1029,
+    "field": "brake",
+    "value": "false",
+    "t_s": 66.697,
+    "frame": "00001029_4615964474000.jpg",
+    "can_row": 4615963671264
+   },
+   {
+    "seq": 1029,
+    "field": "mph",
+    "value": "4.2",
+    "t_s": 66.697,
+    "frame": "00001029_4615964474000.jpg",
+    "can_row": 4615963671264
+   }
+  ],
+  "frames_checked": [],
+  "validation": "passed",
+  "turns": 5,
+  "candidate": {
+   "id": "c04",
+   "type": "other_stop",
+   "t_start": 52.34,
+   "t_end": 66.7,
+   "side": "",
+   "detail": "",
+   "rule": "Standstill flag 57.3-66.7 s, no stop sign seen",
+   "stats": {
+    "min_speed_mps": 0.0,
+    "max_speed_mps": 1.85,
+    "max_left_steer_deg": 123.9,
+    "max_right_steer_deg": 298.7,
+    "blinker": [],
+    "gear": [
+     "D"
+    ]
+   },
+   "key_seqs": []
+  }
+ },
+ {
+  "id": "c05",
+  "verdict": "corrected",
+  "type": "turn",
+  "t_start": 56.34,
+  "t_end": 59,
+  "side": "left",
+  "detail": "no_blinker",
+  "reason": "Steering shows a left turn that starts and finishes within the interval, with no blinker activation.",
+  "claims": [
+   {
+    "seq": 874,
+    "field": "steer",
+    "value": "102.5",
+    "t_s": 56.336,
+    "frame": "00000874_4605603353000.jpg",
+    "can_row": 4605599954140
+   },
+   {
+    "seq": 913,
+    "field": "steer",
+    "value": "4.6",
+    "t_s": 59.002,
+    "frame": "00000913_4608268590000.jpg",
+    "can_row": 4608243970146
+   },
+   {
+    "seq": 874,
+    "field": "blinker",
+    "value": "null",
+    "t_s": 56.336,
+    "frame": "00000874_4605603353000.jpg",
+    "can_row": 4605599954140
+   },
+   {
+    "seq": 884,
+    "field": "frame_check",
+    "value": "The vehicle is on a public road with visible lane markings or road edges.",
+    "t_s": 57.003,
+    "frame": "00000884_4606269657000.jpg",
+    "can_row": 4606269878465
+   }
+  ],
+  "frames_checked": [
+   {
+    "seqs": [
+     884
+    ],
+    "question": "Is the vehicle on a public road with visible lane markings or road edges, or is it in a parking lot/driveway?",
+    "answer": "Frame 884: The vehicle is on a public road with visible lane markings or road edges."
+   }
+  ],
+  "validation": "passed",
+  "turns": 5,
+  "candidate": {
+   "id": "c05",
+   "type": "turn",
+   "t_start": 56.34,
+   "t_end": 58.03,
+   "side": "left",
+   "detail": "no_blinker",
+   "rule": "steering past 90 deg 56.3-58.0 s; left blinker not on",
+   "stats": {
+    "min_speed_mps": 0.0,
+    "max_speed_mps": 1.05,
+    "max_left_steer_deg": 123.9,
+    "max_right_steer_deg": -102.5,
+    "blinker": [],
+    "gear": [
+     "D"
+    ]
+   },
+   "key_seqs": [
+    884
+   ]
+  }
+ },
+ {
+  "id": "c06",
+  "verdict": "confirmed",
+  "type": "turn",
+  "t_start": 64.36,
+  "t_end": 70.36,
+  "side": "right",
+  "detail": "no_blinker",
+  "reason": "The steering wheel shows a sustained right turn (negative angles) from start to end with no blinker activation, consistent with a right turn maneuver.",
+  "claims": [
+   {
+    "seq": 993,
+    "field": "steer",
+    "value": "-98.2",
+    "t_s": 64.365,
+    "frame": "00000993_4613632394000.jpg",
+    "can_row": 4613631648893
+   },
+   {
+    "seq": 993,
+    "field": "blinker",
+    "value": "null",
+    "t_s": 64.365,
+    "frame": "00000993_4613632394000.jpg",
+    "can_row": 4613631648893
+   },
+   {
+    "seq": 1080,
+    "field": "steer",
+    "value": "-132.6",
+    "t_s": 70.229,
+    "frame": "00001080_4619495924000.jpg",
+    "can_row": 4619495246020
+   },
+   {
+    "seq": 1080,
+    "field": "blinker",
+    "value": "null",
+    "t_s": 70.229,
+    "frame": "00001080_4619495924000.jpg",
+    "can_row": 4619495246020
+   },
+   {
+    "seq": 993,
+    "field": "gear",
+    "value": "D",
+    "t_s": 64.365,
+    "frame": "00000993_4613632394000.jpg",
+    "can_row": 4613631648893
+   },
+   {
+    "seq": 1080,
+    "field": "gear",
+    "value": "D",
+    "t_s": 70.229,
+    "frame": "00001080_4619495924000.jpg",
+    "can_row": 4619495246020
+   }
+  ],
+  "frames_checked": [],
+  "validation": "passed",
+  "turns": 2,
+  "candidate": {
+   "id": "c06",
+   "type": "turn",
+   "t_start": 64.36,
+   "t_end": 70.36,
+   "side": "right",
+   "detail": "no_blinker",
+   "rule": "steering past 90 deg 64.4-70.4 s; right blinker not on",
+   "stats": {
+    "min_speed_mps": 1.02,
+    "max_speed_mps": 3.09,
+    "max_left_steer_deg": -98.2,
+    "max_right_steer_deg": 427.4,
+    "blinker": [],
+    "gear": [
+     "D"
+    ]
+   },
+   "key_seqs": [
+    1046
+   ]
+  }
+ },
+ {
+  "id": "c07",
+  "verdict": "corrected",
+  "type": "other_stop",
+  "t_start": 88.35,
+  "t_end": 91.02,
+  "side": "",
+  "detail": "",
+  "reason": "The car slowed to a stop with standstill true, remained stopped, then began moving again, with no stop sign present.",
+  "claims": [
+   {
+    "seq": 1374,
+    "field": "mph",
+    "value": "4.0",
+    "t_s": 88.353,
+    "frame": "00001374_4637619587000.jpg",
+    "can_row": 4637609017938
+   },
+   {
+    "seq": 1374,
+    "field": "standstill",
+    "value": "true",
+    "t_s": 88.353,
+    "frame": "00001374_4637619587000.jpg",
+    "can_row": 4637609017938
+   },
+   {
+    "seq": 1405,
+    "field": "mph",
+    "value": "0.0",
+    "t_s": 90.352,
+    "frame": "00001405_4639618520000.jpg",
+    "can_row": 4639618125361
+   },
+   {
+    "seq": 1410,
+    "field": "mph",
+    "value": "0.0",
+    "t_s": 90.718,
+    "frame": "00001410_4639985008000.jpg",
+    "can_row": 4639984609246
+   },
+   {
+    "seq": 1415,
+    "field": "standstill",
+    "value": "true",
+    "t_s": 91.018,
+    "frame": "00001415_4640284829000.jpg",
+    "can_row": 4640284692708
+   },
+   {
+    "seq": 1415,
+    "field": "accel",
+    "value": "0.47",
+    "t_s": 91.018,
+    "frame": "00001415_4640284829000.jpg",
+    "can_row": 4640284692708
+   }
+  ],
+  "frames_checked": [],
+  "validation": "passed",
+  "turns": 3,
+  "candidate": {
+   "id": "c07",
+   "type": "other_stop",
+   "t_start": 83.35,
+   "t_end": 91.02,
+   "side": "",
+   "detail": "",
+   "rule": "Standstill flag 88.4-91.0 s, no stop sign seen",
+   "stats": {
+    "min_speed_mps": 0.0,
+    "max_speed_mps": 4.05,
+    "max_left_steer_deg": 1.0,
+    "max_right_steer_deg": 2.7,
+    "blinker": [
+     "left"
+    ],
+    "gear": [
+     "D"
+    ]
+   },
+   "key_seqs": []
+  }
+ },
+ {
+  "id": "c08",
+  "verdict": "confirmed",
+  "type": "turn",
+  "t_start": 93.25,
+  "t_end": 98.01,
+  "side": "left",
+  "detail": "blinker",
+  "reason": "The steering wheel exceeded 90\u00b0 left from 93.25\u202fs onward and returned to near\u2011center by 98.01\u202fs, with the left blinker activated well before steering began and remaining on until shortly after the turn completed, consistent with a left turn.",
+  "claims": [
+   {
+    "seq": 1451,
+    "field": "steer",
+    "value": "90.1",
+    "t_s": 93.25,
+    "frame": "00001451_4642516975000.jpg",
+    "can_row": 4642516960761
+   },
+   {
+    "seq": 1451,
+    "field": "blinker",
+    "value": "left",
+    "t_s": 93.25,
+    "frame": "00001451_4642516975000.jpg",
+    "can_row": 4642516960761
+   },
+   {
+    "seq": 1489,
+    "field": "steer",
+    "value": "235.4",
+    "t_s": 95.715,
+    "frame": "00001489_4644982334000.jpg",
+    "can_row": 4644975579583
+   },
+   {
+    "seq": 1510,
+    "field": "blinker",
+    "value": "left",
+    "t_s": 97.015,
+    "frame": "00001510_4646281654000.jpg",
+    "can_row": 4646281567013
+   },
+   {
+    "seq": 1514,
+    "field": "blinker",
+    "value": "null",
+    "t_s": 97.381,
+    "frame": "00001514_4646648118000.jpg",
+    "can_row": 4646635783148
+   }
+  ],
+  "frames_checked": [],
+  "validation": "passed",
+  "turns": 2,
+  "candidate": {
+   "id": "c08",
+   "type": "turn",
+   "t_start": 93.25,
+   "t_end": 98.01,
+   "side": "left",
+   "detail": "blinker",
+   "rule": "steering past 90 deg 93.2-98.0 s; left blinker 85.7-97.0 s",
+   "stats": {
+    "min_speed_mps": 2.28,
+    "max_speed_mps": 4.87,
+    "max_left_steer_deg": 235.4,
+    "max_right_steer_deg": -90.1,
+    "blinker": [
+     "left"
+    ],
+    "gear": [
+     "D"
+    ]
+   },
+   "key_seqs": [
+    1489
+   ]
+  }
+ },
+ {
+  "id": "c09",
+  "verdict": "corrected",
+  "type": "curve",
+  "t_start": 117,
+  "t_end": 122,
+  "side": "left",
+  "detail": "",
+  "reason": "The steering wheel turned left far beyond 90\u00b0 and the left blinker was on, but the road ahead continued straight, indicating a left curve rather than a turn at an intersection.",
+  "claims": [
+   {
+    "seq": 1881,
+    "field": "steer",
+    "value": "193.9",
+    "t_s": 120.769,
+    "frame": "00001881_4670035707000.jpg",
+    "can_row": 4670035678934
+   },
+   {
+    "seq": 1845,
+    "field": "blinker",
+    "value": "left",
+    "t_s": 118.203,
+    "frame": "00001845_4667470403000.jpg",
+    "can_row": 4667467810820
+   },
+   {
+    "seq": 1823,
+    "field": "mph",
+    "value": "9.3",
+    "t_s": 117.004,
+    "frame": "00001823_4666271035000.jpg",
+    "can_row": 4666050154901
+   }
+  ],
+  "frames_checked": [
+   {
+    "seqs": [
+     1881
+    ],
+    "question": "Does the road ahead appear to continue straight or does it turn left?",
+    "answer": "Frame 1881: The road ahead appears to continue straight."
+   }
+  ],
+  "validation": "passed",
+  "turns": 3,
+  "candidate": {
+   "id": "c09",
+   "type": "turn",
+   "t_start": 117.0,
+   "t_end": 122.0,
+   "side": "left",
+   "detail": "blinker",
+   "rule": "steering past 90 deg 117.0-122.0 s; left blinker 110.7-122.7 s",
+   "stats": {
+    "min_speed_mps": 3.49,
+    "max_speed_mps": 3.99,
+    "max_left_steer_deg": 193.9,
+    "max_right_steer_deg": -90.1,
+    "blinker": [
+     "left"
+    ],
+    "gear": [
+     "D"
+    ]
+   },
+   "key_seqs": [
+    1881
+   ]
+  }
+ },
+ {
+  "id": "c10",
+  "verdict": "rejected",
+  "type": "lane_departure",
+  "t_start": 170.71,
+  "t_end": 172.68,
+  "side": "left",
+  "detail": "",
+  "reason": "Lane markings were not visible on the left side, so the reported departure left is not a real lane departure.",
+  "claims": [
+   {
+    "seq": 2637,
+    "field": "offset_m",
+    "value": "-1.58",
+    "t_s": 170.709,
+    "frame": "00002637_4719976080000.jpg",
+    "can_row": 4719971735937
+   },
+   {
+    "seq": 2652,
+    "field": "offset_m",
+    "value": "-0.46",
+    "t_s": 171.709,
+    "frame": "00002652_4720975508000.jpg",
+    "can_row": 4720975803692
+   },
+   {
+    "seq": 2666,
+    "field": "offset_m",
+    "value": "-0.69",
+    "t_s": 172.675,
+    "frame": "00002666_4721941671000.jpg",
+    "can_row": 4721939930685
+   },
+   {
+    "seq": 2637,
+    "field": "frame_check",
+    "value": "No",
+    "t_s": 170.709,
+    "frame": "00002637_4719976080000.jpg",
+    "can_row": 4719971735937
+   },
+   {
+    "seq": 2652,
+    "field": "frame_check",
+    "value": "No",
+    "t_s": 171.709,
+    "frame": "00002652_4720975508000.jpg",
+    "can_row": 4720975803692
+   },
+   {
+    "seq": 2666,
+    "field": "frame_check",
+    "value": "No",
+    "t_s": 172.675,
+    "frame": "00002666_4721941671000.jpg",
+    "can_row": 4721939930685
+   }
+  ],
+  "frames_checked": [
+   {
+    "seqs": [
+     2637,
+     2642,
+     2652,
+     2658
+    ],
+    "question": "Are lane markings visible on the left side of the vehicle in these frames?",
+    "answer": "Frame 2637: No\nFrame 2642: No\nFrame 2652: No\nFrame 2658: No"
+   },
+   {
+    "seqs": [
+     2637,
+     2652,
+     2666
+    ],
+    "question": "Are lane markings visible on the left side of the vehicle in these frames?",
+    "answer": "Frame 2637: No\nFrame 2652: No\nFrame 2666: No"
+   }
+  ],
+  "validation": "passed",
+  "turns": 5,
+  "candidate": {
+   "id": "c10",
+   "type": "lane_departure",
+   "t_start": 170.71,
+   "t_end": 172.68,
+   "side": "left",
+   "detail": "",
+   "rule": "vision flagged departing left 170.7-172.7 s",
+   "stats": {
+    "min_speed_mps": 2.05,
+    "max_speed_mps": 3.43,
+    "max_left_steer_deg": 11.2,
+    "max_right_steer_deg": 3.1,
+    "blinker": [
+     "right"
+    ],
+    "gear": [
+     "D"
+    ]
+   },
+   "key_seqs": [
+    2637,
+    2652,
+    2657,
+    2658,
+    2662,
+    2666
+   ]
+  }
+ },
+ {
+  "id": "c11",
+  "verdict": "confirmed",
+  "type": "stop_sign",
+  "t_start": 170.71,
+  "t_end": 176.07,
+  "side": "",
+  "detail": "rolling_stop",
+  "reason": "A stop sign was visible, the car slowed but never reached zero mph, and the standstill flag became true while the car was still moving, indicating a rolling stop.",
+  "claims": [
+   {
+    "seq": 2637,
+    "field": "vision_stop_sign",
+    "value": "true",
+    "t_s": 170.709,
+    "frame": "00002637_4719976080000.jpg",
+    "can_row": 4719971735937
+   },
+   {
+    "seq": 2637,
+    "field": "mph",
+    "value": "8.5",
+    "t_s": 170.709,
+    "frame": "00002637_4719976080000.jpg",
+    "can_row": 4719971735937
+   },
+   {
+    "seq": 2720,
+    "field": "mph",
+    "value": "1.1",
+    "t_s": 176.073,
+    "frame": "00002720_4725339881000.jpg",
+    "can_row": 4725323584316
+   },
+   {
+    "seq": 2687,
+    "field": "standstill",
+    "value": "true",
+    "t_s": 174.041,
+    "frame": "00002687_4723307633000.jpg",
+    "can_row": 4723307161866
+   }
+  ],
+  "frames_checked": [
+   {
+    "seqs": [
+     2637,
+     2648,
+     2652,
+     2657
+    ],
+    "question": "Is there a stop sign visible in these frames?",
+    "answer": "Frame 2637: Yes, a red stop sign is visible on the right side of the road.\nFrame 2648: Yes, a red stop sign is visible on the right side of the road.\nFrame 2652: Yes, a red stop sign is visible on the right side of the road.\nFrame 2657: Yes, a red stop sign is visible on the right side of the road."
+   }
+  ],
+  "validation": "passed",
+  "turns": 4,
+  "candidate": {
+   "id": "c11",
+   "type": "stop_sign",
+   "t_start": 170.71,
+   "t_end": 176.07,
+   "side": "",
+   "detail": "rolling_stop",
+   "rule": "stop sign seen 170.7-173.0 s, Standstill flag 174.0-176.1 s; slowest 0.5572 m/s at 176.1 s",
+   "stats": {
+    "min_speed_mps": 0.56,
+    "max_speed_mps": 3.43,
+    "max_left_steer_deg": 14.8,
+    "max_right_steer_deg": 3.1,
+    "blinker": [
+     "right"
+    ],
+    "gear": [
+     "D"
+    ]
+   },
+   "key_seqs": [
+    2637,
+    2648,
+    2652,
+    2657,
+    2658,
+    2662,
+    2666,
+    2672
+   ]
+  }
+ },
+ {
+  "id": "c12",
+  "verdict": "corrected",
+  "type": "turn",
+  "t_start": 179.04,
+  "t_end": 184,
+  "side": "right",
+  "detail": "blinker",
+  "reason": "The steering wheel moved right from -124\u00b0 to a peak of -428\u00b0 then returned to near zero, with the right blinker active before steering began and turning off after the maneuver completed.",
+  "claims": [
+   {
+    "seq": 2771,
+    "field": "blinker",
+    "value": "right",
+    "t_s": 179.038,
+    "frame": "00002771_4728304994000.jpg",
+    "can_row": 4728291746222
+   },
+   {
+    "seq": 2771,
+    "field": "steer",
+    "value": "-124.4",
+    "t_s": 179.038,
+    "frame": "00002771_4728304994000.jpg",
+    "can_row": 4728291746222
+   },
+   {
+    "seq": 2794,
+    "field": "steer",
+    "value": "-428.8",
+    "t_s": 180.704,
+    "frame": "00002794_4729970787000.jpg",
+    "can_row": 4729967740655
+   },
+   {
+    "seq": 2850,
+    "field": "steer",
+    "value": "0.1",
+    "t_s": 184.335,
+    "frame": "00002850_4733602209000.jpg",
+    "can_row": 4733601779237
+   },
+   {
+    "seq": 2850,
+    "field": "blinker",
+    "value": "null",
+    "t_s": 184.335,
+    "frame": "00002850_4733602209000.jpg",
+    "can_row": 4733601779237
+   }
+  ],
+  "frames_checked": [],
+  "validation": "passed",
+  "turns": 3,
+  "candidate": {
+   "id": "c12",
+   "type": "turn",
+   "t_start": 179.04,
+   "t_end": 182.34,
+   "side": "right",
+   "detail": "blinker",
+   "rule": "steering past 90 deg 179.0-182.3 s; right blinker 164.3-181.3 s",
+   "stats": {
+    "min_speed_mps": 2.1,
+    "max_speed_mps": 4.12,
+    "max_left_steer_deg": -124.4,
+    "max_right_steer_deg": 428.8,
+    "blinker": [
+     "right"
+    ],
+    "gear": [
+     "D"
+    ]
+   },
+   "key_seqs": [
+    2794
+   ]
+  }
+ },
+ {
+  "id": "c13",
+  "verdict": "rejected",
+  "type": "lane_departure",
+  "t_start": 181,
+  "t_end": 184.67,
+  "side": "left",
+  "detail": "",
+  "reason": "No lane line or road edge was visible, and the car's offset moved toward the lane centre rather than crossing a line.",
+  "claims": [
+   {
+    "seq": 2800,
+    "field": "departure",
+    "value": "left",
+    "t_s": 181.004,
+    "frame": "00002800_4730270632000.jpg",
+    "can_row": 4730268410770
+   },
+   {
+    "seq": 2800,
+    "field": "offset_m",
+    "value": "-1.57",
+    "t_s": 181.004,
+    "frame": "00002800_4730270632000.jpg",
+    "can_row": 4730268410770
+   },
+   {
+    "seq": 2855,
+    "field": "offset_m",
+    "value": "-0.43",
+    "t_s": 184.668,
+    "frame": "00002855_4733935371000.jpg",
+    "can_row": 4733932459942
+   },
+   {
+    "seq": 2800,
+    "field": "lane_valid",
+    "value": "true",
+    "t_s": 181.004,
+    "frame": "00002800_4730270632000.jpg",
+    "can_row": 4730268410770
+   },
+   {
+    "seq": 2815,
+    "field": "lane_valid",
+    "value": "false",
+    "t_s": 182.003,
+    "frame": "00002815_4731270105000.jpg",
+    "can_row": 4731269485719
+   },
+   {
+    "seq": 2800,
+    "field": "frame_check",
+    "value": "Frame 2800: No",
+    "t_s": 181.004,
+    "frame": "00002800_4730270632000.jpg",
+    "can_row": 4730268410770
+   }
+  ],
+  "frames_checked": [
+   {
+    "seqs": [
+     2800,
+     2805,
+     2810,
+     2820
+    ],
+    "question": "Is the left lane line visible in these frames?",
+    "answer": "Frame 2800: No\nFrame 2805: No\nFrame 2810: No\nFrame 2820: No"
+   }
+  ],
+  "validation": "passed",
+  "turns": 3,
+  "candidate": {
+   "id": "c13",
+   "type": "lane_departure",
+   "t_start": 181.0,
+   "t_end": 184.67,
+   "side": "left",
+   "detail": "",
+   "rule": "vision flagged departing left 181.0-184.7 s",
+   "stats": {
+    "min_speed_mps": 2.96,
+    "max_speed_mps": 5.84,
+    "max_left_steer_deg": 0.1,
+    "max_right_steer_deg": 426.5,
+    "blinker": [
+     "right"
+    ],
+    "gear": [
+     "D"
+    ]
+   },
+   "key_seqs": [
+    2800,
+    2802,
+    2804,
+    2820,
+    2825,
+    2831,
+    2845,
+    2850,
+    2855
+   ]
+  }
+ },
+ {
+  "id": "c14",
+  "verdict": "confirmed",
+  "type": "turn",
+  "t_start": 243.7,
+  "t_end": 245.34,
+  "side": "right",
+  "detail": "blinker",
+  "reason": "The steering wheel angle is negative (right turn) and large throughout the interval, and the right blinker is on before steering starts and stays on until after the turn begins, matching a right turn with proper blinker.",
+  "claims": [
+   {
+    "seq": 3745,
+    "field": "steer",
+    "value": "-278.8",
+    "t_s": 243.704,
+    "frame": "00003745_4792971198000.jpg",
+    "can_row": 4792929923114
+   },
+   {
+    "seq": 3745,
+    "field": "blinker",
+    "value": "right",
+    "t_s": 243.704,
+    "frame": "00003745_4792971198000.jpg",
+    "can_row": 4792929923114
+   },
+   {
+    "seq": 3749,
+    "field": "steer",
+    "value": "-285.0",
+    "t_s": 244.004,
+    "frame": "00003749_4793271044000.jpg",
+    "can_row": 4793269858652
+   },
+   {
+    "seq": 3749,
+    "field": "blinker",
+    "value": "right",
+    "t_s": 244.004,
+    "frame": "00003749_4793271044000.jpg",
+    "can_row": 4793269858652
+   },
+   {
+    "seq": 3762,
+    "field": "blinker",
+    "value": "null",
+    "t_s": 245.037,
+    "frame": "00003762_4794303843000.jpg",
+    "can_row": 4794297082197
+   }
+  ],
+  "frames_checked": [],
+  "validation": "passed",
+  "turns": 2,
+  "candidate": {
+   "id": "c14",
+   "type": "turn",
+   "t_start": 243.7,
+   "t_end": 245.34,
+   "side": "right",
+   "detail": "blinker",
+   "rule": "steering past 90 deg 243.7-245.3 s; right blinker 239.3-244.7 s",
+   "stats": {
+    "min_speed_mps": 3.89,
+    "max_speed_mps": 6.16,
+    "max_left_steer_deg": -133.8,
+    "max_right_steer_deg": 285.0,
+    "blinker": [
+     "right"
+    ],
+    "gear": [
+     "D"
+    ]
+   },
+   "key_seqs": [
+    3749
+   ]
+  }
+ },
+ {
+  "id": "c15",
+  "verdict": "rejected",
+  "type": "stop_sign",
+  "t_start": 251.37,
+  "t_end": 257.37,
+  "side": "",
+  "detail": "",
+  "reason": "No stop sign was visible in the frame where the detector reported one, so the event did not occur.",
+  "claims": [
+   {
+    "seq": 3856,
+    "field": "mph",
+    "value": "13.1",
+    "t_s": 251.367,
+    "frame": "00003856_4800633878000.jpg",
+    "can_row": 4800630535649
+   },
+   {
+    "seq": 3856,
+    "field": "frame_check",
+    "value": "Frame 3856: No.",
+    "t_s": 251.367,
+    "frame": "00003856_4800633878000.jpg",
+    "can_row": 4800630535649
+   }
+  ],
+  "frames_checked": [
+   {
+    "seqs": [
+     3856
+    ],
+    "question": "Is there a stop sign visible in this frame?",
+    "answer": "Frame 3856: No."
+   }
+  ],
+  "validation": "passed",
+  "turns": 4,
+  "candidate": {
+   "id": "c15",
+   "type": "stop_sign",
+   "t_start": 251.37,
+   "t_end": 257.37,
+   "side": "",
+   "detail": "no_stop",
+   "rule": "stop sign seen 251.4-251.4 s, no Standstill flag; slowest 5.6369 m/s at 251.4 s",
+   "stats": {
+    "min_speed_mps": 5.64,
+    "max_speed_mps": 5.97,
+    "max_left_steer_deg": 29.1,
+    "max_right_steer_deg": 37.0,
+    "blinker": [],
+    "gear": [
+     "D"
+    ]
+   },
+   "key_seqs": [
+    3856
+   ]
+  }
+ },
+ {
+  "id": "c16",
+  "verdict": "rejected",
+  "type": "curve",
+  "t_start": 253.37,
+  "t_end": 255.4,
+  "side": "left",
+  "detail": "",
+  "reason": "Steering remained left throughout the interval and did not return to straight, so the maneuver does not meet the curve definition.",
+  "claims": [
+   {
+    "seq": 3892,
+    "field": "steer",
+    "value": "29.1",
+    "t_s": 253.799,
+    "frame": "00003892_4803065946000.jpg",
+    "can_row": 4803064193668
+   },
+   {
+    "seq": 3918,
+    "field": "steer",
+    "value": "20.1",
+    "t_s": 255.398,
+    "frame": "00003918_4804665126000.jpg",
+    "can_row": 4804663926293
+   }
+  ],
+  "frames_checked": [],
+  "validation": "passed",
+  "turns": 2,
+  "candidate": {
+   "id": "c16",
+   "type": "curve",
+   "t_start": 253.37,
+   "t_end": 255.4,
+   "side": "left",
+   "detail": "",
+   "rule": "steering 20-90 deg for 2.0 s",
+   "stats": {
+    "min_speed_mps": 5.9,
+    "max_speed_mps": 5.97,
+    "max_left_steer_deg": 29.1,
+    "max_right_steer_deg": -20.1,
+    "blinker": [],
+    "gear": [
+     "D"
+    ]
+   },
+   "key_seqs": []
+  }
+ },
+ {
+  "id": "c17",
+  "verdict": "rejected",
+  "type": "other_stop",
+  "t_start": 261.79,
+  "t_end": 270.39,
+  "side": "",
+  "detail": "",
+  "reason": "The car never reached zero speed despite the standstill flag, so it did not actually stop.",
+  "claims": [
+   {
+    "seq": 4088,
+    "field": "mph",
+    "value": "4.4",
+    "t_s": 266.792,
+    "frame": "00004088_4816059200000.jpg",
+    "can_row": 4816051572261
+   },
+   {
+    "seq": 4130,
+    "field": "mph",
+    "value": "2.2",
+    "t_s": 270.057,
+    "frame": "00004130_4819324174000.jpg",
+    "can_row": 4819323715604
+   },
+   {
+    "seq": 4088,
+    "field": "standstill",
+    "value": "true",
+    "t_s": 266.792,
+    "frame": "00004088_4816059200000.jpg",
+    "can_row": 4816051572261
+   }
+  ],
+  "frames_checked": [],
+  "validation": "passed",
+  "turns": 3,
+  "candidate": {
+   "id": "c17",
+   "type": "other_stop",
+   "t_start": 261.79,
+   "t_end": 270.39,
+   "side": "",
+   "detail": "",
+   "rule": "Standstill flag 266.8-270.4 s, no stop sign seen",
+   "stats": {
+    "min_speed_mps": 0.36,
+    "max_speed_mps": 5.18,
+    "max_left_steer_deg": 501.2,
+    "max_right_steer_deg": 101.2,
+    "blinker": [],
+    "gear": [
+     "R",
+     "N",
+     "D"
+    ]
+   },
+   "key_seqs": []
+  }
+ },
+ {
+  "id": "c18",
+  "verdict": "rejected",
+  "type": "turn",
+  "t_start": 265.06,
+  "t_end": 265.06,
+  "side": "right",
+  "detail": "no_blinker",
+  "reason": "The steering shows a brief rightward deflection then returns to near straight and overshoots left, without evidence of a sustained road change or lane change; thus no turn occurred.",
+  "claims": [
+   {
+    "seq": 4066,
+    "field": "steer",
+    "value": "-101.2",
+    "t_s": 265.06,
+    "frame": "00004066_4814326771000.jpg",
+    "can_row": 4814323387848
+   },
+   {
+    "seq": 4074,
+    "field": "steer",
+    "value": "-0.8",
+    "t_s": 265.693,
+    "frame": "00004074_4814959788000.jpg",
+    "can_row": 4814955708548
+   },
+   {
+    "seq": 4076,
+    "field": "steer",
+    "value": "29.6",
+    "t_s": 265.859,
+    "frame": "00004076_4815126363000.jpg",
+    "can_row": 4815123500499
+   }
+  ],
+  "frames_checked": [],
+  "validation": "passed",
+  "turns": 2,
+  "candidate": {
+   "id": "c18",
+   "type": "turn",
+   "t_start": 265.06,
+   "t_end": 265.06,
+   "side": "right",
+   "detail": "no_blinker",
+   "rule": "steering past 90 deg 265.1-265.1 s; right blinker not on",
+   "stats": {
+    "min_speed_mps": 2.66,
+    "max_speed_mps": 2.66,
+    "max_left_steer_deg": -101.2,
+    "max_right_steer_deg": 101.2,
+    "blinker": [],
+    "gear": [
+     "D"
+    ]
+   },
+   "key_seqs": [
+    4066
+   ]
+  }
+ },
+ {
+  "id": "c19",
+  "verdict": "confirmed",
+  "type": "turn",
+  "t_start": 266.39,
+  "t_end": 271.09,
+  "side": "left",
+  "detail": "no_blinker",
+  "reason": "The steering angle shows a sustained left turn (>90\u00b0) from ~266.4\u202fs to ~271.1\u202fs, with the wheel returning toward straight afterward, and the left blinker was never activated.",
+  "claims": [
+   {
+    "seq": 4083,
+    "field": "steer",
+    "value": "106.3",
+    "t_s": 266.392,
+    "frame": "00004083_4815659415000.jpg",
+    "can_row": 4815655103485
+   },
+   {
+    "seq": 4121,
+    "field": "steer",
+    "value": "501.2",
+    "t_s": 269.391,
+    "frame": "00004121_4818657852000.jpg",
+    "can_row": 4818654805771
+   },
+   {
+    "seq": 4146,
+    "field": "steer",
+    "value": "127.4",
+    "t_s": 271.09,
+    "frame": "00004146_4820356972000.jpg",
+    "can_row": 4820351793863
+   },
+   {
+    "seq": 4083,
+    "field": "blinker",
+    "value": "null",
+    "t_s": 266.392,
+    "frame": "00004083_4815659415000.jpg",
+    "can_row": 4815655103485
+   },
+   {
+    "seq": 4121,
+    "field": "blinker",
+    "value": "null",
+    "t_s": 269.391,
+    "frame": "00004121_4818657852000.jpg",
+    "can_row": 4818654805771
+   },
+   {
+    "seq": 4146,
+    "field": "blinker",
+    "value": "null",
+    "t_s": 271.09,
+    "frame": "00004146_4820356972000.jpg",
+    "can_row": 4820351793863
+   }
+  ],
+  "frames_checked": [
+   {
+    "seqs": [
+     4083,
+     4105,
+     4121,
+     4146
+    ],
+    "question": "Is the vehicle on a public road or in a parking lot/driveway at these times? Describe surroundings.",
+    "answer": "Frame 4083: Public road; wooded roadside with trees, a stop sign, and a barricade visible.\nFrame 4105: Public road; wooded roadside with trees, a stop sign, and a barricade visible.\nFrame 4121: Public road; guardrail, grassy area, trees, and distant buildings visible.\nFrame 4146: Public road; guardrail, grassy area, trees, and distant buildings visible."
+   }
+  ],
+  "validation": "passed",
+  "turns": 3,
+  "candidate": {
+   "id": "c19",
+   "type": "turn",
+   "t_start": 266.39,
+   "t_end": 271.09,
+   "side": "left",
+   "detail": "no_blinker",
+   "rule": "steering past 90 deg 266.4-271.1 s; left blinker not on",
+   "stats": {
+    "min_speed_mps": 0.0,
+    "max_speed_mps": 2.03,
+    "max_left_steer_deg": 501.2,
+    "max_right_steer_deg": -106.3,
+    "blinker": [],
+    "gear": [
+     "R",
+     "N",
+     "D"
+    ]
+   },
+   "key_seqs": [
+    4121
+   ]
+  }
+ },
+ {
+  "id": "c20",
+  "verdict": "rejected",
+  "type": "other_stop",
+  "t_start": 267.39,
+  "t_end": 275.35,
+  "side": "",
+  "detail": "",
+  "reason": "The maneuver includes gear shifts between D and R with large steering angles while moving slowly, characteristic of parking\u2011lot maneuvering, not a stop for traffic.",
+  "claims": [
+   {
+    "seq": 4100,
+    "field": "gear",
+    "value": "D",
+    "t_s": 267.692,
+    "frame": "00004100_4816958751000.jpg",
+    "can_row": 4816943753724
+   },
+   {
+    "seq": 4100,
+    "field": "steer",
+    "value": "306.1",
+    "t_s": 267.692,
+    "frame": "00004100_4816958751000.jpg",
+    "can_row": 4816943753724
+   },
+   {
+    "seq": 4135,
+    "field": "gear",
+    "value": "R",
+    "t_s": 270.39,
+    "frame": "00004135_4819657331000.jpg",
+    "can_row": 4819634153134
+   },
+   {
+    "seq": 4135,
+    "field": "steer",
+    "value": "307.9",
+    "t_s": 270.39,
+    "frame": "00004135_4819657331000.jpg",
+    "can_row": 4819634153134
+   },
+   {
+    "seq": 4150,
+    "field": "gear",
+    "value": "R",
+    "t_s": 271.423,
+    "frame": "00004150_4820690130000.jpg",
+    "can_row": 4820683193502
+   }
+  ],
+  "frames_checked": [],
+  "validation": "passed",
+  "turns": 3,
+  "candidate": {
+   "id": "c20",
+   "type": "other_stop",
+   "t_start": 267.39,
+   "t_end": 275.35,
+   "side": "",
+   "detail": "",
+   "rule": "Standstill flag 272.4-275.4 s, no stop sign seen",
+   "stats": {
+    "min_speed_mps": 0.0,
+    "max_speed_mps": 1.8,
+    "max_left_steer_deg": 501.2,
+    "max_right_steer_deg": 503.9,
+    "blinker": [],
+    "gear": [
+     "R",
+     "N",
+     "D"
+    ]
+   },
+   "key_seqs": []
+  }
+ },
+ {
+  "id": "c21",
+  "verdict": "confirmed",
+  "type": "turn",
+  "t_start": 272.02,
+  "t_end": 275.35,
+  "side": "right",
+  "detail": "no_blinker",
+  "reason": "Steering shows a sustained right turn (negative angles) with no blinker activation throughout the interval.",
+  "claims": [
+   {
+    "seq": 4159,
+    "field": "steer",
+    "value": "-222.3",
+    "t_s": 272.023,
+    "frame": "00004159_4821290006000.jpg",
+    "can_row": 4821289170829
+   },
+   {
+    "seq": 4159,
+    "field": "blinker",
+    "value": "null",
+    "t_s": 272.023,
+    "frame": "00004159_4821290006000.jpg",
+    "can_row": 4821289170829
+   },
+   {
+    "seq": 4170,
+    "field": "steer",
+    "value": "-420.2",
+    "t_s": 272.689,
+    "frame": "00004170_4821956142000.jpg",
+    "can_row": 4821951826091
+   },
+   {
+    "seq": 4170,
+    "field": "blinker",
+    "value": "null",
+    "t_s": 272.689,
+    "frame": "00004170_4821956142000.jpg",
+    "can_row": 4821951826091
+   },
+   {
+    "seq": 4208,
+    "field": "steer",
+    "value": "-140.8",
+    "t_s": 275.354,
+    "frame": "00004208_4824621426000.jpg",
+    "can_row": 4824614263409
+   },
+   {
+    "seq": 4208,
+    "field": "blinker",
+    "value": "null",
+    "t_s": 275.354,
+    "frame": "00004208_4824621426000.jpg",
+    "can_row": 4824614263409
+   }
+  ],
+  "frames_checked": [],
+  "validation": "passed",
+  "turns": 3,
+  "candidate": {
+   "id": "c21",
+   "type": "turn",
+   "t_start": 272.02,
+   "t_end": 275.35,
+   "side": "right",
+   "detail": "no_blinker",
+   "rule": "steering past 90 deg 272.0-275.4 s; right blinker not on",
+   "stats": {
+    "min_speed_mps": 0.0,
+    "max_speed_mps": 1.46,
+    "max_left_steer_deg": -140.8,
+    "max_right_steer_deg": 503.9,
+    "blinker": [],
+    "gear": [
+     "R",
+     "N",
+     "D"
+    ]
+   },
+   "key_seqs": [
+    4180
+   ]
+  }
+ },
+ {
+  "id": "c22",
+  "verdict": "confirmed",
+  "type": "turn",
+  "t_start": 276.05,
+  "t_end": 279.72,
+  "side": "left",
+  "detail": "no_blinker",
+  "reason": "The steering wheel turned left (>150\u00b0) from 276.05\u202fs to 279.72\u202fs and returned toward centre, with the left blinker never activated, matching a left turn without blinker.",
+  "claims": [
+   {
+    "seq": 4219,
+    "field": "steer",
+    "value": "158.2",
+    "t_s": 276.054,
+    "frame": "00004219_4825321068000.jpg",
+    "can_row": 4825311605862
+   },
+   {
+    "seq": 4239,
+    "field": "steer",
+    "value": "505.7",
+    "t_s": 277.353,
+    "frame": "00004239_4826620394000.jpg",
+    "can_row": 4826619759185
+   },
+   {
+    "seq": 4273,
+    "field": "steer",
+    "value": "163.1",
+    "t_s": 279.719,
+    "frame": "00004273_4828985838000.jpg",
+    "can_row": 4828982625363
+   },
+   {
+    "seq": 4219,
+    "field": "blinker",
+    "value": "null",
+    "t_s": 276.054,
+    "frame": "00004219_4825321068000.jpg",
+    "can_row": 4825311605862
+   },
+   {
+    "seq": 4239,
+    "field": "blinker",
+    "value": "null",
+    "t_s": 277.353,
+    "frame": "00004239_4826620394000.jpg",
+    "can_row": 4826619759185
+   },
+   {
+    "seq": 4273,
+    "field": "blinker",
+    "value": "null",
+    "t_s": 279.719,
+    "frame": "00004273_4828985838000.jpg",
+    "can_row": 4828982625363
+   }
+  ],
+  "frames_checked": [],
+  "validation": "passed",
+  "turns": 2,
+  "candidate": {
+   "id": "c22",
+   "type": "turn",
+   "t_start": 276.05,
+   "t_end": 279.72,
+   "side": "left",
+   "detail": "no_blinker",
+   "rule": "steering past 90 deg 276.1-279.7 s; left blinker not on",
+   "stats": {
+    "min_speed_mps": 0.0,
+    "max_speed_mps": 4.44,
+    "max_left_steer_deg": 505.7,
+    "max_right_steer_deg": -158.2,
+    "blinker": [],
+    "gear": [
+     "D"
+    ]
+   },
+   "key_seqs": [
+    4239
+   ]
+  }
+ },
+ {
+  "id": "c23",
+  "verdict": "confirmed",
+  "type": "stop_sign",
+  "t_start": 296.04,
+  "t_end": 304.41,
+  "side": "",
+  "detail": "full_stop",
+  "reason": "The stop sign was detected at the start, the vehicle slowed to zero mph and remained stopped (standstill true) through the interval, then standstill became false after the interval, indicating a full stop.",
+  "claims": [
+   {
+    "seq": 4507,
+    "field": "vision_stop_sign",
+    "value": "true",
+    "t_s": 296.044,
+    "frame": "00004507_4845310720000.jpg",
+    "can_row": 4845306061240
+   },
+   {
+    "seq": 4592,
+    "field": "mph",
+    "value": "0.0",
+    "t_s": 302.007,
+    "frame": "00004592_4851274309000.jpg",
+    "can_row": 4851272192169
+   },
+   {
+    "seq": 4592,
+    "field": "standstill",
+    "value": "true",
+    "t_s": 302.007,
+    "frame": "00004592_4851274309000.jpg",
+    "can_row": 4851272192169
+   },
+   {
+    "seq": 4627,
+    "field": "standstill",
+    "value": "true",
+    "t_s": 304.406,
+    "frame": "00004627_4853673059000.jpg",
+    "can_row": 4853671979832
+   },
+   {
+    "seq": 4631,
+    "field": "standstill",
+    "value": "false",
+    "t_s": 304.673,
+    "frame": "00004631_4853939590000.jpg",
+    "can_row": 4853935913745
+   }
+  ],
+  "frames_checked": [
+   {
+    "seqs": [
+     4507
+    ],
+    "question": "Is there a stop sign visible in this frame?",
+    "answer": "Frame 4507: Yes"
+   }
+  ],
+  "validation": "passed",
+  "turns": 4,
+  "candidate": {
+   "id": "c23",
+   "type": "stop_sign",
+   "t_start": 296.04,
+   "t_end": 304.41,
+   "side": "",
+   "detail": "full_stop",
+   "rule": "stop sign seen 296.0-296.0 s, Standstill flag 297.4-304.4 s; slowest 0.0 m/s at 301.7 s",
+   "stats": {
+    "min_speed_mps": 0.0,
+    "max_speed_mps": 2.36,
+    "max_left_steer_deg": 5.7,
+    "max_right_steer_deg": 33.6,
+    "blinker": [
+     "left"
+    ],
+    "gear": [
+     "D"
+    ]
+   },
+   "key_seqs": [
+    4507
+   ]
+  }
+ },
+ {
+  "id": "c24",
+  "verdict": "confirmed",
+  "type": "turn",
+  "t_start": 306.04,
+  "t_end": 310.04,
+  "side": "left",
+  "detail": "blinker",
+  "reason": "The left blinker was on before steering exceeded 90\u00b0, steering reached a large left angle and then returned toward straight, indicating a left turn.",
+  "claims": [
+   {
+    "seq": 4654,
+    "field": "blinker",
+    "value": "left",
+    "t_s": 306.372,
+    "frame": "00004654_4855638711000.jpg",
+    "can_row": 4855638861885
+   },
+   {
+    "seq": 4654,
+    "field": "steer",
+    "value": "147.8",
+    "t_s": 306.372,
+    "frame": "00004654_4855638711000.jpg",
+    "can_row": 4855638861885
+   },
+   {
+    "seq": 4673,
+    "field": "steer",
+    "value": "223.6",
+    "t_s": 307.704,
+    "frame": "00004673_4856971356000.jpg",
+    "can_row": 4856970486918
+   },
+   {
+    "seq": 4705,
+    "field": "steer",
+    "value": "109.9",
+    "t_s": 310.036,
+    "frame": "00004705_4859303488000.jpg",
+    "can_row": 4859302431100
+   }
+  ],
+  "frames_checked": [],
+  "validation": "passed",
+  "turns": 2,
+  "candidate": {
+   "id": "c24",
+   "type": "turn",
+   "t_start": 306.04,
+   "t_end": 310.04,
+   "side": "left",
+   "detail": "blinker",
+   "rule": "steering past 90 deg 306.0-310.0 s; left blinker 290.7-309.0 s",
+   "stats": {
+    "min_speed_mps": 1.6,
+    "max_speed_mps": 6.08,
+    "max_left_steer_deg": 223.6,
+    "max_right_steer_deg": -107.9,
+    "blinker": [
+     "left"
+    ],
+    "gear": [
+     "D"
+    ]
+   },
+   "key_seqs": [
+    4673
+   ]
+  }
+ },
+ {
+  "id": "c25",
+  "verdict": "rejected",
+  "type": "lane_departure",
+  "t_start": 310.34,
+  "t_end": 311.34,
+  "side": "right",
+  "detail": "",
+  "reason": "No visible lane line on the right side in the flagged frames, so the departure did not actually occur.",
+  "claims": [
+   {
+    "seq": 4710,
+    "field": "departure",
+    "value": "right",
+    "t_s": 310.336,
+    "frame": "00004710_4859603332000.jpg",
+    "can_row": 4859602063801
+   },
+   {
+    "seq": 4714,
+    "field": "departure",
+    "value": "right",
+    "t_s": 310.669,
+    "frame": "00004714_4859936494000.jpg",
+    "can_row": 4859934887058
+   },
+   {
+    "seq": 4720,
+    "field": "departure",
+    "value": "right",
+    "t_s": 311.036,
+    "frame": "00004720_4860302970000.jpg",
+    "can_row": 4860299750235
+   },
+   {
+    "seq": 4724,
+    "field": "departure",
+    "value": "right",
+    "t_s": 311.336,
+    "frame": "00004724_4860602824000.jpg",
+    "can_row": 4860602705204
+   }
+  ],
+  "frames_checked": [
+   {
+    "seqs": [
+     4710,
+     4714,
+     4720,
+     4724
+    ],
+    "question": "Is there a visible lane line on the right side of the vehicle in these frames?",
+    "answer": "Frame 4710: No\nFrame 4714: No\nFrame 4720: No\nFrame 4724: No"
+   }
+  ],
+  "validation": "passed",
+  "turns": 3,
+  "candidate": {
+   "id": "c25",
+   "type": "lane_departure",
+   "t_start": 310.34,
+   "t_end": 311.34,
+   "side": "right",
+   "detail": "",
+   "rule": "vision flagged departing right 310.3-311.3 s",
+   "stats": {
+    "min_speed_mps": 6.73,
+    "max_speed_mps": 7.72,
+    "max_left_steer_deg": 78.9,
+    "max_right_steer_deg": -49.3,
+    "blinker": [],
+    "gear": [
+     "D"
+    ]
+   },
+   "key_seqs": [
+    4710,
+    4714,
+    4720,
+    4724
+   ]
+  }
+ },
+ {
+  "id": "c26",
+  "verdict": "rejected",
+  "type": "lane_departure",
+  "t_start": 316.77,
+  "t_end": 319.06,
+  "side": "left",
+  "detail": "",
+  "reason": "The car remained inside the lane (negative offset well within lane markings) while lane lines were visible, contradicting the alleged left departure.",
+  "claims": [
+   {
+    "seq": 4812,
+    "field": "offset_m",
+    "value": "-0.55",
+    "t_s": 317.066,
+    "frame": "00004812_4866333188000.jpg",
+    "can_row": 4866332737904
+   },
+   {
+    "seq": 4812,
+    "field": "departure",
+    "value": "left",
+    "t_s": 317.066,
+    "frame": "00004812_4866333188000.jpg",
+    "can_row": 4866332737904
+   },
+   {
+    "seq": 4812,
+    "field": "lane_valid",
+    "value": "true",
+    "t_s": 317.066,
+    "frame": "00004812_4866333188000.jpg",
+    "can_row": 4866332737904
+   },
+   {
+    "seq": 4816,
+    "field": "offset_m",
+    "value": "-0.6",
+    "t_s": 317.366,
+    "frame": "00004816_4866633032000.jpg",
+    "can_row": 4866630790805
+   },
+   {
+    "seq": 4812,
+    "field": "frame_check",
+    "value": "Yes",
+    "t_s": 317.066,
+    "frame": "00004812_4866333188000.jpg",
+    "can_row": 4866332737904
+   }
+  ],
+  "frames_checked": [
+   {
+    "seqs": [
+     4812,
+     4816,
+     4827,
+     4832
+    ],
+    "question": "Is the left lane line visible in these frames?",
+    "answer": "Frame 4812: Yes\nFrame 4816: Yes\nFrame 4827: Yes\nFrame 4832: Yes"
+   }
+  ],
+  "validation": "passed",
+  "turns": 4,
+  "candidate": {
+   "id": "c26",
+   "type": "lane_departure",
+   "t_start": 316.77,
+   "t_end": 319.06,
+   "side": "left",
+   "detail": "",
+   "rule": "vision flagged departing left 316.8-319.1 s",
+   "stats": {
+    "min_speed_mps": 9.01,
+    "max_speed_mps": 9.37,
+    "max_left_steer_deg": 1.3,
+    "max_right_steer_deg": 0.2,
+    "blinker": [],
+    "gear": [
+     "D"
+    ]
+   },
+   "key_seqs": [
+    4807,
+    4812,
+    4816,
+    4827,
+    4832,
+    4844
+   ]
+  }
+ },
+ {
+  "id": "c27",
+  "verdict": "confirmed",
+  "type": "lane_departure",
+  "t_start": 365.71,
+  "t_end": 369.74,
+  "side": "right",
+  "detail": "",
+  "reason": "The vehicle drifted right while steering left with left blinker on, and a solid white line was present on the right edge.",
+  "claims": [
+   {
+    "seq": 5552,
+    "field": "departure",
+    "value": "right",
+    "t_s": 365.708,
+    "frame": "00005552_4914974820000.jpg",
+    "can_row": 4914974769978
+   },
+   {
+    "seq": 5552,
+    "field": "offset_m",
+    "value": "0.47",
+    "t_s": 365.708,
+    "frame": "00005552_4914974820000.jpg",
+    "can_row": 4914974769978
+   },
+   {
+    "seq": 5552,
+    "field": "steer",
+    "value": "0.6",
+    "t_s": 365.708,
+    "frame": "00005552_4914974820000.jpg",
+    "can_row": 4914974769978
+   },
+   {
+    "seq": 5552,
+    "field": "blinker",
+    "value": "left",
+    "t_s": 365.708,
+    "frame": "00005552_4914974820000.jpg",
+    "can_row": 4914974769978
+   },
+   {
+    "seq": 5552,
+    "field": "lane_valid",
+    "value": "true",
+    "t_s": 365.708,
+    "frame": "00005552_4914974820000.jpg",
+    "can_row": 4914974769978
+   },
+   {
+    "seq": 5588,
+    "field": "departure",
+    "value": "right",
+    "t_s": 368.04,
+    "frame": "00005588_4917306959000.jpg",
+    "can_row": 4917306549332
+   }
+  ],
+  "frames_checked": [
+   {
+    "seqs": [
+     5552,
+     5556,
+     5562,
+     5566
+    ],
+    "question": "Are the lane markings visible on the right side of the vehicle in these frames?",
+    "answer": "Frame 5552: Yes, a solid white line is visible on the right edge of the road.\nFrame 5556: Yes, a solid white line is visible on the right edge of the road.\nFrame 5562: Yes, a solid white line is visible on the right edge of the road.\nFrame 5566: Yes, a solid white line is visible on the right edge of the road."
+   }
+  ],
+  "validation": "passed",
+  "turns": 4,
+  "candidate": {
+   "id": "c27",
+   "type": "lane_departure",
+   "t_start": 365.71,
+   "t_end": 369.74,
+   "side": "right",
+   "detail": "",
+   "rule": "vision flagged departing right 365.7-369.7 s",
+   "stats": {
+    "min_speed_mps": 10.46,
+    "max_speed_mps": 11.48,
+    "max_left_steer_deg": 5.1,
+    "max_right_steer_deg": -0.1,
+    "blinker": [
+     "left"
+    ],
+    "gear": [
+     "D"
+    ]
+   },
+   "key_seqs": [
+    5552,
+    5556,
+    5562,
+    5566,
+    5572,
+    5577,
+    5580,
+    5584,
+    5588,
+    5601,
+    5611
+   ]
+  }
+ },
+ {
+  "id": "c28",
+  "verdict": "rejected",
+  "type": "lane_departure",
+  "t_start": 371.84,
+  "t_end": 374.67,
+  "side": "right",
+  "detail": "",
+  "reason": "Vision flagged a right departure but the right lane line was visible and the wheel did not cross or touch it, so no actual lane departure occurred.",
+  "claims": [
+   {
+    "seq": 5643,
+    "field": "departure",
+    "value": "right",
+    "t_s": 371.838,
+    "frame": "00005643_4921105012000.jpg",
+    "can_row": 4921104992378
+   },
+   {
+    "seq": 5643,
+    "field": "offset_m",
+    "value": "1.67",
+    "t_s": 371.838,
+    "frame": "00005643_4921105012000.jpg",
+    "can_row": 4921104992378
+   },
+   {
+    "seq": 5643,
+    "field": "frame_check",
+    "value": "Frame 5643: Yes, the right lane line is visible; no, the car's right wheel is not crossing or touching it.",
+    "t_s": 371.838,
+    "frame": "00005643_4921105012000.jpg",
+    "can_row": 4921104992378
+   }
+  ],
+  "frames_checked": [
+   {
+    "seqs": [
+     5643,
+     5650,
+     5660,
+     5670
+    ],
+    "question": "Is the right lane line visible and is the car's right wheel crossing or touching it?",
+    "answer": "Frame 5643: Yes, the right lane line is visible; no, the car's right wheel is not crossing or touching it.\nFrame 5650: Yes, the right lane line is visible; no, the car's right wheel is not crossing or touching it.\nFrame 5660: Yes, the right lane line is visible; no, the car's right wheel is not crossing or touching it.\nFrame 5670: Yes, the right lane line is visible; no, the car's right wheel is not crossing or touching it."
+   }
+  ],
+  "validation": "passed",
+  "turns": 3,
+  "candidate": {
+   "id": "c28",
+   "type": "lane_departure",
+   "t_start": 371.84,
+   "t_end": 374.67,
+   "side": "right",
+   "detail": "",
+   "rule": "vision flagged departing right 371.8-374.7 s",
+   "stats": {
+    "min_speed_mps": 6.41,
+    "max_speed_mps": 9.34,
+    "max_left_steer_deg": 11.5,
+    "max_right_steer_deg": 25.1,
+    "blinker": [
+     "left"
+    ],
+    "gear": [
+     "D"
+    ]
+   },
+   "key_seqs": [
+    5643,
+    5647,
+    5651,
+    5656,
+    5665,
+    5670,
+    5675,
+    5680,
+    5685
+   ]
+  }
+ },
+ {
+  "id": "c29",
+  "verdict": "confirmed",
+  "type": "turn",
+  "t_start": 376.37,
+  "t_end": 380,
+  "side": "left",
+  "detail": "blinker",
+  "reason": "The steering angle exceeds 90 degrees left starting at 376.37\u202fs and the left blinker is on from before the turn begins until shortly after 379\u202fs, matching a left turn with blinker.",
+  "claims": [
+   {
+    "seq": 5711,
+    "field": "steer",
+    "value": "90.9",
+    "t_s": 376.369,
+    "frame": "00005711_4925636088000.jpg",
+    "can_row": 4925631732900
+   },
+   {
+    "seq": 5711,
+    "field": "blinker",
+    "value": "left",
+    "t_s": 376.369,
+    "frame": "00005711_4925636088000.jpg",
+    "can_row": 4925631732900
+   },
+   {
+    "seq": 5748,
+    "field": "blinker",
+    "value": "left",
+    "t_s": 379.001,
+    "frame": "00005748_4928268009000.jpg",
+    "can_row": 4928263709385
+   },
+   {
+    "seq": 5754,
+    "field": "blinker",
+    "value": "null",
+    "t_s": 379.367,
+    "frame": "00005754_4928634479000.jpg",
+    "can_row": 4928632426514
+   }
+  ],
+  "frames_checked": [],
+  "validation": "passed",
+  "turns": 2,
+  "candidate": {
+   "id": "c29",
+   "type": "turn",
+   "t_start": 376.37,
+   "t_end": 380.0,
+   "side": "left",
+   "detail": "blinker",
+   "rule": "steering past 90 deg 376.4-380.0 s; left blinker 365.0-379.0 s",
+   "stats": {
+    "min_speed_mps": 4.12,
+    "max_speed_mps": 5.7,
+    "max_left_steer_deg": 230.8,
+    "max_right_steer_deg": -90.9,
+    "blinker": [
+     "left"
+    ],
+    "gear": [
+     "D"
+    ]
+   },
+   "key_seqs": [
+    5737
+   ]
+  }
+ },
+ {
+  "id": "c30",
+  "verdict": "confirmed",
+  "type": "curve",
+  "t_start": 391.39,
+  "t_end": 394.09,
+  "side": "left",
+  "detail": "",
+  "reason": "The steering wheel stayed left\u2011turned between ~22\u00b0 and ~30\u00b0 for the interval, indicating a left curve with no blinker required.",
+  "claims": [
+   {
+    "seq": 5936,
+    "field": "steer",
+    "value": "21.8",
+    "t_s": 391.395,
+    "frame": "00005936_4940661653000.jpg",
+    "can_row": 4940660213836
+   },
+   {
+    "seq": 5964,
+    "field": "steer",
+    "value": "29.9",
+    "t_s": 393.027,
+    "frame": "00005964_4942294152000.jpg",
+    "can_row": 4942293792763
+   }
+  ],
+  "frames_checked": [],
+  "validation": "passed",
+  "turns": 2,
+  "candidate": {
+   "id": "c30",
+   "type": "curve",
+   "t_start": 391.39,
+   "t_end": 394.09,
+   "side": "left",
+   "detail": "",
+   "rule": "steering 20-90 deg for 2.7 s",
+   "stats": {
+    "min_speed_mps": 6.1,
+    "max_speed_mps": 7.94,
+    "max_left_steer_deg": 29.9,
+    "max_right_steer_deg": -21.8,
+    "blinker": [
+     "right"
+    ],
+    "gear": [
+     "D"
+    ]
+   },
+   "key_seqs": []
+  }
+ },
+ {
+  "id": "c31",
+  "verdict": "rejected",
+  "type": "other_stop",
+  "t_start": 394.06,
+  "t_end": 421.35,
+  "side": "",
+  "detail": "",
+  "reason": "The vehicle stopped and remained stopped; no resumption of motion observed to complete an other_stop event.",
+  "claims": [
+   {
+    "seq": 6053,
+    "field": "standstill",
+    "value": "true",
+    "t_s": 399.057,
+    "frame": "00006053_4948324399000.jpg",
+    "can_row": 4948319994344
+   },
+   {
+    "seq": 6111,
+    "field": "mph",
+    "value": "0.0",
+    "t_s": 402.689,
+    "frame": "00006111_4951955875000.jpg",
+    "can_row": 4951950986569
+   },
+   {
+    "seq": 6111,
+    "field": "brake",
+    "value": "true",
+    "t_s": 402.689,
+    "frame": "00006111_4951955875000.jpg",
+    "can_row": 4951950986569
+   },
+   {
+    "seq": 6111,
+    "field": "gear",
+    "value": "D",
+    "t_s": 402.689,
+    "frame": "00006111_4951955875000.jpg",
+    "can_row": 4951950986569
+   }
+  ],
+  "frames_checked": [],
+  "validation": "passed",
+  "turns": 2,
+  "candidate": {
+   "id": "c31",
+   "type": "other_stop",
+   "t_start": 394.06,
+   "t_end": 421.35,
+   "side": "",
+   "detail": "",
+   "rule": "Standstill flag 399.1-421.3 s, no stop sign seen",
+   "stats": {
+    "min_speed_mps": 0.0,
+    "max_speed_mps": 6.1,
+    "max_left_steer_deg": 28.2,
+    "max_right_steer_deg": 395.9,
+    "blinker": [
+     "right"
+    ],
+    "gear": [
+     "D"
+    ]
+   },
+   "key_seqs": []
+  }
+ },
+ {
+  "id": "c32",
+  "verdict": "confirmed",
+  "type": "turn",
+  "t_start": 395.36,
+  "t_end": 400.69,
+  "side": "right",
+  "detail": "blinker",
+  "reason": "The steer exceeded 90 deg right from 395.36\u202fs, the right blinker was on before steering began and stayed on until after the major steering input ended, matching a right turn with blinker.",
+  "claims": [
+   {
+    "seq": 5998,
+    "field": "steer",
+    "value": "-124.2",
+    "t_s": 395.359,
+    "frame": "00005998_4944626296000.jpg",
+    "can_row": 4944620745050
+   },
+   {
+    "seq": 5998,
+    "field": "blinker",
+    "value": "right",
+    "t_s": 395.359,
+    "frame": "00005998_4944626296000.jpg",
+    "can_row": 4944620745050
+   },
+   {
+    "seq": 6039,
+    "field": "steer",
+    "value": "-347.1",
+    "t_s": 398.025,
+    "frame": "00006039_4947291597000.jpg",
+    "can_row": 4947291578393
+   },
+   {
+    "seq": 6039,
+    "field": "blinker",
+    "value": "right",
+    "t_s": 398.025,
+    "frame": "00006039_4947291597000.jpg",
+    "can_row": 4947291578393
+   },
+   {
+    "seq": 6063,
+    "field": "steer",
+    "value": "-210.1",
+    "t_s": 399.724,
+    "frame": "00006063_4948990722000.jpg",
+    "can_row": 4948986648859
+   },
+   {
+    "seq": 6063,
+    "field": "blinker",
+    "value": "null",
+    "t_s": 399.724,
+    "frame": "00006063_4948990722000.jpg",
+    "can_row": 4948986648859
+   }
+  ],
+  "frames_checked": [],
+  "validation": "passed",
+  "turns": 4,
+  "candidate": {
+   "id": "c32",
+   "type": "turn",
+   "t_start": 395.36,
+   "t_end": 400.69,
+   "side": "right",
+   "detail": "blinker",
+   "rule": "steering past 90 deg 395.4-400.7 s; right blinker 389.1-399.4 s",
+   "stats": {
+    "min_speed_mps": 1.1,
+    "max_speed_mps": 4.54,
+    "max_left_steer_deg": -124.2,
+    "max_right_steer_deg": 347.1,
+    "blinker": [
+     "right"
+    ],
+    "gear": [
+     "D"
+    ]
+   },
+   "key_seqs": [
+    6039
+   ]
+  }
+ },
+ {
+  "id": "c33",
+  "verdict": "rejected",
+  "type": "turn",
+  "t_start": 419.35,
+  "t_end": 424.38,
+  "side": "right",
+  "detail": "no_blinker",
+  "reason": "The maneuver occurred at very low speed in a parking lot with no lane markings, so it is not a road turn.",
+  "claims": [
+   {
+    "seq": 6413,
+    "field": "mph",
+    "value": "0.2",
+    "t_s": 422.712,
+    "frame": "00006413_4971978985000.jpg",
+    "can_row": 4971976141995
+   },
+   {
+    "seq": 6413,
+    "field": "steer",
+    "value": "-423.9",
+    "t_s": 422.712,
+    "frame": "00006413_4971978985000.jpg",
+    "can_row": 4971976141995
+   },
+   {
+    "seq": 6413,
+    "field": "blinker",
+    "value": "null",
+    "t_s": 422.712,
+    "frame": "00006413_4971978985000.jpg",
+    "can_row": 4971976141995
+   },
+   {
+    "seq": 6413,
+    "field": "gear",
+    "value": "D",
+    "t_s": 422.712,
+    "frame": "00006413_4971978985000.jpg",
+    "can_row": 4971976141995
+   },
+   {
+    "seq": 6413,
+    "field": "frame_check",
+    "value": "No, the vehicle is in a parking lot with no lane markings visible.",
+    "t_s": 422.712,
+    "frame": "00006413_4971978985000.jpg",
+    "can_row": 4971976141995
+   }
+  ],
+  "frames_checked": [
+   {
+    "seqs": [
+     6408,
+     6413,
+     6419
+    ],
+    "question": "Is the vehicle on a public road with lane markings visible?",
+    "answer": "Frame 6408: No, the vehicle is in a parking lot with no lane markings visible.\nFrame 6413: No, the vehicle is in a parking lot with no lane markings visible.\nFrame 6419: No, the vehicle is in a parking lot with no lane markings visible."
+   }
+  ],
+  "validation": "passed",
+  "turns": 3,
+  "candidate": {
+   "id": "c33",
+   "type": "turn",
+   "t_start": 419.35,
+   "t_end": 424.38,
+   "side": "right",
+   "detail": "no_blinker",
+   "rule": "steering past 90 deg 419.3-424.4 s; right blinker not on",
+   "stats": {
+    "min_speed_mps": 0.0,
+    "max_speed_mps": 1.59,
+    "max_left_steer_deg": -93.6,
+    "max_right_steer_deg": 423.9,
+    "blinker": [],
+    "gear": [
+     "D"
+    ]
+   },
+   "key_seqs": [
+    6413
+   ]
+  }
+ },
+ {
+  "id": "c34",
+  "verdict": "corrected",
+  "type": "turn",
+  "t_start": 425.34,
+  "t_end": 429.38,
+  "side": "left",
+  "detail": "no_blinker",
+  "reason": "The steering angle exceeded 90\u00b0 left at 425.34\u202fs and returned to near\u2011zero by 429.38\u202fs, indicating a left turn; blinker was never activated.",
+  "claims": [
+   {
+    "seq": 6476,
+    "field": "steer",
+    "value": "218.1",
+    "t_s": 426.677,
+    "frame": "00006476_4975943636000.jpg",
+    "can_row": 4975943976008
+   },
+   {
+    "seq": 6503,
+    "field": "steer",
+    "value": "83.4",
+    "t_s": 428.376,
+    "frame": "00006503_4977642761000.jpg",
+    "can_row": 4977642422435
+   },
+   {
+    "seq": 6517,
+    "field": "steer",
+    "value": "5.4",
+    "t_s": 429.375,
+    "frame": "00006517_4978642246000.jpg",
+    "can_row": 4978641673863
+   },
+   {
+    "seq": 6476,
+    "field": "blinker",
+    "value": "null",
+    "t_s": 426.677,
+    "frame": "00006476_4975943636000.jpg",
+    "can_row": 4975943976008
+   },
+   {
+    "seq": 6503,
+    "field": "blinker",
+    "value": "null",
+    "t_s": 428.376,
+    "frame": "00006503_4977642761000.jpg",
+    "can_row": 4977642422435
+   },
+   {
+    "seq": 6517,
+    "field": "blinker",
+    "value": "null",
+    "t_s": 429.375,
+    "frame": "00006517_4978642246000.jpg",
+    "can_row": 4978641673863
+   }
+  ],
+  "frames_checked": [],
+  "validation": "passed",
+  "turns": 3,
+  "candidate": {
+   "id": "c34",
+   "type": "turn",
+   "t_start": 425.34,
+   "t_end": 428.04,
+   "side": "left",
+   "detail": "no_blinker",
+   "rule": "steering past 90 deg 425.3-428.0 s; left blinker not on",
+   "stats": {
+    "min_speed_mps": 2.46,
+    "max_speed_mps": 4.47,
+    "max_left_steer_deg": 218.1,
+    "max_right_steer_deg": -145.7,
+    "blinker": [],
+    "gear": [
+     "D"
+    ]
+   },
+   "key_seqs": [
+    6476
+   ]
+  }
+ },
+ {
+  "id": "c35",
+  "verdict": "confirmed",
+  "type": "turn",
+  "t_start": 431.34,
+  "t_end": 437.34,
+  "side": "right",
+  "detail": "no_blinker",
+  "reason": "The steering wheel turned right (negative angles increasing magnitude) with no blinker activation, consistent with a right turn at an intersection.",
+  "claims": [
+   {
+    "seq": 6548,
+    "field": "steer",
+    "value": "-103.4",
+    "t_s": 431.341,
+    "frame": "00006548_4980607910000.jpg",
+    "can_row": 4980607837338
+   },
+   {
+    "seq": 6614,
+    "field": "steer",
+    "value": "-390.1",
+    "t_s": 435.672,
+    "frame": "00006614_4984939044000.jpg",
+    "can_row": 4984931680126
+   },
+   {
+    "seq": 6614,
+    "field": "blinker",
+    "value": "null",
+    "t_s": 435.672,
+    "frame": "00006614_4984939044000.jpg",
+    "can_row": 4984931680126
+   },
+   {
+    "seq": 6614,
+    "field": "mph",
+    "value": "7.3",
+    "t_s": 435.672,
+    "frame": "00006614_4984939044000.jpg",
+    "can_row": 4984931680126
+   },
+   {
+    "seq": 6614,
+    "field": "gear",
+    "value": "D",
+    "t_s": 435.672,
+    "frame": "00006614_4984939044000.jpg",
+    "can_row": 4984931680126
+   }
+  ],
+  "frames_checked": [],
+  "validation": "passed",
+  "turns": 2,
+  "candidate": {
+   "id": "c35",
+   "type": "turn",
+   "t_start": 431.34,
+   "t_end": 437.34,
+   "side": "right",
+   "detail": "no_blinker",
+   "rule": "steering past 90 deg 431.3-437.3 s; right blinker not on",
+   "stats": {
+    "min_speed_mps": 3.07,
+    "max_speed_mps": 4.63,
+    "max_left_steer_deg": -103.4,
+    "max_right_steer_deg": 390.1,
+    "blinker": [],
+    "gear": [
+     "D"
+    ]
+   },
+   "key_seqs": [
+    6614
+   ]
+  }
+ },
+ {
+  "id": "c36",
+  "verdict": "rejected",
+  "type": "other_stop",
+  "t_start": 443.03,
+  "t_end": 460.36,
+  "side": "",
+  "detail": "",
+  "reason": "The vehicle shows standstill, zero speed, and gear shifts to Park, indicating a parking maneuver rather than a road\u2011side stop.",
+  "claims": [
+   {
+    "seq": 6804,
+    "field": "standstill",
+    "value": "true",
+    "t_s": 448.032,
+    "frame": "00006804_4997299407000.jpg",
+    "can_row": 4997298886812
+   },
+   {
+    "seq": 6838,
+    "field": "mph",
+    "value": "0.0",
+    "t_s": 450.031,
+    "frame": "00006838_4999298391000.jpg",
+    "can_row": 4999297693026
+   },
+   {
+    "seq": 6882,
+    "field": "gear",
+    "value": "P",
+    "t_s": 452.73,
+    "frame": "00006882_5001997020000.jpg",
+    "can_row": 5001994865616
+   }
+  ],
+  "frames_checked": [],
+  "validation": "passed",
+  "turns": 2,
+  "candidate": {
+   "id": "c36",
+   "type": "other_stop",
+   "t_start": 443.03,
+   "t_end": 460.36,
+   "side": "",
+   "detail": "",
+   "rule": "Standstill flag 448.0-460.4 s, no stop sign seen",
+   "stats": {
+    "min_speed_mps": 0.0,
+    "max_speed_mps": 3.3,
+    "max_left_steer_deg": 504.5,
+    "max_right_steer_deg": 84.6,
+    "blinker": [],
+    "gear": [
+     "P",
+     "R",
+     "N",
+     "D"
+    ]
+   },
+   "key_seqs": []
+  }
+ },
+ {
+  "id": "c37",
+  "verdict": "confirmed",
+  "type": "turn",
+  "t_start": 444.33,
+  "t_end": 448.03,
+  "side": "left",
+  "detail": "no_blinker",
+  "reason": "The steering wheel angle exceeds 150\u00b0 left throughout the interval, indicating a left turn, while the blinker remains off and the car stays in drive.",
+  "claims": [
+   {
+    "seq": 6750,
+    "field": "steer",
+    "value": "251.4",
+    "t_s": 444.667,
+    "frame": "00006750_4993934463000.jpg",
+    "can_row": 4993930608261
+   },
+   {
+    "seq": 6782,
+    "field": "steer",
+    "value": "504.5",
+    "t_s": 446.7,
+    "frame": "00006782_4995966759000.jpg",
+    "can_row": 4995959808204
+   },
+   {
+    "seq": 6744,
+    "field": "blinker",
+    "value": "null",
+    "t_s": 444.334,
+    "frame": "00006744_4993601288000.jpg",
+    "can_row": 4993600923566
+   },
+   {
+    "seq": 6804,
+    "field": "blinker",
+    "value": "null",
+    "t_s": 448.032,
+    "frame": "00006804_4997299407000.jpg",
+    "can_row": 4997298886812
+   },
+   {
+    "seq": 6744,
+    "field": "gear",
+    "value": "D",
+    "t_s": 444.334,
+    "frame": "00006744_4993601288000.jpg",
+    "can_row": 4993600923566
+   },
+   {
+    "seq": 6804,
+    "field": "gear",
+    "value": "D",
+    "t_s": 448.032,
+    "frame": "00006804_4997299407000.jpg",
+    "can_row": 4997298886812
+   }
+  ],
+  "frames_checked": [],
+  "validation": "passed",
+  "turns": 2,
+  "candidate": {
+   "id": "c37",
+   "type": "turn",
+   "t_start": 444.33,
+   "t_end": 448.03,
+   "side": "left",
+   "detail": "no_blinker",
+   "rule": "steering past 90 deg 444.3-448.0 s; left blinker not on",
+   "stats": {
+    "min_speed_mps": 1.74,
+    "max_speed_mps": 2.92,
+    "max_left_steer_deg": 504.5,
+    "max_right_steer_deg": -169.7,
+    "blinker": [],
+    "gear": [
+     "D"
+    ]
+   },
+   "key_seqs": [
+    6782
+   ]
+  }
+ }
+]

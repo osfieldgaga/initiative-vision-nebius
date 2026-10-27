@@ -463,7 +463,7 @@ def main(argv=None):
     tools = ["get_window", "rerun_vision", "emit_event"] + ([] if args.no_vl else ["look_at_frames"])
     meter = tf.Meter(None if args.replay else args.max_usd)
 
-    events = []
+    events, image_mismatches = [], 0
     for cand in cands:
         brief = {k: cand[k] for k in ("id", "type", "t_start", "t_end", "side", "detail", "rule")}
         client = tf.Client(agent_dir / "transcripts" / f"{cand['id']}.json", replay=args.replay, meter=meter)
@@ -472,6 +472,7 @@ def main(argv=None):
         except tf.BudgetExceeded as e:
             ev = unverified(cand, brief, f"not reviewed: {e}")
         events.append(ev)
+        image_mismatches += client.image_mismatches
         changed = "" if ev["verdict"] != "corrected" else " -> " + " ".join(
             str(ev[k]) for k in ("type", "side", "detail", "t_start", "t_end") if ev[k] != cand[k])
         print(f"{cand['id']} {cand['type']:<14} {cand['t_start']:7.1f} s  {ev['verdict']:<11}{changed}"
@@ -487,6 +488,9 @@ def main(argv=None):
     for e in events:
         counts[e["verdict"]] = counts.get(e["verdict"], 0) + 1
     print(f"{len(events)} events: " + ", ".join(f"{v} {k}" for k, v in sorted(counts.items())) + f"; {meter}")
+    if image_mismatches:
+        print(f"note: {image_mismatches} image(s) were encoded with different bytes than in the recording "
+              "(another OpenCV build); every text in those requests matched, so they were replayed")
     print(f"wrote {out}")
 
 

@@ -12,15 +12,15 @@ The AWS pipeline is untouched; it stays the OpenCV competition entry (`upstream`
 | ✅ 0 | Setup: repo, license, Token Factory key, model spike | | done | Sun |
 | ✅ 1 | Vision batch `src/scripts/vision_batch.py`: `lld.process_frame` over the drive at 3 fps | `runs/<session>/vision.jsonl` | lane_valid on the 95 labelled frames matches `lane_eval/results.json` | Sun |
 | ✅ 2 | Fusion `src/scripts/fuse.py`: vision + CAN (speed, steering, yaw, blinker, standstill, brake) on timestamp | `timeline.jsonl` | tests: stopped at the known stop signs, blinker at known lane changes | Mon |
-| 3 | Ground truth (2 h max): review `data/eval/events_gt_<session>.csv`, how-to in `data/eval/LABELLING.md` | labelled CSV | `label_events.py check` says OK | Mon |
+| ✅ 3 | Ground truth: `data/eval/events_gt_<session>.csv` via `label_tool.py`, how-to in `data/eval/LABELLING.md` | labelled CSV | `label_events.py check` says OK: 38 rows, 15 events | Tue |
 | ✅ 4 | Rule candidates `src/scripts/candidates.py` (with evidence: seqs, CAN rows, stats); scorer `src/scripts/score.py` | `candidates.json` + baseline score vs ground truth | code done; score once labels are in | Sun |
 | ✅ 5 | Agent `src/scripts/agent.py` (Nemotron 3 Super + tools + validator), client `tokenfactory.py` (record / `--replay`, spend cap) | `runs/<s>/agent/events.json` | every event passes the validator or is marked unverified; replay is identical (checked) | Sun |
 | ✅ 6 | VL frame checks (`look_at_frames`), `rerun_vision` at 15 fps (1280 px originals aren't shareable); VL vs 95 lane labels `eval_vl_lanes.py` | rules vs rules + agent table | VL eval done; table once labels are in | Sun |
-| ✅ 7 | MATLAB export `export_matlab.py` (speed profile + path from CAN, road along it), check `verify_matlab.py` | `scenarios/<s>/ev_*.m` + `full_drive.m` | 21 of 21 run in MATLAB R2025a and replay the CAN speed (rms <= 0.10 m/s; whole drive 0.05 m/s, 0.1 s late after 459 s) | Tue |
-| 8 | Results page + Token Factory proxy with spend cap | demo URL | a judge can open it and re-run an event | Wed |
+| ✅ 7 | MATLAB export `export_matlab.py --labels` (only events agent and labels agree on), check `verify_matlab.py` | `scenarios/<s>/ev_*.m` + `full_drive.m` | 9 of 9 run in MATLAB R2025a and replay the CAN speed (rms <= 0.05 m/s; whole drive 0.1 s late after 459 s) | Tue |
+| ✅ 8 | Results: technical report PDF + README results; judges re-run with `--replay`. No hosted proxy: the rules don't require a demo URL for Physical AI, and a proxy would spend credits until judging ends (Dec 15) | `docs/nebius-technical-report.pdf` | | Tue |
 | | **Cut line: steps 1-8 = minimum submittable** | | | **end of Wed** |
 | 9 | Optional: steps 1-6 as a Nebius Serverless Job | | | Wed if ahead |
-| 10 | README, Devpost text, what's new, feedback, video < 3 min (>= 1 min of the car) | submitted | | Thu |
+| 10 | ✅ README, ✅ Devpost text draft (`docs/devpost.md`: what's new, feedback); video < 3 min (>= 1 min of the car); submit | submitted | | Thu |
 | | Stretch: end-of-drive report from validated events only | | | if ahead |
 
 Models (checked live 2026-10-25): `nvidia/nemotron-3-super-120b-a12b` (tool calling works),
@@ -47,3 +47,9 @@ For the final run, after the labels are in (each change invalidates the recordin
 
 YawRate calibrated (2026-10-26) against the original drive's GPS: (raw - 2.5) * 0.112 deg/s, positive
 left (167 windows, r = 0.96). Exported paths vs GPS heading change: median 11.5 deg, worst 30 deg (9 events).
+
+Final run (2026-10-27, after labels; fixes chosen before labelling): 16 confirmed, 5 corrected, 16 rejected,
+0 unverified (~$0.17). Against 15 labelled events: rules 12/37 right (precision 0.32, recall 0.80), agent 9/21
+(0.43, 0.60). 3 repeat runs in runs/<s>/agent_repeats/ measure run-to-run noise (`score_runs.py`); they are not
+used to pick a run. Known failure modes, left unfixed to avoid tuning on the labels: the agent trusts a VL "no
+intersection" mid-turn; it ignored a VL "no stop sign" (c15) because of the "correct, don't reject" rule.

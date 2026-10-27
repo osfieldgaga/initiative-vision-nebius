@@ -1,0 +1,545 @@
+{
+ "calls": [
+  {
+   "sha256": "c2aa1276e2aab0ac204d85b9ddc321f508b579514c46870c6896cb2ccfad456a",
+   "request": {
+    "model": "nvidia/nemotron-3-super-120b-a12b",
+    "temperature": 0,
+    "max_tokens": 4096,
+    "messages": [
+     {
+      "role": "system",
+      "content": "You review candidate driving events that simple rules found in a recorded drive (front camera and CAN bus of a car in the US). For each candidate, decide whether it really happened as described: confirm it, correct it (type, times, side or detail), or reject it. Cite the samples that prove your answer.\n\nData. Times are seconds since the first frame. get_window returns a table, about 3 frames per second:\nseq = frame number, t = time, can_row = timestamp_ns of the CAN row used, mph = vehicle speed,\nsteer = steering wheel angle in degrees (positive = left, a turn at an intersection is 150-450),\nblinker = left / right / null, standstill = the car's Standstill flag (NOT proof the car stopped: it can be on\nat 4 mph; use mph, 0.0 means stopped), brake = brake pedal pressed, gear = P/R/N/D, accel = m/s2,\nlane_valid = vision found both lane lines, offset_m = car offset from the lane centre (positive = right of it),\ndeparture = vision says the car is drifting out of its lane (left / right / null), signs = signs vision read\n(\"stop:-3.79\" = stop sign, detector score).\n\nEvent definitions (the same ones the human labeller used):\n\nOnly label **driving on roads**. Anything inside a parking lot or driveway (slow manoeuvring, reversing,\nparked) is `no`. Turning from the road into a parking lot, or out of it onto the road, is a `turn`.\n\n| type | what | t_start \u2192 t_end | side | detail |\n|---|---|---|---|---|\n| `stop_sign` | approaching a stop sign | first moment the sign is readable on screen \u2192 car moving again past the line | (empty) | `full_stop` (speed reached 0), `rolling_stop` (slowed, never 0), `no_stop` |\n| `other_stop` | stopping for anything else: traffic, light, pedestrian, yielding | start of braking for it \u2192 moving again | (empty) | (empty) |\n| `turn` | changing road at an intersection, or road \u2194 driveway / parking entrance | steering starts \u2192 wheel straight on the new road | `left` / `right` | `blinker` (on before steering started), `late_blinker` (only after), `no_blinker` |\n| `lane_change` | moving to the next lane on the same road | starts drifting \u2192 settled in the new lane | `left` / `right` | as for `turn` |\n| `curve` | the road bends and you follow it (no intersection), clearly noticeable | steering starts \u2192 straight again | `left` / `right` | (empty) |\n| `lane_departure` | a wheel touches or crosses a lane line or the road edge **without** meaning to change lane | wheel reaches the line \u2192 back in the lane | `left` / `right` | (empty) |\n\nHow to decide:\n- Reject only what did not happen as an event of any type (no stop sign there, parking-lot manoeuvring, a\n  departure with no line). If it happened differently, correct it: a stop sign the car did not stop at is a\n  stop_sign with detail no_stop, not a rejection.\n- Reject manoeuvring inside a parking lot or driveway: walking pace, back-and-forth steering, gear changes to R\n  or P. Speed alone is not enough: turns at intersections are often 5-12 mph, especially after a stop.\n- Vision can be wrong (false stop signs, lane lines found where there are none). When a candidate depends on\n  vision (a stop sign, a lane departure), check the frames with look_at_frames before confirming. Ask a\n  specific question and pass the frames that matter (e.g. where the sign was detected, or where departure\n  was flagged). rerun_vision gives every frame of a short window if the 3 fps rows are not enough.\n- A lane_departure needs a visible lane line or road edge that a wheel touches or crosses.\n- look_at_frames is conservative about lane lines (measured on 95 hand-labelled frames of this drive): when\n  it says lines are visible it was always right, but it missed three quarters of the lines that were there.\n  So \"no lines\" from it is weak evidence; ask a specific question (where is the car relative to the line?).\n- Usually: get_window once, then look_at_frames if vision is involved, then emit_event.\n\nemit_event: give the event as it really happened, per the definitions. claims = 2 to 6 samples from the tool\noutputs that support it: {\"seq\": frame, \"field\": one of the row fields above or \"vision_stop_sign\", \"value\":\nexactly as the tool showed it, as text}. Two extra fields: \"vision_stop_sign\" (did the sign reader read a stop\nsign in that frame: \"true\" / \"false\") and \"frame_check\" (value = a quote from look_at_frames' answer about that\nframe). A validator checks every claim against the source data, and checks the\nstop detail, blinker detail and side against the CAN log. If it returns errors, fix the event and call\nemit_event again."
+     },
+     {
+      "role": "user",
+      "content": "Candidate:\n{\"id\": \"c01\", \"type\": \"other_stop\", \"t_start\": 0, \"t_end\": 56.0, \"side\": \"\", \"detail\": \"\", \"rule\": \"Standstill flag 0.0-56.0 s, no stop sign seen\", \"stats\": {\"min_speed_mps\": 0.0, \"max_speed_mps\": 2.14, \"max_left_steer_deg\": 152.8, \"max_right_steer_deg\": 93.4, \"blinker\": [], \"gear\": [\"N\", \"D\"]}, \"key_seqs\": []}"
+     }
+    ],
+    "tools": [
+     {
+      "type": "function",
+      "function": {
+       "name": "get_window",
+       "description": "Fused timeline rows between two drive times (max 60 s; long windows are thinned to 60 rows).",
+       "parameters": {
+        "type": "object",
+        "properties": {
+         "t_start": {
+          "type": "number"
+         },
+         "t_end": {
+          "type": "number"
+         }
+        },
+        "required": [
+         "t_start",
+         "t_end"
+        ]
+       }
+      }
+     },
+     {
+      "type": "function",
+      "function": {
+       "name": "rerun_vision",
+       "description": "Run the lane and sign pipeline on every frame (15 fps) between two drive times (max 3.0 s). Rows as in get_window.",
+       "parameters": {
+        "type": "object",
+        "properties": {
+         "t_start": {
+          "type": "number"
+         },
+         "t_end": {
+          "type": "number"
+         }
+        },
+        "required": [
+         "t_start",
+         "t_end"
+        ]
+       }
+      }
+     },
+     {
+      "type": "function",
+      "function": {
+       "name": "emit_event",
+       "description": "Your final answer for this candidate.",
+       "parameters": {
+        "type": "object",
+        "properties": {
+         "verdict": {
+          "type": "string",
+          "enum": [
+           "confirmed",
+           "corrected",
+           "rejected"
+          ]
+         },
+         "type": {
+          "type": "string",
+          "enum": [
+           "stop_sign",
+           "other_stop",
+           "turn",
+           "lane_change",
+           "curve",
+           "lane_departure"
+          ]
+         },
+         "t_start": {
+          "type": "number"
+         },
+         "t_end": {
+          "type": "number"
+         },
+         "side": {
+          "type": "string",
+          "enum": [
+           "left",
+           "right",
+           ""
+          ]
+         },
+         "detail": {
+          "type": "string",
+          "enum": [
+           "",
+           "blinker",
+           "full_stop",
+           "late_blinker",
+           "no_blinker",
+           "no_stop",
+           "rolling_stop"
+          ]
+         },
+         "claims": {
+          "type": "array",
+          "items": {
+           "type": "object",
+           "properties": {
+            "seq": {
+             "type": "integer"
+            },
+            "field": {
+             "type": "string",
+             "enum": [
+              "mph",
+              "steer",
+              "accel",
+              "offset_m",
+              "blinker",
+              "standstill",
+              "brake",
+              "gear",
+              "lane_valid",
+              "departure",
+              "vision_stop_sign",
+              "frame_check"
+             ]
+            },
+            "value": {
+             "type": "string",
+             "description": "as the tool showed it, written as text: \"5.2\", \"left\", \"true\", \"null\""
+            }
+           },
+           "required": [
+            "seq",
+            "field",
+            "value"
+           ]
+          }
+         },
+         "reason": {
+          "type": "string",
+          "description": "one or two sentences, no numbers (the claims carry them)"
+         }
+        },
+        "required": [
+         "verdict",
+         "type",
+         "t_start",
+         "t_end",
+         "side",
+         "detail",
+         "claims",
+         "reason"
+        ]
+       }
+      }
+     },
+     {
+      "type": "function",
+      "function": {
+       "name": "look_at_frames",
+       "description": "Ask a vision-language model a question about up to 4 camera frames, given by seq.",
+       "parameters": {
+        "type": "object",
+        "properties": {
+         "seqs": {
+          "type": "array",
+          "items": {
+           "type": "integer"
+          }
+         },
+         "question": {
+          "type": "string"
+         }
+        },
+        "required": [
+         "seqs",
+         "question"
+        ]
+       }
+      }
+     }
+    ]
+   },
+   "response": {
+    "id": "chatcmpl-9f985db69029c1e2",
+    "choices": [
+     {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+       "content": null,
+       "refusal": null,
+       "role": "assistant",
+       "annotations": null,
+       "audio": null,
+       "function_call": null,
+       "tool_calls": [
+        {
+         "id": "chatcmpl-tool-ad77cad93a99596d",
+         "function": {
+          "arguments": "{\"t_start\": 0, \"t_end\": 56}",
+          "name": "get_window"
+         },
+         "type": "function"
+        }
+       ],
+       "reasoning": "We need evaluate candidate other_stop from 0-56 sec. Likely just idling? Need check if actually stopped elsewhere. Use get_window 0-56.",
+       "reasoning_content": "We need evaluate candidate other_stop from 0-56 sec. Likely just idling? Need check if actually stopped elsewhere. Use get_window 0-56."
+      },
+      "stop_reason": null,
+      "token_ids": null,
+      "routed_experts": null
+     }
+    ],
+    "created": 1793121108,
+    "model": "nvidia/nemotron-3-super-120b-a12b",
+    "object": "chat.completion",
+    "moderation": null,
+    "service_tier": null,
+    "system_fingerprint": "vllm-0.1.dev1+g5001743e3-tp2-05adddbc",
+    "usage": {
+     "completion_tokens": 72,
+     "prompt_tokens": 2399,
+     "total_tokens": 2471,
+     "completion_tokens_details": {
+      "accepted_prediction_tokens": null,
+      "audio_tokens": null,
+      "reasoning_tokens": 36,
+      "rejected_prediction_tokens": null
+     },
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 0,
+      "created_cache_tokens": 0,
+      "multimodal_tokens": null
+     },
+     "prompt_cache_hit_tokens": 0,
+     "prompt_cache_miss_tokens": 2399
+    },
+    "prompt_logprobs": null,
+    "prompt_token_ids": null,
+    "prompt_text": null,
+    "kv_transfer_params": null,
+    "ec_transfer_params": null,
+    "metrics": null
+   }
+  },
+  {
+   "sha256": "2c1086f56440cde7a320f98b2ca20f761207c53baf7615d38620ce314fbf881a",
+   "request": {
+    "model": "nvidia/nemotron-3-super-120b-a12b",
+    "temperature": 0,
+    "max_tokens": 4096,
+    "messages": [
+     {
+      "role": "system",
+      "content": "You review candidate driving events that simple rules found in a recorded drive (front camera and CAN bus of a car in the US). For each candidate, decide whether it really happened as described: confirm it, correct it (type, times, side or detail), or reject it. Cite the samples that prove your answer.\n\nData. Times are seconds since the first frame. get_window returns a table, about 3 frames per second:\nseq = frame number, t = time, can_row = timestamp_ns of the CAN row used, mph = vehicle speed,\nsteer = steering wheel angle in degrees (positive = left, a turn at an intersection is 150-450),\nblinker = left / right / null, standstill = the car's Standstill flag (NOT proof the car stopped: it can be on\nat 4 mph; use mph, 0.0 means stopped), brake = brake pedal pressed, gear = P/R/N/D, accel = m/s2,\nlane_valid = vision found both lane lines, offset_m = car offset from the lane centre (positive = right of it),\ndeparture = vision says the car is drifting out of its lane (left / right / null), signs = signs vision read\n(\"stop:-3.79\" = stop sign, detector score).\n\nEvent definitions (the same ones the human labeller used):\n\nOnly label **driving on roads**. Anything inside a parking lot or driveway (slow manoeuvring, reversing,\nparked) is `no`. Turning from the road into a parking lot, or out of it onto the road, is a `turn`.\n\n| type | what | t_start \u2192 t_end | side | detail |\n|---|---|---|---|---|\n| `stop_sign` | approaching a stop sign | first moment the sign is readable on screen \u2192 car moving again past the line | (empty) | `full_stop` (speed reached 0), `rolling_stop` (slowed, never 0), `no_stop` |\n| `other_stop` | stopping for anything else: traffic, light, pedestrian, yielding | start of braking for it \u2192 moving again | (empty) | (empty) |\n| `turn` | changing road at an intersection, or road \u2194 driveway / parking entrance | steering starts \u2192 wheel straight on the new road | `left` / `right` | `blinker` (on before steering started), `late_blinker` (only after), `no_blinker` |\n| `lane_change` | moving to the next lane on the same road | starts drifting \u2192 settled in the new lane | `left` / `right` | as for `turn` |\n| `curve` | the road bends and you follow it (no intersection), clearly noticeable | steering starts \u2192 straight again | `left` / `right` | (empty) |\n| `lane_departure` | a wheel touches or crosses a lane line or the road edge **without** meaning to change lane | wheel reaches the line \u2192 back in the lane | `left` / `right` | (empty) |\n\nHow to decide:\n- Reject only what did not happen as an event of any type (no stop sign there, parking-lot manoeuvring, a\n  departure with no line). If it happened differently, correct it: a stop sign the car did not stop at is a\n  stop_sign with detail no_stop, not a rejection.\n- Reject manoeuvring inside a parking lot or driveway: walking pace, back-and-forth steering, gear changes to R\n  or P. Speed alone is not enough: turns at intersections are often 5-12 mph, especially after a stop.\n- Vision can be wrong (false stop signs, lane lines found where there are none). When a candidate depends on\n  vision (a stop sign, a lane departure), check the frames with look_at_frames before confirming. Ask a\n  specific question and pass the frames that matter (e.g. where the sign was detected, or where departure\n  was flagged). rerun_vision gives every frame of a short window if the 3 fps rows are not enough.\n- A lane_departure needs a visible lane line or road edge that a wheel touches or crosses.\n- look_at_frames is conservative about lane lines (measured on 95 hand-labelled frames of this drive): when\n  it says lines are visible it was always right, but it missed three quarters of the lines that were there.\n  So \"no lines\" from it is weak evidence; ask a specific question (where is the car relative to the line?).\n- Usually: get_window once, then look_at_frames if vision is involved, then emit_event.\n\nemit_event: give the event as it really happened, per the definitions. claims = 2 to 6 samples from the tool\noutputs that support it: {\"seq\": frame, \"field\": one of the row fields above or \"vision_stop_sign\", \"value\":\nexactly as the tool showed it, as text}. Two extra fields: \"vision_stop_sign\" (did the sign reader read a stop\nsign in that frame: \"true\" / \"false\") and \"frame_check\" (value = a quote from look_at_frames' answer about that\nframe). A validator checks every claim against the source data, and checks the\nstop detail, blinker detail and side against the CAN log. If it returns errors, fix the event and call\nemit_event again."
+     },
+     {
+      "role": "user",
+      "content": "Candidate:\n{\"id\": \"c01\", \"type\": \"other_stop\", \"t_start\": 0, \"t_end\": 56.0, \"side\": \"\", \"detail\": \"\", \"rule\": \"Standstill flag 0.0-56.0 s, no stop sign seen\", \"stats\": {\"min_speed_mps\": 0.0, \"max_speed_mps\": 2.14, \"max_left_steer_deg\": 152.8, \"max_right_steer_deg\": 93.4, \"blinker\": [], \"gear\": [\"N\", \"D\"]}, \"key_seqs\": []}"
+     },
+     {
+      "role": "assistant",
+      "content": "",
+      "tool_calls": [
+       {
+        "id": "chatcmpl-tool-ad77cad93a99596d",
+        "type": "function",
+        "function": {
+         "arguments": "{\"t_start\": 0, \"t_end\": 56}",
+         "name": "get_window"
+        }
+       }
+      ]
+     },
+     {
+      "role": "tool",
+      "tool_call_id": "chatcmpl-tool-ad77cad93a99596d",
+      "content": "{\"columns\": [\"seq\", \"t\", \"can_row\", \"mph\", \"steer\", \"blinker\", \"standstill\", \"brake\", \"gear\", \"accel\", \"lane_valid\", \"offset_m\", \"departure\", \"signs\"], \"rows\": [[0, 0.0, 4549267279072, 0.0, -0.4, null, true, false, \"N\", 0.0, false, null, null, []], [19, 1.1, 4550361187079, 0.0, -0.4, null, true, false, \"N\", 0.0, false, null, null, []], [34, 2.03, 4551283318114, 0.0, -0.4, null, true, false, \"N\", 0.0, false, null, null, []], [44, 2.7, 4551959567197, 0.0, -0.4, null, true, false, \"N\", 0.0, false, null, null, []], [61, 3.7, 4552963857495, 0.0, -0.4, null, true, false, \"N\", 0.0, false, null, null, []], [75, 4.7, 4553963943091, 0.0, -0.4, null, true, false, \"N\", 0.0, false, null, null, []], [91, 5.7, 4554963980812, 0.0, -0.4, null, true, false, \"N\", 0.0, false, null, null, []], [108, 6.7, 4555951978427, 0.0, -0.4, null, true, false, \"N\", 0.0, false, null, null, []], [122, 7.7, 4556962958460, 0.0, -0.4, null, true, false, \"N\", 0.0, false, null, null, []], [133, 8.53, 4557790187963, 0.0, -0.4, null, true, false, \"N\", 0.0, false, null, null, []], [145, 9.43, 4558693776204, 0.0, -0.4, null, true, false, \"N\", 0.0, false, null, null, []], [160, 10.36, 4559627919143, 0.0, -0.4, null, true, false, \"N\", 0.0, false, null, null, []], [177, 11.39, 4560660268960, 0.0, -0.4, null, true, false, \"N\", 0.0, false, null, null, []], [196, 12.39, 4561299221726, 0.0, -0.4, null, true, false, \"N\", 0.0, false, null, null, []], [212, 13.43, 4562687703998, 0.0, -0.4, null, true, false, \"N\", 0.0, false, null, null, []], [222, 14.03, 4563291480124, 0.0, -0.4, null, true, false, \"N\", 0.0, false, null, null, []], [237, 15.03, 4564291547813, 0.0, -0.4, null, true, false, \"N\", 0.0, false, null, null, []], [254, 16.02, 4565289147480, 0.0, -0.4, null, true, false, \"N\", 0.0, false, null, null, []], [271, 17.09, 4566355082589, 0.0, -0.4, null, true, false, \"N\", 0.0, false, null, null, []], [284, 18.02, 4567290843079, 0.0, -0.4, null, true, false, \"N\", 0.0, false, null, null, []], [298, 19.02, 4568279972635, 0.0, -0.4, null, true, false, \"N\", 0.0, false, null, null, []], [308, 19.72, 4568987381559, 0.0, -0.4, null, true, false, \"N\", 0.0, false, null, null, []], [324, 20.69, 4569947734912, 0.0, -0.4, null, true, false, \"N\", 0.0, false, null, null, []], [341, 21.72, 4570963215341, 0.0, -0.4, null, true, false, \"N\", 0.0, false, null, null, []], [356, 22.69, 4571951968521, 0.0, -0.4, null, true, false, \"N\", 0.0, false, null, null, []], [373, 23.69, 4572952971789, 0.0, -0.4, null, true, false, \"N\", 0.0, false, null, null, []], [387, 24.69, 4573951415004, 0.0, -0.4, null, true, true, \"N\", 0.0, false, null, null, []], [398, 25.39, 4574647701636, 0.0, -0.4, null, true, true, \"N\", 0.0, false, null, null, []], [416, 26.39, 4575652861980, 0.0, -0.4, null, true, true, \"N\", 0.0, false, null, null, []], [431, 27.35, 4576607714756, 0.0, -0.4, null, true, true, \"N\", 0.0, false, null, null, []], [448, 28.39, 4577649586538, 0.0, -0.4, null, true, true, \"D\", 0.0, false, null, null, []], [466, 29.35, 4578551904836, 0.0, -0.4, null, true, true, \"D\", 0.0, false, null, null, []], [486, 30.38, 4578551904836, 0.0, -0.4, null, true, true, \"D\", 0.0, false, null, null, []], [498, 31.02, 4578551904836, 0.0, -0.4, null, true, true, \"D\", 0.0, false, null, null, []], [514, 32.08, 4581339019633, 2.3, 36.2, null, true, false, \"D\", 1.12, false, null, null, []], [528, 33.02, 4582272874477, 2.8, 43.7, null, true, false, \"D\", 0.36, false, null, null, []], [542, 34.02, 4583281790324, 3.8, 152.8, null, true, false, \"D\", 0.29, false, null, null, []], [559, 35.05, 4584314455744, 4.4, 100.8, null, true, false, \"D\", 0.2, false, null, null, []], [574, 36.01, 4585278933491, 4.8, 49.2, null, true, false, \"D\", 0.12, false, null, null, []], [585, 36.68, 4585946866374, 4.8, 16.8, null, true, true, \"D\", -0.01, false, null, null, []], [600, 37.71, 4586975368682, 4.8, -83.1, null, true, false, \"D\", 0.05, false, null, null, []], [614, 38.81, 4588078429357, 5.0, -86.2, null, true, true, \"D\", -0.09, false, null, null, []], [628, 39.74, 4589003732062, 4.3, -51.2, null, true, true, \"D\", -0.54, false, null, null, []], [642, 40.71, 4589975797357, 2.9, -17.2, null, true, true, \"D\", -0.66, false, null, null, []], [656, 41.68, 4590939539047, 1.1, -8.8, null, true, true, \"D\", -0.91, false, null, null, []], [666, 42.38, 4591643896868, 0.0, -6.9, null, true, true, \"D\", 0.0, false, null, null, []], [681, 43.38, 4592642659825, 0.0, -7.2, null, true, true, \"D\", 0.0, false, null, null, []], [697, 44.34, 4593607819799, 0.0, -7.3, null, true, true, \"D\", 0.0, false, null, null, []], [712, 45.34, 4594599911089, 0.0, -7.3, null, true, true, \"D\", 0.0, false, null, null, []], [727, 46.38, 4595639750110, 0.0, -7.2, null, true, true, \"D\", 0.0, false, null, null, []], [743, 47.37, 4596626889502, 0.0, -7.3, null, true, true, \"D\", 0.0, false, null, null, []], [751, 48.11, 4597371703931, 0.0, -7.3, null, true, true, \"D\", 0.0, false, null, null, []], [764, 49.01, 4598271072751, 0.0, -7.3, null, true, true, \"D\", 0.0, false, null, null, []], [778, 50.01, 4599271771134, 0.0, -7.3, null, true, true, \"D\", 0.0, false, null, null, []], [792, 51.01, 4600272626313, 0.0, -7.3, null, true, true, \"D\", 0.0, false, null, null, []], [808, 52.04, 4601291920915, 0.0, -7.3, null, true, true, \"D\", 0.0, false, null, null, []], [822, 53.01, 4602271671471, 0.0, -7.3, null, true, true, \"D\", 0.0, false, null, null, []], [833, 53.67, 4602937673690, 0.0, -7.3, null, true, true, \"D\", 0.0, false, null, null, []], [848, 54.67, 4603935993822, 0.0, -7.3, null, true, true, \"D\", 0.0, false, null, null, []], [863, 55.67, 4604936737264, 0.0, 34.5, null, true, false, \"D\", 0.0, false, null, null, []]]}"
+     }
+    ],
+    "tools": [
+     {
+      "type": "function",
+      "function": {
+       "name": "get_window",
+       "description": "Fused timeline rows between two drive times (max 60 s; long windows are thinned to 60 rows).",
+       "parameters": {
+        "type": "object",
+        "properties": {
+         "t_start": {
+          "type": "number"
+         },
+         "t_end": {
+          "type": "number"
+         }
+        },
+        "required": [
+         "t_start",
+         "t_end"
+        ]
+       }
+      }
+     },
+     {
+      "type": "function",
+      "function": {
+       "name": "rerun_vision",
+       "description": "Run the lane and sign pipeline on every frame (15 fps) between two drive times (max 3.0 s). Rows as in get_window.",
+       "parameters": {
+        "type": "object",
+        "properties": {
+         "t_start": {
+          "type": "number"
+         },
+         "t_end": {
+          "type": "number"
+         }
+        },
+        "required": [
+         "t_start",
+         "t_end"
+        ]
+       }
+      }
+     },
+     {
+      "type": "function",
+      "function": {
+       "name": "emit_event",
+       "description": "Your final answer for this candidate.",
+       "parameters": {
+        "type": "object",
+        "properties": {
+         "verdict": {
+          "type": "string",
+          "enum": [
+           "confirmed",
+           "corrected",
+           "rejected"
+          ]
+         },
+         "type": {
+          "type": "string",
+          "enum": [
+           "stop_sign",
+           "other_stop",
+           "turn",
+           "lane_change",
+           "curve",
+           "lane_departure"
+          ]
+         },
+         "t_start": {
+          "type": "number"
+         },
+         "t_end": {
+          "type": "number"
+         },
+         "side": {
+          "type": "string",
+          "enum": [
+           "left",
+           "right",
+           ""
+          ]
+         },
+         "detail": {
+          "type": "string",
+          "enum": [
+           "",
+           "blinker",
+           "full_stop",
+           "late_blinker",
+           "no_blinker",
+           "no_stop",
+           "rolling_stop"
+          ]
+         },
+         "claims": {
+          "type": "array",
+          "items": {
+           "type": "object",
+           "properties": {
+            "seq": {
+             "type": "integer"
+            },
+            "field": {
+             "type": "string",
+             "enum": [
+              "mph",
+              "steer",
+              "accel",
+              "offset_m",
+              "blinker",
+              "standstill",
+              "brake",
+              "gear",
+              "lane_valid",
+              "departure",
+              "vision_stop_sign",
+              "frame_check"
+             ]
+            },
+            "value": {
+             "type": "string",
+             "description": "as the tool showed it, written as text: \"5.2\", \"left\", \"true\", \"null\""
+            }
+           },
+           "required": [
+            "seq",
+            "field",
+            "value"
+           ]
+          }
+         },
+         "reason": {
+          "type": "string",
+          "description": "one or two sentences, no numbers (the claims carry them)"
+         }
+        },
+        "required": [
+         "verdict",
+         "type",
+         "t_start",
+         "t_end",
+         "side",
+         "detail",
+         "claims",
+         "reason"
+        ]
+       }
+      }
+     },
+     {
+      "type": "function",
+      "function": {
+       "name": "look_at_frames",
+       "description": "Ask a vision-language model a question about up to 4 camera frames, given by seq.",
+       "parameters": {
+        "type": "object",
+        "properties": {
+         "seqs": {
+          "type": "array",
+          "items": {
+           "type": "integer"
+          }
+         },
+         "question": {
+          "type": "string"
+         }
+        },
+        "required": [
+         "seqs",
+         "question"
+        ]
+       }
+      }
+     }
+    ]
+   },
+   "response": {
+    "id": "chatcmpl-be9678f5e3e6585b",
+    "choices": [
+     {
+      "finish_reason": "tool_calls",
+      "index": 0,
+      "logprobs": null,
+      "message": {
+       "content": null,
+       "refusal": null,
+       "role": "assistant",
+       "annotations": null,
+       "audio": null,
+       "function_call": null,
+       "tool_calls": [
+        {
+         "id": "chatcmpl-tool-819f388034bf27ac",
+         "function": {
+          "arguments": "{\"verdict\": \"rejected\", \"type\": \"other_stop\", \"t_start\": 0, \"t_end\": 56, \"side\": \"\", \"detail\": \"\", \"claims\": [{\"seq\": 0, \"field\": \"mph\", \"value\": \"0.0\"}, {\"seq\": 514, \"field\": \"mph\", \"value\": \"2.3\"}, {\"seq\": 387, \"field\": \"brake\", \"value\": \"true\"}, {\"seq\": 514, \"field\": \"brake\", \"value\": \"false\"}], \"reason\": \"The car was already stationary at the start and remained stopped until it began moving again around 32\u202fs; there was no distinct braking\u2011initiated stop for traffic or other cause.\"}",
+          "name": "emit_event"
+         },
+         "type": "function"
+        }
+       ],
+       "reasoning": "We need to determine if other_stop from 0-56 sec actually occurred. The data shows car stationary (mph 0) until around seq 514 at t~32.08 where mph becomes 2.3 and steer positive etc. There's also brake flags earlier? Brake column appears false except some true later? Actually brake column seems false all along? Let's see: early rows brake false, later at 387 brake true? At seq 387 t=24.69 brake true, standstill true, gear N. Then later brake true continues until around seq 466 etc. After that brake false again at seq 514 etc. So there is braking while standstill true (car not moving). That's not a stop for traffic etc; it's just stationary with brake applied maybe holding. But definition of other_stop: stopping for anything else: traffic, light, pedestrian, yielding; start of braking for it \u2192 moving again. Here the car is stationary from start, brakes applied, then releases brake and moves after ~32 sec. Could be waiting for traffic? No stop sign seen. Could be just idle. Since no external cause evident, we might reject as not a meaningful stop. However rule says reject only what did not happen as an event of any type. The car did stop (speed 0) and had braking, then moved. That fits other_stop? It stopped for unknown reason; could be just waiting. The label likely expects other_stop if there is a stop due to something else. Since we don't know cause, but the car was stationary with brake applied, then moved. I'd say corrected? The candidate says other_stop from 0-56, but actual stop ended earlier when car started moving ~32 sec. So t_end should be around when motion resumed and brake released. Look at seq 514 t=32.08 mph 2.3, brake false, standstill true? standstill still true? At seq 514 standstill true (since mph 2.3 but standstill flag true? Actually standstill true indicates flag, but mph >0 so flag misleading). Later at seq 528 brake false, standstill true. At seq 542 brake false. So car moving while standstill true. The stop ended when brake released and car started moving. That is around t~32. So t_end should be ~32. Also t_start is 0 (when braking started?). Braking started at seq 387 t=24.69? Actually brake true earlier? From start brake false until 387 where brake true. So braking started at 24.69. But car was already stopped. So other_stop defined as start of braking for it \u2192 moving again. If car already stopped, braking not needed. Might be no event. I'd reject because it's just idle, not a stop for traffic etc. Probably reject.\n\nThus verdict rejected. Need claims showing no meaningful stop? Provide claim that speed never >0 until after 32 and brake not related. Use sample seq 0 mph 0.0, seq 514 mph 2.3. Show that there was no deceleration to stop; it was already stopped. Provide reason.\n\nLet's craft emit_event with verdict rejected.",
+       "reasoning_content": "We need to determine if other_stop from 0-56 sec actually occurred. The data shows car stationary (mph 0) until around seq 514 at t~32.08 where mph becomes 2.3 and steer positive etc. There's also brake flags earlier? Brake column appears false except some true later? Actually brake column seems false all along? Let's see: early rows brake false, later at 387 brake true? At seq 387 t=24.69 brake true, standstill true, gear N. Then later brake true continues until around seq 466 etc. After that brake false again at seq 514 etc. So there is braking while standstill true (car not moving). That's not a stop for traffic etc; it's just stationary with brake applied maybe holding. But definition of other_stop: stopping for anything else: traffic, light, pedestrian, yielding; start of braking for it \u2192 moving again. Here the car is stationary from start, brakes applied, then releases brake and moves after ~32 sec. Could be waiting for traffic? No stop sign seen. Could be just idle. Since no external cause evident, we might reject as not a meaningful stop. However rule says reject only what did not happen as an event of any type. The car did stop (speed 0) and had braking, then moved. That fits other_stop? It stopped for unknown reason; could be just waiting. The label likely expects other_stop if there is a stop due to something else. Since we don't know cause, but the car was stationary with brake applied, then moved. I'd say corrected? The candidate says other_stop from 0-56, but actual stop ended earlier when car started moving ~32 sec. So t_end should be around when motion resumed and brake released. Look at seq 514 t=32.08 mph 2.3, brake false, standstill true? standstill still true? At seq 514 standstill true (since mph 2.3 but standstill flag true? Actually standstill true indicates flag, but mph >0 so flag misleading). Later at seq 528 brake false, standstill true. At seq 542 brake false. So car moving while standstill true. The stop ended when brake released and car started moving. That is around t~32. So t_end should be ~32. Also t_start is 0 (when braking started?). Braking started at seq 387 t=24.69? Actually brake true earlier? From start brake false until 387 where brake true. So braking started at 24.69. But car was already stopped. So other_stop defined as start of braking for it \u2192 moving again. If car already stopped, braking not needed. Might be no event. I'd reject because it's just idle, not a stop for traffic etc. Probably reject.\n\nThus verdict rejected. Need claims showing no meaningful stop? Provide claim that speed never >0 until after 32 and brake not related. Use sample seq 0 mph 0.0, seq 514 mph 2.3. Show that there was no deceleration to stop; it was already stopped. Provide reason.\n\nLet's craft emit_event with verdict rejected."
+      },
+      "stop_reason": null,
+      "token_ids": null,
+      "routed_experts": null
+     }
+    ],
+    "created": 1793121110,
+    "model": "nvidia/nemotron-3-super-120b-a12b",
+    "object": "chat.completion",
+    "moderation": null,
+    "service_tier": null,
+    "system_fingerprint": "vllm-0.1.dev1+g5001743e3-tp2-05adddbc",
+    "usage": {
+     "completion_tokens": 922,
+     "prompt_tokens": 6047,
+     "total_tokens": 6969,
+     "completion_tokens_details": {
+      "accepted_prediction_tokens": null,
+      "audio_tokens": null,
+      "reasoning_tokens": 703,
+      "rejected_prediction_tokens": null
+     },
+     "prompt_tokens_details": {
+      "audio_tokens": null,
+      "cached_tokens": 2368,
+      "created_cache_tokens": 0,
+      "multimodal_tokens": null
+     },
+     "prompt_cache_hit_tokens": 2368,
+     "prompt_cache_miss_tokens": 3679
+    },
+    "prompt_logprobs": null,
+    "prompt_token_ids": null,
+    "prompt_text": null,
+    "kv_transfer_params": null,
+    "ec_transfer_params": null,
+    "metrics": null
+   }
+  }
+ ]
+}

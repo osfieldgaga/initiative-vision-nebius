@@ -44,6 +44,19 @@ class ClientTest(unittest.TestCase):
         with self.assertRaises(tf.ReplayMismatch):
             replay.chat({"model": tf.SUPER, "messages": [{"role": "user", "content": "changed"}]})
 
+    def test_replay_allows_other_image_bytes_but_not_other_text(self):
+        img = lambda data, text="is there a stop sign?": {"model": tf.VL, "messages": [{"role": "user", "content": [  # noqa: E731
+            {"type": "text", "text": text}, {"type": "image_url", "image_url": {"url": f"data:image/jpeg;base64,{data}"}}]}]}
+        client = tf.Client(self.path)
+        client._post = lambda body: answer("No.")
+        client.chat(img("AAAA"))
+        client.chat(img("AAAA"))
+        replay = tf.Client(self.path, replay=True)
+        replay.chat(img("BBBB"))  # same frame, encoded by another OpenCV build
+        self.assertEqual(replay.image_mismatches, 1)
+        with self.assertRaises(tf.ReplayMismatch):
+            replay.chat(img("AAAA", text="is there a yield sign?"))
+
     def test_images_are_not_stored_but_are_hashed(self):
         body = {"model": tf.VL, "messages": [{"role": "user", "content": [
             {"type": "image_url", "image_url": {"url": "data:image/jpeg;base64,AAAA"}}]}]}
