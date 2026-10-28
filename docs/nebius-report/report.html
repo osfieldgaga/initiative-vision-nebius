@@ -394,7 +394,7 @@ visible on both sides, and compares with the labels and with OpenCV's <code>lane
 agent's prompt states these numbers, so a VL "no lines" is treated as weak evidence. Sending raw sideways frames gave
 recall 0.00; sending what the labeller saw (undistorted, upright) gave 0.25, so every VL call uses that view.</p>
 
-<h2 class="pb">13. MATLAB scenarios</h2>
+<h2>13. MATLAB scenarios</h2>
 <p><code>export_matlab.py --labels</code> exports only the events that <b>the agent verified and the hand labels agree
 with</b> (same type, side and detail, overlapping time, exactly as the scorer matches them): fewer scenarios, each
 confirmed twice. That gives 8 files (6 turns, a full stop at a stop sign, a stop at the lot exit) plus
