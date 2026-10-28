@@ -119,7 +119,11 @@ it also drops some real events. The 8 events that the agent and my labels agree 
 ## What's next for it
 
 - More drives, and fixing the two failure modes on one drive while scoring on another.
-- Other road users in the scenarios (the vision already detects vehicles).
+- A general road-object detector on every frame (pedestrians, traffic lights, vehicles, signs), in OpenCV with a
+  permissive license (e.g. the OpenCV model zoo's YOLOX or NanoDet on `cv.dnn`): new event types such as running a
+  red light or yielding to a pedestrian, a trained stop-sign check (it would have removed the red-leaves false alarm),
+  parked-car density as a hint that the car is in a parking lot (the biggest source of false alarms), and other road
+  users as actors in the MATLAB scenarios. Scored on a new labelled drive, not this one.
 - Running the batch steps as a Nebius Serverless Job over a fleet of drives.
 
 ## What was significantly updated during the hackathon

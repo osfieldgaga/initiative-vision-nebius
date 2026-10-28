@@ -467,6 +467,11 @@ lane-level geometry.</p>
   <li><b>The model's judgement is not validated</b>, only its facts; the two failure modes of section 11 are the next
   fixes, to be measured on a second drive.</li>
   <li><b>Scenarios hold only the ego car.</b> The vision already detects vehicles; adding them as actors is next.</li>
+  <li><b>A general road-object detector</b> on every frame (pedestrians, traffic lights, vehicles, signs), kept in
+  OpenCV with a permissive license (e.g. YOLOX or NanoDet from the OpenCV model zoo on <code>cv.dnn</code>). On this
+  drive it would fix at most one of the final run's 12 false alarms (the red leaves), within the run-to-run spread;
+  its value is new event types (red lights, pedestrians), parked-car density as a parking-lot hint (the largest
+  false-alarm source) and actors for the scenarios, measured on new labelled drives.</li>
   <li><b>Scale:</b> the batch steps are independent per drive and would run as a Nebius Serverless Job over a fleet.</li>
 </ul>
 
