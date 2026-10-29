@@ -112,6 +112,27 @@ so a replay reproduces the recorded run or fails loudly. The one allowance: fram
 this code encodes, and another OpenCV build may produce different bytes for the same frame; if every
 text in the request still matches, the call is replayed and counted.
 
+## NVIDIA Nemotron and Nebius Token Factory
+
+| model (on Token Factory) | used for |
+|---|---|
+| `nvidia/nemotron-3-super-120b-a12b` (NVIDIA Nemotron 3 Super) | the agent: reads the data around each candidate, calls the tools, confirms, corrects or rejects the event with claims; fixes its answer when the validator refuses it (13 refusals in the final run, all fixed) |
+| `nvidia/Nemotron-3.5-Super-VL` (NVIDIA Nemotron 3.5 Super VL) | answers the agent's yes/no questions about specific frames ("is there a stop sign in frame 4507?"), thinking off; a stop sign or lane departure can only be confirmed after this check |
+
+Both are used out of the box (no fine-tuning), at temperature 0, through Token Factory's OpenAI-compatible
+API. Where Token Factory sped up the work:
+
+- **No infrastructure:** no GPUs or model servers to deploy; a 120B model and a vision model from one API key,
+  both working the first day.
+- **A small client:** the OpenAI-compatible API needed only ~150 lines of standard-library Python
+  (`tokenfactory.py`), with no SDK; the same client adds recording, replay and the spend cap.
+- **Cheap enough to evaluate properly:** a full run over the drive is 127 calls (18 vision) and about $0.17,
+  so the agent could be run 4 times to measure run-to-run variation instead of reporting one run.
+- **Exact cost control:** the per-call `usage` field drives a hard spend cap (`--max-usd`).
+
+No other Nebius services are used; running the batch steps as a Nebius Serverless Job over many drives is
+the next step.
+
 ## Repository layout
 
 | Path | What |
