@@ -9,7 +9,7 @@ word alone. The events that the agent and a human labeller agree on become **MAT
 `drivingScenario` test cases** that replay the car's real speed and path.
 
 Entry for the [Nebius x NVIDIA Global AI Hackathon](https://nebiusglobalaihackathon.devpost.com), Physical AI track.
-Technical report: [docs/nebius-technical-report.pdf](docs/nebius-technical-report.pdf). Video: *link to come*.
+Technical report: [docs/nebius-technical-report.pdf](docs/nebius-technical-report.pdf). Video: [youtu.be/PSb4bcy_xpE](https://youtu.be/PSb4bcy_xpE).
 
 > Not a safety system: it never controls the vehicle. The drive was recorded with a camera and a CAN
 > logger on a Raspberry Pi in a normal car.

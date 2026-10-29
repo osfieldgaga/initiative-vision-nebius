@@ -7,7 +7,7 @@ traceable driving events and MATLAB test scenarios.
 
 **Links**
 - Code: https://github.com/osfieldgaga/initiative-vision-nebius (MIT)
-- Video: *YouTube link*
+- Video: https://youtu.be/PSb4bcy_xpE
 - Technical report: https://github.com/osfieldgaga/initiative-vision-nebius/blob/main/docs/nebius-technical-report.pdf
 - Built on (OpenCV AI Competition 2026 entry): https://github.com/osfieldgaga/initiative-vision-aws
 
